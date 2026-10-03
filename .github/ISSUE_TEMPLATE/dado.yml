@@ -1,0 +1,49 @@
+name: Dado novo ou correção de dado
+description: Ficha de campo ou ajuste em um arquivo de /dados
+labels: ["dados"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Dado real só entra com **fonte** e **data de verificação**.
+        Não coloque endereço exato de moradia, nome de proprietário nem contato pessoal.
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo
+      options: [Comida, Moradia, Cena e rolê, Outro]
+    validations:
+      required: true
+  - type: input
+    id: nome
+    attributes:
+      label: Nome do lugar
+    validations:
+      required: true
+  - type: input
+    id: bairro
+    attributes:
+      label: Bairro
+  - type: input
+    id: preco
+    attributes:
+      label: Preço observado
+      description: Só o que está afixado ou foi informado por quem trabalha no lugar.
+  - type: dropdown
+    id: fonte
+    attributes:
+      label: Fonte
+      options: [Campo (visita da equipe), Fonte pública, Indicação conferida]
+    validations:
+      required: true
+  - type: input
+    id: verificado
+    attributes:
+      label: Data da verificação
+      placeholder: AAAA-MM-DD
+    validations:
+      required: true
+  - type: textarea
+    id: obs
+    attributes:
+      label: Observações

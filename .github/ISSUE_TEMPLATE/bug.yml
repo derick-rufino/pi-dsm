@@ -1,0 +1,29 @@
+name: Bug
+description: Algo não funciona como deveria
+labels: ["bug"]
+body:
+  - type: textarea
+    id: o-que-acontece
+    attributes:
+      label: O que acontece
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como reproduzir
+      placeholder: |
+        1. Abra moradia.html
+        2. Filtre por bairro
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que era esperado
+  - type: input
+    id: ambiente
+    attributes:
+      label: Navegador e largura da tela
+      placeholder: Chrome 130, 320 px

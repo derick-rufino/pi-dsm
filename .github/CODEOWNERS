@@ -1,0 +1,3 @@
+# A aprovação de PR vem sempre do dono do repositório.
+# O ruleset exige revisão de code owner, então só este nome conta como aprovação.
+*   @derick-rufino

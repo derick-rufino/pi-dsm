@@ -1,0 +1,19 @@
+# Dados sensíveis: nunca no repositório
+respostas*.csv
+respostas*.xlsx
+*formulario*.xlsx
+fotos-brutas/
+contatos-pessoais*
+
+# Sistema e editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/extensions.json
+
+# Ferramentas locais
+node_modules/
+.env
+*.log
+pi-shadow-auditor/

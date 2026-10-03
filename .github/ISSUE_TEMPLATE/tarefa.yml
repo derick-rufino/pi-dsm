@@ -1,0 +1,43 @@
+name: Tarefa
+description: Trabalho com entrada, saída e critério de pronto claros
+labels: ["feature"]
+body:
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: O que precisa ser feito
+      description: Em uma ou duas frases.
+    validations:
+      required: true
+  - type: input
+    id: pode-alterar
+    attributes:
+      label: Arquivos que podem ser alterados
+      placeholder: assets/js/filtros.js
+    validations:
+      required: true
+  - type: input
+    id: nao-alterar
+    attributes:
+      label: Arquivos que NÃO podem ser alterados
+      placeholder: assets/css/**, *.html
+  - type: textarea
+    id: entrada-saida
+    attributes:
+      label: Entrada e saída
+      description: Que dado chega e que dado sai, em que formato.
+  - type: textarea
+    id: pronto
+    attributes:
+      label: Pronto quando
+      description: Verificação objetiva, sem depender de gosto.
+      placeholder: |
+        - [ ] Funciona só com teclado
+        - [ ] Estado vazio e de erro tratados
+    validations:
+      required: true
+  - type: input
+    id: revisor
+    attributes:
+      label: Quem revisa
+      placeholder: "@usuario"
