@@ -1,0 +1,8 @@
+footer {
+    background: var(--surface);
+    border-radius: var(--radius-2xl);
+
+    width: 100%;
+    height: fit-content;
+    padding: var(--space-8);
+}
