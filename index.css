@@ -1,8 +1,1301 @@
-footer {
-    background: var(--surface);
-    border-radius: var(--radius-2xl);
+﻿/* ==========================================================================
+   Kampi · index.css (home)
+   Depende de global.css. Só usa tokens; valores locais ficam em custom
+   properties no início de cada bloco e seguem a grade de 4px.
 
-    width: 100%;
-    height: fit-content;
-    padding: var(--space-8);
+   Ordem do arquivo = ordem da página
+   0. Utilitários e componentes comuns (botão redondo, strip, degraus, burst)
+   1. Header e menu mobile
+   2. Hero
+   3. Banner deslizante
+   4. Pilares (bento)
+   5. Confiança
+   6. Footer
+   7. Responsivo
+
+   Cada seção indica o elemento no formato <tag.classe>.
+   ========================================================================== */
+
+@property --spread {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 1;
+}
+
+:root {
+    /* Conteúdo centralizado até --page-width, nunca menos que a margem da página */
+    --gutter: max(var(--page-margin), calc((100% - var(--page-width)) / 2));
+
+    /* Estrela de 14 pontas (bursts), raio interno 80% */
+    --star-14: polygon(50% 0%, 58.9% 11%, 71.7% 5%, 74.9% 18.7%, 89.1% 18.8%, 86% 32.6%, 98.7% 38.9%, 90% 50%, 98.7% 61.1%, 86% 67.4%, 89.1% 81.2%, 74.9% 81.3%, 71.7% 95%, 58.9% 89%, 50% 100%, 41.1% 89%, 28.3% 95%, 25.1% 81.3%, 10.9% 81.2%, 14% 67.4%, 1.3% 61.1%, 10% 50%, 1.3% 38.9%, 14% 32.6%, 10.9% 18.8%, 25.1% 18.7%, 28.3% 5%, 41.1% 11%);
+}
+
+html {
+    scroll-behavior: smooth;
+    /* navegação entre seções: 0.7s ease-in-out no protótipo */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+p {
+    margin: 0;
+}
+
+svg {
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* --------------------------------------------------------------------------
+   0. COMPONENTES COMUNS
+   -------------------------------------------------------------------------- */
+
+/* <a|button|span.round-btn> botão redondo com seta.
+   Defina --control (tamanho), --btn-bg e --btn-fg no contexto. */
+.round-btn {
+    --dir: 1;
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    width: var(--control, var(--control-md));
+    aspect-ratio: 1;
+    border-radius: var(--radius-pill);
+    --fill: var(--btn-bg, var(--ink));
+    background: var(--fill);
+    color: var(--btn-fg, var(--light));
+    transition: background var(--duration-base) var(--ease-in-out),
+        color var(--duration-base) var(--ease-in-out);
+}
+
+.round-btn svg {
+    width: 50%;
+    transition: translate var(--duration-fast) var(--ease-out);
+}
+
+.round-btn--prev {
+    --dir: -1;
+}
+
+.round-btn--prev svg {
+    scale: -1 1;
+}
+
+/* A seta anda 10% do botão quando ele (ou o card que o contém) recebe hover */
+.round-btn:not(.menu__close):hover svg,
+a:hover>.round-btn:not(.menu__close) svg,
+.cta:hover .round-btn svg {
+    translate: calc(var(--control, var(--control-md)) * 0.1 * var(--dir)) 0;
+}
+
+/* <.pill> base de todas as pills. Tamanhos: --md (toque), --lg (título).
+   Cores: defina --pill-bg e --pill-fg. */
+.pill {
+    --fill: var(--pill-bg, var(--surface-raised));
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-pill);
+    background: var(--fill);
+    color: var(--pill-fg, var(--text));
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-auto);
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+.pill--md {
+    min-height: var(--control-sm);
+    padding-inline: var(--space-5);
+    font-size: var(--text-md);
+}
+
+.pill--lg {
+    max-width: var(--pill-max);
+    padding: var(--space-4) var(--pill-pad-x);
+    color: var(--pill-fg, var(--ink));
+    font-family: var(--font-display);
+    font-size: var(--heading-title);
+    font-weight: var(--weight-display);
+    letter-spacing: 0;
+}
+
+.pill--muted {
+    --pill-fg: var(--text-muted);
+}
+
+.pill--ink {
+    --pill-bg: var(--ink);
+    --pill-fg: var(--text);
+    --state-tint: var(--text);
+    font-weight: var(--weight-semibold);
+}
+
+/* Estados (hover, press, disabled) para pills e botões que são link ou botão.
+   Fundo claro escurece (tinta); fundo escuro clareia (--state-tint: texto). */
+:is(a, button):is(.pill, .round-btn):hover {
+    background: color-mix(in srgb, var(--fill), var(--state-tint, var(--ink)) var(--state-hover));
+}
+
+:is(a, button):is(.pill, .round-btn):active {
+    background: color-mix(in srgb, var(--fill), var(--state-tint, var(--ink)) var(--state-press));
+}
+
+:is(a, button):is(.pill, .round-btn):is(:disabled, [aria-disabled="true"]) {
+    opacity: var(--state-disabled);
+    pointer-events: none;
+}
+
+/* <span.strip> círculos sobrepostos em degradê.
+   Defina --n (quantidade), --circle (diâmetro) e a largura. Entrada: círculos
+   abrem a partir da esquerda (Estado Início → Fim). */
+.strip {
+    --spread: 1;
+    display: flex;
+    flex: none;
+    overflow: hidden;
+    width: var(--strip-width);
+    height: var(--circle);
+    border-radius: var(--radius-pill);
+    animation: strip-in var(--duration-enter) var(--ease-out) var(--duration-fast) backwards;
+}
+
+.strip>span {
+    flex: none;
+    width: var(--circle);
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.strip>span+span {
+    margin-inline-start: calc(var(--circle) * -1 + (100% - var(--circle)) / (var(--n) - 1) * var(--spread));
+}
+
+.strip--sky {
+    --n: 7;
+    --circle: var(--control-xl);
+    --strip-width: var(--strip-md);
+}
+
+.strip--sky> :nth-child(1) {
+    background: var(--ramp-sky-1);
+}
+
+.strip--sky> :nth-child(2) {
+    background: var(--ramp-sky-2);
+}
+
+.strip--sky> :nth-child(3) {
+    background: var(--ramp-sky-3);
+}
+
+.strip--sky> :nth-child(4) {
+    background: var(--ramp-sky-4);
+}
+
+.strip--sky> :nth-child(5) {
+    background: var(--ramp-sky-5);
+}
+
+.strip--sky> :nth-child(6) {
+    background: var(--ramp-sky-6);
+}
+
+.strip--sky> :nth-child(7) {
+    background: var(--ramp-sky-7);
+}
+
+.strip--lime {
+    --n: 8;
+    --circle: var(--control-xl);
+    --strip-width: var(--strip-lg);
+}
+
+.strip--lime> :nth-child(1) {
+    background: var(--ramp-lime-1);
+}
+
+.strip--lime> :nth-child(2) {
+    background: var(--ramp-lime-2);
+}
+
+.strip--lime> :nth-child(3) {
+    background: var(--ramp-lime-3);
+}
+
+.strip--lime> :nth-child(4) {
+    background: var(--ramp-lime-4);
+}
+
+.strip--lime> :nth-child(5) {
+    background: var(--ramp-lime-5);
+}
+
+.strip--lime> :nth-child(6) {
+    background: var(--ramp-lime-6);
+}
+
+.strip--lime> :nth-child(7) {
+    background: var(--ramp-lime-7);
+}
+
+.strip--lime> :nth-child(8) {
+    background: var(--ramp-lime-8);
+}
+
+/* Card da calculadora: tinta → olivas → lima */
+.strip--olive {
+    --n: 6;
+    --circle: var(--space-8);
+    --strip-width: var(--strip-sm);
+}
+
+.strip--olive> :nth-child(1) {
+    background: var(--ink);
+}
+
+.strip--olive> :nth-child(2) {
+    background: var(--ramp-olive-1);
+}
+
+.strip--olive> :nth-child(3) {
+    background: var(--ramp-olive-2);
+}
+
+.strip--olive> :nth-child(4) {
+    background: var(--ramp-olive-3);
+}
+
+.strip--olive> :nth-child(5) {
+    background: var(--ramp-olive-4);
+}
+
+.strip--olive> :nth-child(6) {
+    background: var(--lime);
+}
+
+@keyframes strip-in {
+    from {
+        --spread: 0;
+    }
+
+    to {
+        --spread: 1;
+    }
+}
+
+/* <span.stairs> degraus de pixel. Cada quadrado entra um por vez no hover. */
+.stairs {
+    --unit: var(--space-4);
+    --cols: 7;
+    --rows: 6;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), var(--unit));
+    grid-template-rows: repeat(var(--rows), var(--unit));
+    flex: none;
+}
+
+.stairs>span {
+    grid-row: calc(var(--rows) - var(--r));
+    grid-column: var(--c);
+    background: var(--stairs-color, var(--lime));
+}
+
+.stairs> :nth-child(1) {
+    --n: 0;
+    --r: 0;
+    --c: 1;
+}
+
+.stairs> :nth-child(2) {
+    --n: 1;
+    --r: 0;
+    --c: 2;
+}
+
+.stairs> :nth-child(3) {
+    --n: 2;
+    --r: 1;
+    --c: 2;
+}
+
+.stairs> :nth-child(4) {
+    --n: 3;
+    --r: 1;
+    --c: 3;
+}
+
+.stairs> :nth-child(5) {
+    --n: 4;
+    --r: 2;
+    --c: 3;
+}
+
+.stairs> :nth-child(6) {
+    --n: 5;
+    --r: 2;
+    --c: 4;
+}
+
+.stairs> :nth-child(7) {
+    --n: 6;
+    --r: 3;
+    --c: 4;
+}
+
+.stairs> :nth-child(8) {
+    --n: 7;
+    --r: 3;
+    --c: 5;
+}
+
+.stairs> :nth-child(9) {
+    --n: 8;
+    --r: 4;
+    --c: 5;
+}
+
+.stairs> :nth-child(10) {
+    --n: 9;
+    --r: 4;
+    --c: 6;
+}
+
+.stairs> :nth-child(11) {
+    --n: 10;
+    --r: 5;
+    --c: 6;
+}
+
+.stairs> :nth-child(12) {
+    --n: 11;
+    --r: 5;
+    --c: 7;
+}
+
+/* Degraus da escada do hero: invisíveis por padrão (sem nenhum degrau visível quando idle) */
+.hero > .stairs > span {
+    opacity: 0;
+    scale: 0;
+    transform-origin: center center;
+    transition:
+        opacity 0.15s var(--ease-out),
+        scale 0.18s cubic-bezier(0.34, 1.3, 0.64, 1);
+    transition-delay: calc((11 - var(--n)) * 25ms);
+}
+
+/* Hover no hero: degraus animam subindo de 0 a 11. Ao sair do hover, revertem suavemente de onde pararam descendo até sumir */
+.hero:hover > .stairs > span {
+    opacity: 1;
+    scale: 1;
+    transition-delay: calc(var(--n) * 32ms);
+}
+
+/* <span.burst> estrela decorativa. Hover no card: gira 90° e sai de cena. */
+.burst {
+    --burst-size: var(--burst-sm);
+    --burst-rotate: 0deg;
+    position: absolute;
+    width: var(--burst-size);
+    aspect-ratio: 1;
+    background: var(--burst-color, var(--sky));
+    clip-path: var(--star-14);
+    rotate: var(--burst-rotate);
+    pointer-events: none;
+    transition: rotate var(--duration-slow) var(--ease-in-out);
+}
+
+/* Contorno (stroke de 10 sobre 324): estrela menor por cima, cor do slide */
+.burst--outline::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--sky) 30%, var(--slide-bg));
+    clip-path: var(--star-14);
+    scale: 0.94;
+}
+
+:is(.block, .slide):hover>.burst {
+    rotate: calc(var(--burst-rotate) + 90deg);
+}
+
+/* --------------------------------------------------------------------------
+   1. HEADER E MENU MOBILE
+   -------------------------------------------------------------------------- */
+
+/* <header.header> */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) var(--gutter) var(--space-3);
+    background: var(--bg);
+}
+
+/* <a.brand> > <span.brand__dot> + <span.brand__name> */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.brand__dot {
+    width: var(--space-3);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--blue);
+}
+
+.brand__name {
+    font-family: var(--font-display);
+    font-size: var(--heading-card);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-auto);
+    letter-spacing: var(--tracking-brand);
+    color: var(--text);
+}
+
+/* <nav.nav> > <a.nav__link> (cada link leva a cor da sua seção) */
+.nav {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.nav__link {
+    --pill-bg: var(--link-bg);
+    --pill-fg: var(--ink);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    padding-inline: var(--space-4);
+    min-height: calc(var(--control-sm) - var(--space-1));
+}
+
+.link--food,
+.nav__link--food {
+    --link-bg: var(--section-food);
+}
+
+.link--scene,
+.nav__link--scene {
+    --link-bg: var(--section-scene);
+}
+
+.link--calc,
+.nav__link--calc {
+    --link-bg: var(--section-calc);
+}
+
+/* <button.pill.pill--md.menu-toggle> (só no mobile) */
+.menu-toggle {
+    --pill-bg: var(--lime);
+    --pill-fg: var(--ink);
+    display: none;
+    padding-inline-end: var(--space-4);
+    font-weight: var(--weight-semibold);
+}
+
+/* <span.menu-toggle__icon> duas barras */
+.menu-toggle__icon {
+    display: grid;
+    gap: var(--space-1);
+    width: var(--space-5);
+}
+
+.menu-toggle__icon::before,
+.menu-toggle__icon::after {
+    content: "";
+    justify-self: center;
+    width: 70%;
+    height: calc(var(--space-1) / 2);
+    border-radius: var(--radius-pill);
+    background: currentColor;
+}
+
+/* <nav.menu> painel que desce do topo */
+.menu {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 20;
+    display: none;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6) var(--page-margin);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    background: var(--surface);
+}
+
+.menu[data-open] {
+    display: flex;
+    animation: menu-in var(--duration-fast) var(--ease-out);
+    /* protótipo: 0.3s */
+}
+
+@keyframes menu-in {
+    from {
+        translate: 0 -100%;
+        opacity: 0;
+    }
+}
+
+.menu__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu__title {
+    font-family: var(--font-display);
+    font-size: var(--heading-card);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--text);
+}
+
+.menu__close {
+    --control: var(--control-md);
+    --btn-bg: var(--surface-raised);
+    --btn-fg: var(--text);
+    --state-tint: var(--text);
+}
+
+.menu__close:hover svg {
+    translate: 0;
+}
+
+.menu__link {
+    --pill-bg: var(--link-bg);
+    --pill-fg: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    height: calc(var(--space-12) + var(--space-5));
+    padding: 0 var(--space-3) 0 var(--space-7);
+    font-size: var(--heading-sub);
+    font-weight: var(--weight-semibold);
+}
+
+.menu__link .round-btn {
+    --control: var(--space-12);
+    --btn-bg: var(--ink);
+    --btn-fg: var(--light);
+    --state-tint: var(--text);
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO
+   <section.hero> > <h1.hero__headline> > <span.hero__row>
+   -------------------------------------------------------------------------- */
+
+.hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--gutter) var(--space-12);
+}
+
+.hero__headline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin: 0;
+    font-weight: inherit;
+}
+
+.hero__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.hero .pill--lg {
+    padding: var(--space-3) var(--space-7);
+    font-size: var(--heading-section);
+}
+
+/* <span.pill.pill--lg.title-pill--*> pill de título em duas cores */
+.title-pill--light {
+    --pill-bg: var(--light);
+}
+
+.title-pill--sky {
+    --pill-bg: var(--sky);
+}
+
+.hero .strip--sky {
+    --circle: var(--control-lg);
+    --strip-width: 124px;
+}
+
+.hero .strip--lime {
+    --circle: var(--control-lg);
+    --strip-width: 180px;
+}
+
+.hero .round-btn {
+    --control: var(--control-lg);
+    --btn-bg: var(--lime);
+    --btn-fg: var(--ink);
+}
+
+/* <p.hero__lead> */
+.hero__lead {
+    max-width: 32em;
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+    line-height: var(--leading-text);
+}
+
+/* <span.stairs> do hero: 7 colunas x 6 linhas */
+.hero>.stairs {
+    --unit: var(--space-3);
+    position: absolute;
+    inset-inline-end: calc(var(--gutter) + var(--space-10));
+    inset-block-end: var(--space-2);
+}
+
+/* --------------------------------------------------------------------------
+   3. BANNER DESLIZANTE
+   <section.banner> > .banner__head, .banner__viewport, .banner__dots
+   -------------------------------------------------------------------------- */
+
+.banner {
+    --slide-index: 0;
+    /* atualizado por JS; autoplay a cada 5s */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: 0 var(--gutter) var(--section-gap);
+}
+
+.banner__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+/* <div.banner__title> título + aviso */
+.banner__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.tag {
+    --pill-bg: var(--surface-raised);
+    --pill-fg: var(--text-muted);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+}
+
+.section-title {
+    margin: 0;
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: var(--heading-section);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+}
+
+/* <div.banner__controls> */
+.banner__controls {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.banner__controls .round-btn {
+    --control: var(--control-md);
+    --btn-bg: var(--light);
+    --btn-fg: var(--ink);
+}
+
+.banner__controls .round-btn--prev {
+    --btn-bg: var(--surface-raised);
+    --btn-fg: var(--text);
+    --state-tint: var(--text);
+}
+
+/* <div.banner__viewport> recorta os slides */
+.banner__viewport {
+    overflow: hidden;
+    border-radius: var(--radius-2xl);
+}
+
+.banner__slides {
+    display: flex;
+    gap: var(--space-4);
+    translate: calc(var(--slide-index) * -1 * (var(--slide-width) + var(--space-4))) 0;
+    transition: translate var(--duration-base) var(--ease-in-out);
+}
+
+.banner__slides--no-transition,
+.banner__slides--no-transition .slide {
+    transition: none !important;
+}
+
+/* <li.slide> */
+.slide {
+    --slide-pad-x: var(--space-9);
+    --slide-pad-y: var(--space-8);
+    --burst-size: var(--burst-lg);
+    position: relative;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: var(--slide-width);
+    height: var(--slide-height);
+    padding: var(--slide-pad-y) var(--slide-pad-x);
+    overflow: hidden;
+    border-radius: var(--radius-2xl);
+    background: var(--slide-bg);
+    color: var(--ink);
+    opacity: 0.45;
+    transition: opacity var(--duration-base) var(--ease-in-out);
+}
+
+.slide[data-active="true"] {
+    opacity: 1;
+}
+
+.slide:not([data-active="true"]):hover {
+    opacity: 0.75;
+    cursor: pointer;
+}
+
+.slide--food {
+    --slide-bg: var(--section-food);
+}
+
+.slide--scene {
+    --slide-bg: var(--section-scene);
+}
+
+.slide--market {
+    --slide-bg: var(--lime);
+}
+
+/* <div.slide__body> pill + título + texto */
+.slide__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    max-width: calc(100% * 2 / 3);
+}
+
+.slide__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--heading-section);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+}
+
+.slide__text {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-text);
+}
+
+/* <a.pill.pill--ink.cta> botão escuro com seta na cor do slide */
+.cta {
+    position: relative;
+    z-index: 1;
+    align-self: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-6);
+    font-size: var(--text-md);
+}
+
+.cta .round-btn {
+    --control: var(--control-sm);
+    --btn-bg: var(--slide-bg);
+    --btn-fg: var(--ink);
+}
+
+/* Bursts e selo dos slides (posição em % do slide) */
+.slide>.burst {
+    inset-inline-start: 66%;
+    inset-block-start: 20%;
+    --burst-color: var(--sky);
+}
+
+.slide--scene>.burst {
+    --burst-size: var(--burst-md);
+    --burst-color: var(--blue);
+    --burst-rotate: 10deg;
+    inset-inline-start: 68%;
+    inset-block-start: 0;
+}
+
+/* <span.seal> selo "qui 19h" */
+.seal {
+    position: absolute;
+    inset-inline-start: 74%;
+    inset-block-start: 26%;
+    display: grid;
+    place-items: center;
+    width: var(--seal-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--sky);
+    font-family: var(--font-display);
+    font-size: var(--heading-section);
+    font-weight: var(--weight-display);
+    line-height: 0.95;
+    letter-spacing: var(--tracking-display);
+    text-align: center;
+}
+
+/* <ul.banner__dots> indicadores: o ativo estica e vira barra */
+.banner__dots {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    gap: var(--space-2);
+}
+
+.banner__dot {
+    position: relative;
+    width: var(--space-3);
+    height: var(--space-3);
+    border-radius: var(--radius-pill);
+    background: var(--surface-raised);
+    overflow: hidden;
+    cursor: pointer;
+    transition: width var(--duration-base) var(--ease-in-out),
+        background var(--duration-base) var(--ease-in-out);
+}
+
+.banner__dot::before {
+    content: "";
+    position: absolute;
+    inset-block: calc((var(--space-3) - var(--control-sm)) / 2);
+    inset-inline: calc(var(--space-1) * -1);
+}
+
+.banner__dot[aria-current="true"] {
+    width: var(--space-14);
+    background: var(--surface-raised);
+}
+
+.banner__dot[aria-current="true"]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--light);
+    width: 0%;
+    animation: dot-progress var(--slide-duration, 5000ms) linear forwards;
+}
+
+.banner:hover .banner__dot[aria-current="true"]::after {
+    animation-play-state: paused;
+}
+
+@keyframes dot-progress {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   4. PILARES (BENTO)
+   <section.pillars> > <h2.section-title> + <div.bento>
+   -------------------------------------------------------------------------- */
+
+.pillars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: 0 var(--gutter) var(--section-gap);
+}
+
+.bento {
+    display: grid;
+    grid-template-columns: 8fr 5fr;
+    gap: var(--space-4);
+    min-height: var(--bento-height);
+}
+
+/* <div.bento__side> coluna dos dois blocos menores */
+.bento__side {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+/* <a.block> */
+.block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-9);
+    overflow: hidden;
+    border-radius: var(--radius-2xl);
+    background: var(--block-bg);
+    color: var(--ink);
+}
+
+.block--food {
+    --block-bg: var(--section-food);
+}
+
+.block--scene {
+    --block-bg: var(--section-scene);
+    --stairs-color: var(--ink);
+}
+
+.block--calc {
+    --block-bg: var(--section-calc);
+}
+
+.block .round-btn {
+    --btn-bg: var(--ink);
+    --btn-fg: var(--light);
+    --state-tint: var(--text);
+}
+
+/* <a.block--main> bloco grande (comer bem) */
+.block--main {
+    justify-content: space-between;
+}
+
+.block--main .round-btn {
+    --control: var(--control-lg);
+}
+
+.block--main>.burst {
+    inset-block-start: calc(var(--space-8) * -1);
+    inset-inline-end: var(--space-9);
+    --burst-rotate: -12deg;
+    --burst-color: var(--sky);
+}
+
+.block__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: var(--block-text-max);
+}
+
+.block__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--heading-section);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+}
+
+.block--main .block__title {
+    font-size: var(--heading-page);
+}
+
+.block__desc {
+    font-size: var(--text-md);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-text);
+    max-width: var(--block-desc-max);
+}
+
+.block--main .block__desc {
+    max-width: none;
+    font-size: var(--text-xl);
+}
+
+/* <a.block--side> blocos cena & rolê e calculadora */
+.block--side {
+    gap: var(--space-6);
+    padding: var(--space-7) var(--space-8);
+    border-radius: var(--radius-xl);
+}
+
+.block--side .block__title {
+    padding-inline-end: calc(var(--control-md) + var(--space-2));
+    /* não encosta no botão */
+}
+
+.block--side .round-btn {
+    --control: var(--control-md);
+    position: absolute;
+    inset-block-start: var(--space-7);
+    inset-inline-end: var(--space-8);
+}
+
+.block--scene > .stairs {
+    --unit: var(--space-2);
+    --stairs-color: var(--ink);
+    position: absolute;
+    inset-inline-end: var(--space-8);
+    inset-block-end: var(--space-6);
+}
+
+.block--calc>.strip {
+    position: absolute;
+    inset-inline-end: var(--space-8);
+    inset-block-end: var(--space-7);
+}
+
+/* --------------------------------------------------------------------------
+   5. CONFIANÇA
+   <section.trust> > <ul> > <li.pill.pill--md> > <span.trust__dot> + <span>
+   -------------------------------------------------------------------------- */
+
+.trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: 0 var(--gutter) var(--section-gap-sm);
+}
+
+.trust__dot {
+    width: var(--space-3);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--dot, var(--lime));
+}
+
+.trust .pill:nth-child(1) {
+    --dot: var(--lime);
+}
+
+.trust .pill:nth-child(2) {
+    --dot: var(--blue);
+}
+
+.trust .pill:nth-child(3) {
+    --dot: var(--sky);
+}
+
+/* --------------------------------------------------------------------------
+   6. FOOTER
+   <footer.footer> > <div.footer__block> > .footer__top + .footer__wordmark
+   -------------------------------------------------------------------------- */
+
+.footer__block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: var(--space-9) var(--footer-pad) 0;
+    background: var(--surface);
+    border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+}
+
+.footer__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-7);
+}
+
+.footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 15em;
+}
+
+.footer__tagline {
+    color: var(--text);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-auto);
+}
+
+.footer__credit {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-auto);
+}
+
+/* <nav.footer__links> > <div.footer__col> */
+.footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-14);
+}
+
+.footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.footer__heading {
+    margin: 0;
+    color: var(--text-muted);
+    font-family: var(--font-text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0;
+    line-height: var(--leading-auto);
+}
+
+.footer__col ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--control-sm);
+    gap: var(--space-2);
+    color: var(--text);
+    font-size: var(--text-md);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-auto);
+}
+
+.footer__link svg {
+    width: var(--space-4);
+    fill: currentColor;
+    stroke: none;
+}
+
+/* <div.footer__wordmark> mostra só o topo do "kampi" gigante */
+.footer__wordmark {
+    height: var(--wordmark-crop);
+    overflow: hidden;
+}
+
+.footer__wordmark>span {
+    display: block;
+    margin-inline-start: -0.04em;
+    /* alinhamento óptico do "k" com a margem */
+    color: var(--lime);
+    font-family: var(--font-display);
+    font-size: var(--wordmark-size);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+}
+
+/* --------------------------------------------------------------------------
+   7. RESPONSIVO (mesmos breakpoints do global.css)
+   -------------------------------------------------------------------------- */
+
+/* Tablet: sem degraus no hero; bento 5fr/4fr; rodapé quebra em linhas */
+@media (max-width: 1079px) {
+    .hero>.stairs {
+        display: none;
+    }
+
+    .bento {
+        grid-template-columns: 5fr 4fr;
+    }
+
+    .slide>.burst {
+        inset-inline-start: 77%;
+    }
+
+    .seal {
+        inset-inline-start: 73%;
+        inset-block-start: 17%;
+    }
+
+    .slide__text {
+        font-size: var(--text-md);
+    }
+
+    .footer__links {
+        gap: var(--space-10);
+    }
+}
+
+/* Mobile: nav vira menu; hero enxuto; bento em coluna única; slides altos */
+@media (max-width: 767px) {
+    .nav {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+    }
+
+    .hero__row:first-child>.strip,
+    .title-pill--sky,
+    .hero__lead {
+        display: none;
+    }
+
+    .banner__title .tag,
+    .banner__controls .round-btn--prev {
+        display: none;
+    }
+
+    .slide {
+        --slide-pad-x: var(--space-5);
+        --slide-pad-y: var(--space-6);
+    }
+
+    .slide__body {
+        max-width: none;
+    }
+
+    .slide>.burst,
+    .seal {
+        display: none;
+    }
+
+    .bento {
+        grid-template-columns: 1fr;
+    }
+
+    .block--side {
+        min-height: calc(var(--bento-height) / 2 - var(--space-2));
+    }
+
+    .block--main {
+        min-height: var(--bento-height);
+    }
+
+    .footer__top {
+        flex-direction: column;
+    }
+}
+
+/* Movimento reduzido: sem scroll suave nem animação de entrada */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 }

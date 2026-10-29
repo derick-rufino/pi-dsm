@@ -1,30 +1,361 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kampi - seu guia da cidade</title>
+    <title>kampi · seu guia da cidade</title>
 
     <link rel="stylesheet" href="global.css">
-
     <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
 </head>
 
 <body>
-    <header>
-        <h1>kampi</h1>
-        <nav>
-            <ul>
-                <li><a href="">page 1</a></li>
-                <li><a href="">page 2</a></li>
-                <li><a href="">page 3</a></li>
-            </ul>
+    <!-- ================================================================
+         HEADER
+         ================================================================ -->
+    <header class="header">
+        <a href="#" class="brand" aria-label="kampi — página inicial">
+            <span class="brand__dot" aria-hidden="true"></span>
+            <span class="brand__name">kampi</span>
+        </a>
+
+        <nav class="nav" aria-label="Navegação principal">
+            <a href="#comer" class="pill pill--md nav__link link--food">comer bem</a>
+            <a href="#cena" class="pill pill--md nav__link link--scene">cena &amp; rolê</a>
+            <a href="#calc" class="pill pill--md nav__link link--calc">calculadora</a>
         </nav>
+
+        <button type="button" class="pill pill--md menu-toggle"
+            aria-expanded="false" aria-controls="menu"
+            aria-label="Abrir menu de navegação">
+            <span>menu</span>
+            <span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
     </header>
-    <main></main>
-    <footer>
-        <p class="footer-wordmark">kampi</p>
+
+    <!-- ================================================================
+         MENU MOBILE
+         ================================================================ -->
+    <nav id="menu" class="menu" aria-label="Menu móvel">
+        <div class="menu__top">
+            <p class="menu__title">menu</p>
+            <button type="button" class="round-btn menu__close" aria-label="Fechar menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M18 6 6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <ul>
+            <li>
+                <a href="#comer" class="pill menu__link link--food">
+                    <span>comer bem</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#cena" class="pill menu__link link--scene">
+                    <span>cena &amp; rolê</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#calc" class="pill menu__link link--calc">
+                    <span>calculadora</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="conteudo">
+        <!-- ============================================================
+             HERO
+             ============================================================ -->
+        <section class="hero">
+            <h1 class="hero__headline">
+                <!-- Linha 1: pill clara + strip sky (7 círculos) -->
+                <span class="hero__row">
+                    <span class="pill pill--lg title-pill--light">chegou em Marília?</span>
+                    <span class="strip strip--sky" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </span>
+                </span>
+
+                <!-- Linha 2: strip lime (8 círculos) + botão seta + pill azul -->
+                <span class="hero__row">
+                    <span class="strip strip--lime" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span><span></span>
+                    </span>
+                    <a href="#comer" class="round-btn" aria-label="Comece por aqui">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6"></path>
+                        </svg>
+                    </a>
+                    <span class="pill pill--lg title-pill--sky">comece por aqui</span>
+                </span>
+            </h1>
+
+            <p class="hero__lead">
+                Onde comer barato, o que fazer depois da aula e quanto custa viver aqui, com preço e data verificados por estudantes.
+            </p>
+
+            <!-- Degraus decorativos: 7×6, 12 quadrados -->
+            <span class="stairs" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+            </span>
+        </section>
+
+        <!-- ============================================================
+             BANNER DESLIZANTE
+             ============================================================ -->
+        <section class="banner" aria-label="Destaques da cidade">
+            <div class="banner__head">
+                <div class="banner__title">
+                    <h2 class="section-title">agora na cidade</h2>
+                    <span class="pill tag" aria-hidden="true">dados de exemplo</span>
+                </div>
+
+                <div class="banner__controls">
+                    <button type="button" class="round-btn round-btn--prev"
+                        aria-label="Slide anterior" data-banner="prev">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6"></path>
+                        </svg>
+                    </button>
+                    <button type="button" class="round-btn"
+                        aria-label="Próximo slide" data-banner="next">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="banner__viewport">
+                <ul class="banner__slides" role="list">
+                    <!-- Slide 1 — Comer bem -->
+                    <li class="slide slide--food" data-active="true">
+                        <div class="slide__body">
+                            <span class="pill pill--ink">promoção de comida</span>
+                            <h3 class="slide__title">almoço a R$ 4,90 no bandejão</h3>
+                            <p class="slide__text">
+                                Válido até sexta, mediante vínculo estudantil.
+                            </p>
+                        </div>
+                        <a href="comer.html" class="pill pill--ink cta">
+                            ver no comer bem
+                            <span class="round-btn" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                            </span>
+                        </a>
+                        <span class="burst" aria-hidden="true"></span>
+                    </li>
+
+                    <!-- Slide 2 — Cena & rolê -->
+                    <li class="slide slide--scene">
+                        <div class="slide__body">
+                            <span class="pill pill--ink">rolê da semana</span>
+                            <h3 class="slide__title">quinta de bandas locais</h3>
+                            <p class="slide__text">
+                                Música ao vivo no Centro, entrada franca.
+                            </p>
+                        </div>
+                        <a href="cena.html" class="pill pill--ink cta">
+                            ver em cena &amp; rolê
+                            <span class="round-btn" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                            </span>
+                        </a>
+                        <span class="burst" aria-hidden="true"></span>
+                        <span class="seal" aria-hidden="true">qui<br>19h</span>
+                    </li>
+
+                    <!-- Slide 3 — Mercado da semana -->
+                    <li class="slide slide--market">
+                        <div class="slide__body">
+                            <span class="pill pill--ink">feira e mercado</span>
+                            <h3 class="slide__title">onde comprar mais barato</h3>
+                            <p class="slide__text">
+                                Dia de feira e sacolão para economizar na semana.
+                            </p>
+                        </div>
+                        <a href="calculadora.html" class="pill pill--ink cta">
+                            calcular gastos
+                            <span class="round-btn" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="banner__dots" role="tablist" aria-label="Indicadores de slide">
+                <li>
+                    <button type="button" class="banner__dot" role="tab"
+                        aria-current="true" aria-label="Slide 1 de 3"
+                        data-slide="0"></button>
+                </li>
+                <li>
+                    <button type="button" class="banner__dot" role="tab"
+                        aria-label="Slide 2 de 3"
+                        data-slide="1"></button>
+                </li>
+                <li>
+                    <button type="button" class="banner__dot" role="tab"
+                        aria-label="Slide 3 de 3"
+                        data-slide="2"></button>
+                </li>
+            </ul>
+        </section>
+
+        <!-- ============================================================
+             PILARES (BENTO)
+             ============================================================ -->
+        <section class="pillars" id="comer">
+            <h2 class="section-title">por onde começar</h2>
+
+            <div class="bento">
+                <!-- Bloco grande — Comer bem -->
+                <a href="comer.html" class="block block--food block--main">
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                    <span class="burst" aria-hidden="true"></span>
+                    <div class="block__text">
+                        <h3 class="block__title">comer bem</h3>
+                        <p class="block__desc">
+                            Bandejão, marmita, feira e mercado perto do seu campus.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Coluna lateral: dois blocos menores -->
+                <div class="bento__side">
+                    <!-- Cena & rolê -->
+                    <a href="cena.html" class="block block--scene block--side" id="cena">
+                        <div class="block__text">
+                            <h3 class="block__title">cena &amp; rolê</h3>
+                            <p class="block__desc">
+                                Parques, cultura e programas recorrentes, sem agenda vencida.
+                            </p>
+                        </div>
+                        <span class="round-btn" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                        </span>
+                        <!-- Degraus decorativos (cena & rolê): 7×6 -->
+                        <span class="stairs" aria-hidden="true">
+                            <span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span><span></span>
+                        </span>
+                    </a>
+
+                    <!-- Calculadora -->
+                    <a href="calculadora.html" class="block block--calc block--side" id="calc">
+                        <div class="block__text">
+                            <h3 class="block__title">calculadora</h3>
+                            <p class="block__desc">
+                                Calcule comida, transporte e lazer em um só cenário.
+                            </p>
+                        </div>
+                        <span class="round-btn" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                        </span>
+                        <!-- Strip olive: 6 círculos (ink → olivas → lime) -->
+                        <span class="strip strip--olive" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             CONFIANÇA
+             ============================================================ -->
+        <section class="trust" aria-label="Indicadores de confiança">
+            <span class="pill pill--md">
+                <span class="trust__dot" aria-hidden="true"></span>
+                <span>dados verificados em campo</span>
+            </span>
+            <span class="pill pill--md">
+                <span class="trust__dot" aria-hidden="true"></span>
+                <span>ofertas sempre identificadas</span>
+            </span>
+            <span class="pill pill--md">
+                <span class="trust__dot" aria-hidden="true"></span>
+                <span>feito com estudantes</span>
+            </span>
+        </section>
+    </main>
+
+    <!-- ================================================================
+         FOOTER
+         ================================================================ -->
+    <footer class="footer">
+        <div class="footer__block">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <p class="footer__tagline">Informação honesta para quem está chegando.</p>
+                    <p class="footer__credit">
+                        feito em Marília · projeto integrador DSM, Fatec
+                    </p>
+                </div>
+
+                <nav class="footer__links" aria-label="Links do rodapé">
+                    <div class="footer__col">
+                        <h3 class="footer__heading">explorar</h3>
+                        <ul>
+                            <li><a href="comer.html" class="footer__link">comer bem</a></li>
+                            <li><a href="cena.html" class="footer__link">cena &amp; rolê</a></li>
+                            <li><a href="calculadora.html" class="footer__link">calculadora</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h3 class="footer__heading">projeto</h3>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/derick-rufino/pi-dsm"
+                                    class="footer__link" target="_blank" rel="noopener noreferrer">
+                                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                                        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15
+                                        -.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87
+                                        .51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12
+                                        0 0 .67-.21 2.2.82a7.64 7.64 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82
+                                        2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95
+                                        .29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0
+                                        16 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </li>
+                            <li><a href="#" class="footer__link">reportar dado errado</a></li>
+                            <li><a href="#" class="footer__link">sugerir um lugar</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Wordmark gigante cortada -->
+            <div class="footer__wordmark" aria-hidden="true">
+                <span>kampi</span>
+            </div>
+        </div>
     </footer>
 </body>
 

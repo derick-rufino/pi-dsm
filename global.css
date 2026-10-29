@@ -3,6 +3,9 @@
    Tokens de design derivados do Figma (kampi - design system).
    Tema único escuro. Sem modo claro.
 
+   Regra de medida: todo valor de espaço, raio, layout e título é múltiplo
+   de 4px (grade de 4pt). Texto corrido usa múltiplos de 2px.
+
    Estrutura
    1. Cor
    2. Tipografia
@@ -49,7 +52,7 @@
     /* ação principal: CTA, seleção, valores (R$) */
 
     /* Acento por seção do site */
-    --section-eat: var(--blue);
+    --section-food: var(--blue);
     /* comer bem */
     --section-scene: var(--sky);
     /* cena & rolê */
@@ -74,8 +77,21 @@
     --ramp-lime-7: #b3e38d;
     --ramp-lime-8: var(--lime);
 
+    --ramp-olive-1: #253732;
+    /* card da calculadora (home) */
+    --ramp-olive-2: #4a6143;
+    --ramp-olive-3: #718e52;
+    --ramp-olive-4: #9bbf5e;
+
+    --ramp-mint-1: #b0e192;
+    /* hero da calculadora */
+    --ramp-mint-2: #99d0af;
+    --ramp-mint-3: #82bec7;
+    --ramp-mint-4: #6eabdc;
+    --ramp-mint-5: #5b95ee;
+
     /* Foco de teclado */
-    --focus-ring: 3px solid var(--lime);
+    --focus-ring: 4px solid var(--lime);
 
     /* ---------- 2. TIPOGRAFIA --------------------------------------------- */
 
@@ -88,28 +104,34 @@
     --weight-semibold: 600;
     --weight-display: 800;
 
-    /* Texto corrido (fixo em todos os breakpoints) */
-    --text-3xs: 11px;
-    --text-2xs: 13px;
-    --text-xs: 14px;
-    --text-sm: 15px;
+    /* Texto corrido (fixo em todos os breakpoints). Múltiplos de 2. */
+    --text-xs: 12px;
+    /* legendas, selos */
+    --text-sm: 14px;
+    /* labels, descrições curtas */
     --text-md: 16px;
-    --text-lg: 17px;
-    --text-xl: 19px;
-    --text-2xl: 20px;
+    /* corpo */
+    --text-lg: 18px;
+    --text-xl: 20px;
+    /* destaque */
 
     /* Entrelinha e tracking */
     --leading-display: 1;
     /* títulos (alguns usam 0.95) */
+    --leading-auto: 1.2;
+    /* altura automática: pills de título, nav, labels */
     --leading-text: 1.375;
     /* parágrafos (135–140%) */
-    --tracking-display: -0.03em;
+    --tracking-display: -0.02em;
+    /* títulos e wordmark gigante */
+    --tracking-brand: -0.03em;
+    /* wordmark do header */
     --tracking-hero: -0.05em;
     /* só nos tamanhos maiores */
 
     /* ---------- 3. FORMA E ESPAÇO ----------------------------------------- */
 
-    --radius-xs: 6px;
+    --radius-xs: 8px;
     /* indicadores de slide */
     --radius-sm: 16px;
     --radius-md: 32px;
@@ -122,14 +144,31 @@
     --radius-pill: 999px;
     /* pills e botões */
 
+    /* Espaço: --space-N = N x 4px */
     --space-1: 4px;
     --space-2: 8px;
     --space-3: 12px;
     --space-4: 16px;
     --space-5: 20px;
     --space-6: 24px;
-    --space-7: 32px;
-    --space-8: 40px;
+    --space-7: 28px;
+    --space-8: 32px;
+    --space-9: 36px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-14: 56px;
+
+    /* Controles redondos (botões de seta, pills de nav) */
+    --control-sm: 44px;
+    /* área de toque mínima */
+    --control-md: 52px;
+    --control-lg: 64px;
+    --control-xl: 88px;
+
+    /* Estados de interação (misturados à cor de fundo do elemento) */
+    --state-hover: 12%;
+    --state-press: 20%;
+    --state-disabled: 0.4;
 
     /* ---------- 4. MOVIMENTO ---------------------------------------------- */
 
@@ -149,93 +188,93 @@
 
     /* ---------- 5. LAYOUT (valores Desktop; Tablet e Mobile abaixo) -------- */
 
-    --container: 1024px;
+    --page-width: 1024px;
+    /* largura máxima do conteúdo */
+    --pill-max: 1024px;
+    /* largura máxima da pill de título */
     --page-margin: 28px;
     --section-gap: 112px;
     --section-gap-sm: 56px;
-    --card-pad: 32px;
-    --card-pad-sm: 28px;
+    --card-pad: 28px;
     --card-text-max: 560px;
-    --row-gap: 16px;
     --pill-pad-x: 36px;
     --footer-pad: 40px;
 
     --slide-width: 760px;
-    --seal-size: 170px;
-    --wordmark-size: 330px;
-    --wordmark-crop: 215px;
+    --slide-height: 340px;
+    --seal-size: 168px;
+    --strip-sm: 76px;
+    /* strip do card da calculadora */
+    --strip-md: 168px;
+    /* strip do título 1 do hero */
+    --strip-lg: 248px;
+    /* strip do título 2 do hero */
+    --burst-sm: 208px;
+    --burst-md: 252px;
+    --burst-lg: 324px;
+    --bento-height: 384px;
+    --block-text-max: 400px;
+    --block-desc-max: 232px;
+    --wordmark-size: 332px;
+    --wordmark-crop: 216px;
 
-    /* Títulos (Bricolage Grotesque). Escala responsiva. */
-    --heading-hero: 110px;
-    --heading-1: 76px;
-    --heading-2: 56px;
-    --heading-3: 52px;
-    --heading-4: 44px;
-    --heading-5: 40px;
-    --heading-6: 36px;
-    --heading-7: 34px;
-    --heading-8: 28px;
+    /* Títulos (Bricolage Grotesque). Escala fluida entre mobile (390px) e desktop
+     (1080px): clamp(mínimo, interpolação linear, máximo). Os extremos são
+     múltiplos de 4; entre eles o tamanho acompanha a largura da tela. */
+    --heading-display: clamp(64px, 64px + 48 * (100vw - 390px) / 690, 112px);
+    /* total da calculadora */
+    --heading-page: clamp(44px, 44px + 32 * (100vw - 390px) / 690, 76px);
+    /* título do bloco principal */
+    --heading-title: clamp(32px, 32px + 24 * (100vw - 390px) / 690, 56px);
+    /* pills de título, slides */
+    --heading-section: clamp(28px, 28px + 16 * (100vw - 390px) / 690, 44px);
+    /* títulos de seção e blocos */
+    --heading-card: clamp(24px, 24px + 8 * (100vw - 390px) / 690, 32px);
+    /* nome do lugar, preço */
+    --heading-sub: clamp(24px, 24px + 4 * (100vw - 390px) / 690, 28px);
+    /* perguntas, itens de menu */
+    --heading-brand: 36px;
+    /* wordmark do header (fixo) */
 }
 
 /* Tablet (frame de 768) */
 @media (max-width: 1079px) {
     :root {
-        --container: 668px;
+        --pill-max: 668px;
         --page-margin: 24px;
         --section-gap: 80px;
         --section-gap-sm: 44px;
-        --card-pad: 26px;
-        --card-pad-sm: 24px;
+        --card-pad: 24px;
         --card-text-max: 360px;
-        --row-gap: 16px;
         --pill-pad-x: 28px;
         --footer-pad: 32px;
 
         --slide-width: 560px;
+        --slide-height: 360px;
         --seal-size: 140px;
         --wordmark-size: 260px;
-        --wordmark-crop: 169px;
-
-        --heading-hero: 88px;
-        --heading-1: 60px;
-        --heading-2: 46px;
-        --heading-3: 42px;
-        --heading-4: 36px;
-        --heading-5: 34px;
-        --heading-6: 30px;
-        --heading-7: 28px;
-        --heading-8: 25px;
+        --wordmark-crop: 168px;
     }
 }
 
 /* Mobile (frame de 390) */
 @media (max-width: 767px) {
     :root {
-        --container: 328px;
+        --pill-max: 328px;
         --page-margin: 16px;
         --section-gap: 56px;
         --section-gap-sm: 32px;
         --card-pad: 20px;
-        --card-pad-sm: 20px;
-        --card-text-max: 358px;
-        --row-gap: 12px;
-        --pill-pad-x: 18px;
+        --card-text-max: 360px;
+        --pill-pad-x: 20px;
         --footer-pad: 20px;
 
         --slide-width: 300px;
+        --slide-height: 400px;
         --seal-size: 104px;
+        --block-desc-max: 200px;
         --wordmark-size: 128px;
-        --wordmark-crop: 83px;
-
-        --heading-hero: 64px;
-        --heading-1: 44px;
-        --heading-2: 34px;
-        --heading-3: 32px;
-        --heading-4: 28px;
-        --heading-5: 28px;
-        --heading-6: 26px;
-        --heading-7: 24px;
-        --heading-8: 22px;
+        --wordmark-crop: 84px;
     }
 }
 
@@ -277,7 +316,7 @@ h6 {
 
 :focus-visible {
     outline: var(--focus-ring);
-    outline-offset: 3px;
+    outline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
