@@ -7,7 +7,11 @@
    2. Componentes comuns (pill, botão redondo, strip, degraus, burst, selo, tag)
    3. Header e menu mobile
    4. Footer
-   5. Responsivo
+   5. Ícones, .sr-only e nav da página atual
+   6. Hero das páginas internas
+   7. Filtros
+   8. Resultados (destaque e cards)
+   9. Responsivo
    ========================================================================== */
 
 @property --spread {
@@ -17,6 +21,9 @@
 }
 
 :root {
+    /* Cor da seção atual. Cada página interna troca no seu index.css. */
+    --accent: var(--blue);
+
     /* Conteúdo centralizado até --page-width, nunca menos que a margem da página */
     --gutter: max(var(--page-margin), calc((100% - var(--page-width)) / 2));
 
@@ -98,7 +105,7 @@ svg {
 
 /* A seta anda 10% do botão quando ele (ou o card que o contém) recebe hover */
 .round-btn:not(.menu__close):hover :is(svg, .icon),
-a:hover>.round-btn:not(.menu__close) :is(svg, .icon),
+:is(a, button):hover>.round-btn:not(.menu__close) :is(svg, .icon),
 .cta:hover .round-btn svg {
     translate: calc(var(--control, var(--control-md)) * 0.1 * var(--dir)) 0;
 }
@@ -709,6 +716,87 @@ a:hover>.round-btn:not(.menu__close) :is(svg, .icon),
     letter-spacing: var(--tracking-display);
 }
 
+/* --------------------------------------------------------------------------
+   5. ÍCONES, ACESSIBILIDADE E NAV DA PÁGINA ATUAL
+   -------------------------------------------------------------------------- */
+
+/* <span.icon.icon--nome aria-hidden="true"> ícone do Figma (assets/icones).
+   Herda a cor do texto (currentColor). Tamanho: --icon-size. */
+.icon {
+    display: inline-block;
+    flex: none;
+    width: var(--icon-size, 18px);
+    aspect-ratio: 1;
+    background: currentColor;
+    -webkit-mask: center / contain no-repeat;
+    mask: center / contain no-repeat;
+}
+
+.icon--arrow   { -webkit-mask-image: url("assets/icones/arrow.svg");   mask-image: url("assets/icones/arrow.svg"); }
+.icon--bus     { -webkit-mask-image: url("assets/icones/bus.svg");     mask-image: url("assets/icones/bus.svg"); }
+.icon--check   { -webkit-mask-image: url("assets/icones/check.svg");   mask-image: url("assets/icones/check.svg"); }
+.icon--chevron { -webkit-mask-image: url("assets/icones/chevron.svg"); mask-image: url("assets/icones/chevron.svg"); }
+.icon--clock   { -webkit-mask-image: url("assets/icones/clock.svg");   mask-image: url("assets/icones/clock.svg"); }
+.icon--food    { -webkit-mask-image: url("assets/icones/food.svg");    mask-image: url("assets/icones/food.svg"); }
+.icon--info    { -webkit-mask-image: url("assets/icones/info.svg");    mask-image: url("assets/icones/info.svg"); }
+.icon--pin     { -webkit-mask-image: url("assets/icones/pin.svg");     mask-image: url("assets/icones/pin.svg"); }
+.icon--plus    { -webkit-mask-image: url("assets/icones/plus.svg");    mask-image: url("assets/icones/plus.svg"); }
+.icon--search  { -webkit-mask-image: url("assets/icones/search.svg");  mask-image: url("assets/icones/search.svg"); }
+.icon--star    { -webkit-mask-image: url("assets/icones/star.svg");    mask-image: url("assets/icones/star.svg"); }
+
+/* <.sr-only> texto só para leitor de tela (labels, contagem de resultados) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Nav nas páginas internas: o link com aria-current="page" fica na cor da
+   seção; os outros ficam neutros. Na home (sem aria-current) nada muda. */
+.nav:has([aria-current="page"]) .nav__link:not([aria-current="page"]) {
+    --link-bg: var(--surface-raised);
+    --pill-fg: var(--text);
+    --state-tint: var(--text);
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO DAS PÁGINAS INTERNAS
+   <section.page-hero> > <h1.page-hero__title> > <span.page-hero__row>
+   Cada página define --accent (cor da seção) no seu index.css.
+   -------------------------------------------------------------------------- */
+
+.page-hero {
+    --page-title: clamp(32px, 32px + 20 * (100vw - 390px) / 690, 52px);
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6) var(--gutter) var(--space-10);
+}
+
+.page-hero__title {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    font-weight: inherit;
+}
+
+.page-hero__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-4);
+}
+
+.page-hero .pill--lg {
+    padding: var(--space-3) var(--pill-pad-x);
+    font-size: var(--page-title);
+}
+
 /* <span.pill.pill--lg.title-pill--*> pill de título (compartilhadas com a home) */
 .title-pill--light {
     --pill-bg: var(--light);
@@ -718,18 +806,556 @@ a:hover>.round-btn:not(.menu__close) :is(svg, .icon),
     --pill-bg: var(--sky);
 }
 
+.title-pill--accent {
+    --pill-bg: var(--accent);
+}
+
+/* Strip do hero: 7 círculos de 80px em 220px */
+.page-hero .strip {
+    --circle: calc(var(--space-10) * 2);
+    --strip-width: 220px;
+}
+
+/* Variações de strip das páginas internas (mesma lógica de .strip--sky) */
+.strip--blue,
+.strip--mint {
+    --n: 7;
+}
+
+.strip--blue> :nth-child(1) { background: var(--ramp-sky-7); }
+.strip--blue> :nth-child(2) { background: var(--ramp-sky-6); }
+.strip--blue> :nth-child(3) { background: var(--ramp-sky-5); }
+.strip--blue> :nth-child(4) { background: var(--ramp-sky-4); }
+.strip--blue> :nth-child(5) { background: var(--ramp-sky-3); }
+.strip--blue> :nth-child(6) { background: var(--ramp-sky-2); }
+.strip--blue> :nth-child(7) { background: var(--ramp-sky-1); }
+
+.strip--mint> :nth-child(1) { background: var(--lime); }
+.strip--mint> :nth-child(2) { background: var(--ramp-mint-1); }
+.strip--mint> :nth-child(3) { background: var(--ramp-mint-2); }
+.strip--mint> :nth-child(4) { background: var(--ramp-mint-3); }
+.strip--mint> :nth-child(5) { background: var(--ramp-mint-4); }
+.strip--mint> :nth-child(6) { background: var(--ramp-mint-5); }
+.strip--mint> :nth-child(7) { background: var(--blue); }
+
+/* <div.page-hero__info> subtítulo + destaque lado a lado */
+.page-hero__info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-7);
+}
+
+.page-hero__lead {
+    flex: 1 1 240px;
+    max-width: 600px;
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+    line-height: var(--leading-text);
+}
+
+/* <div.stat> destaque "24+ opções" */
+.stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-6) var(--space-2) var(--space-2);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+}
+
+.stat__value {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: var(--control-lg);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
+}
+
+.stat__label {
+    display: block;
+    color: var(--text);
+    font-size: var(--text-md);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-auto);
+}
+
+.stat__desc {
+    display: block;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-auto);
+}
+
+/* Decoração do hero: burst e degraus (posição definida no index.css da página) */
+.page-hero>.burst {
+    --burst-size: 120px;
+    z-index: -1;
+}
+
+.page-hero:hover>.burst {
+    rotate: calc(var(--burst-rotate) + 90deg);
+}
+
+.page-hero>.stairs {
+    --unit: var(--space-3);
+    --cols: 6;
+    --rows: 5;
+    --stairs-color: var(--accent);
+    position: absolute;
+}
+
+/* Degraus aparecem um a um no hover do hero, como na home */
+.page-hero>.stairs>span {
+    opacity: 0;
+    scale: 0;
+    transition:
+        opacity 0.15s var(--ease-out),
+        scale 0.18s cubic-bezier(0.34, 1.3, 0.64, 1);
+    transition-delay: calc((9 - var(--n)) * 25ms);
+}
+
+.page-hero:hover>.stairs>span {
+    opacity: 1;
+    scale: 1;
+    transition-delay: calc(var(--n) * 32ms);
+}
+
 /* --------------------------------------------------------------------------
-   5. RESPONSIVO (mesmos breakpoints do global.css)
+   7. FILTROS (comer bem, cena & rolê)
+   <section.filters-section> > <form.filters role="search">
    -------------------------------------------------------------------------- */
 
-/* Tablet: rodapé quebra em linhas */
+.filters-section {
+    padding: 0 var(--gutter) var(--space-5);
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+}
+
+/* <label.filters__search> > <span.icon.icon--search> + <input.filters__input> */
+.filters__search {
+    --icon-size: 20px;
+    display: flex;
+    flex: 1 1 240px;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+    min-height: var(--control-md);
+    padding-inline: var(--space-5);
+    border-radius: var(--radius-pill);
+    background: var(--surface-raised);
+    color: var(--text-muted);
+}
+
+.filters__input {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text);
+    font: inherit;
+    font-size: var(--text-md);
+}
+
+.filters__input::placeholder {
+    color: var(--text-muted);
+}
+
+/* O foco aparece na pill inteira, não só no texto */
+.filters__input:focus {
+    outline: none;
+}
+
+.filters__search:focus-within {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* <label.select> > <span.select__label> + <select.select__input> + <span.icon.icon--chevron> */
+.select {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: var(--control-md);
+    padding: var(--space-2) var(--space-12) var(--space-2) var(--space-5);
+    border-radius: var(--radius-pill);
+    background: var(--surface-raised);
+}
+
+.select__label {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-auto);
+}
+
+/* Aparência nativa removida; a seta é o .icon--chevron */
+.select__input {
+    appearance: none;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text);
+    font: inherit;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-auto);
+    cursor: pointer;
+}
+
+.select__input option {
+    background: var(--surface);
+    color: var(--text);
+}
+
+.select__input:focus {
+    outline: none;
+}
+
+.select:focus-within {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.select>.icon {
+    position: absolute;
+    inset-inline-end: var(--space-4);
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    color: var(--text);
+    pointer-events: none;
+}
+
+/* <button.pill.pill--md.filters__clear> */
+.filters__clear {
+    --pill-bg: var(--accent);
+    --pill-fg: var(--ink);
+    min-height: var(--control-md);
+    padding-inline: var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+}
+
+/* --------------------------------------------------------------------------
+   8. RESULTADOS: destaque (.feature) + cards (.card)
+   <section.results> > <article.feature> + <ul.results__grid> > <li> > <article.card>
+   -------------------------------------------------------------------------- */
+
+.results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: 0 var(--gutter) var(--section-gap);
+}
+
+.results__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: var(--space-4);
+}
+
+/* Estrutura comum ao card normal e ao destaque */
+.card,
+.feature {
+    --card-title: clamp(28px, 28px + 8 * (100vw - 390px) / 690, 36px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    height: 100%;
+    padding: var(--space-8) var(--space-8) var(--space-7);
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    color: var(--text);
+}
+
+/* <div.card__top> categoria à esquerda, "verificado" à direita */
+.card__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    align-self: stretch;
+}
+
+/* <span.category> pill com bolinha */
+.category {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4) var(--space-2) var(--space-3);
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    color: var(--ink);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-auto);
+}
+
+.category::before {
+    content: "";
+    width: var(--space-2);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--category-dot, currentColor);
+}
+
+/* <span.verified> check verde + "verificado" */
+.verified {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+    border-radius: var(--radius-pill);
+    background: var(--surface-raised);
+    color: var(--text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-auto);
+}
+
+.verified::before {
+    content: "";
+    width: var(--space-5);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--lime) url("assets/icones/check.svg") center / 12px no-repeat;
+}
+
+.card__title {
+    max-width: 440px;
+    font-size: var(--card-title);
+}
+
+.card__desc {
+    max-width: 440px;
+    color: var(--text-muted);
+    line-height: var(--leading-text);
+}
+
+/* <p.price> > <span.price__value> + <span.price__unit> */
+.price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-5);
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    color: var(--ink);
+}
+
+.price__value {
+    font-family: var(--font-display);
+    font-size: var(--heading-sub);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
+}
+
+.price__unit {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+}
+
+/* <ul.meta> > <li> > <span.icon.icon--pin|clock> + texto */
+.meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.meta li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-auto);
+}
+
+.meta .icon {
+    color: var(--accent);
+}
+
+/* <ul.chips> > <li.chip> etiquetas */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.chip {
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-pill);
+    background: var(--surface-raised);
+    color: var(--text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-auto);
+}
+
+/* <div.card__footer> data de verificação + botão comparar */
+.card__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    align-self: stretch;
+    margin-top: auto;
+}
+
+.card__date {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+}
+
+/* <button.compare aria-pressed="false|true"> "comparar" / "adicionado" */
+.compare {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--control-sm);
+    padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2);
+    border-radius: var(--radius-pill);
+    background: var(--ink);
+    color: var(--text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+.compare::before {
+    content: "";
+    width: var(--space-7);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--accent) url("assets/icones/plus.svg") center / 14px no-repeat;
+}
+
+.compare[aria-pressed="true"]::before {
+    background: var(--lime) url("assets/icones/check.svg") center / 14px no-repeat;
+}
+
+.compare:hover {
+    background: color-mix(in srgb, var(--ink), var(--text) var(--state-hover));
+}
+
+/* <article.feature> card de destaque, na cor da seção.
+   Texto e pills ficam escuros; burst + selo de preço à direita. */
+.feature {
+    --category-dot: var(--accent);
+    border-radius: var(--radius-2xl);
+    background: var(--accent);
+    color: var(--ink);
+}
+
+.feature .card__title {
+    max-width: var(--card-text-max);
+    font-size: var(--heading-title);
+}
+
+.feature .card__desc {
+    max-width: var(--card-text-max);
+    color: var(--ink);
+    font-weight: var(--weight-medium);
+}
+
+.feature :is(.category, .verified, .chip) {
+    background: var(--ink);
+    color: var(--text);
+}
+
+.feature :is(.meta .icon, .card__date) {
+    color: var(--ink);
+}
+
+.feature>.burst {
+    --burst-size: 250px;
+    inset-inline-end: var(--space-12);
+    inset-block-start: var(--space-9);
+}
+
+.feature:hover>.burst {
+    rotate: calc(var(--burst-rotate) + 90deg);
+}
+
+/* <p.seal.feature__seal> preço centralizado sobre o burst */
+.feature__seal {
+    --seal-fg: var(--accent);
+    position: absolute;
+    inset-inline-end: calc(var(--space-12) + (250px - var(--seal-size)) / 2);
+    inset-block-start: calc(var(--space-9) + (250px - var(--seal-size)) / 2);
+    padding: var(--space-3);
+    font-size: var(--heading-card);
+}
+
+/* Conteúdo sempre acima da decoração */
+.feature> :not(.burst, .feature__seal) {
+    position: relative;
+    z-index: 1;
+}
+
+/* <div.empty> lista vazia ou erro de carregamento.
+   Não está no Figma; é exigido em docs/05, seção 5.5. */
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-8);
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   9. RESPONSIVO (mesmos breakpoints do global.css)
+   -------------------------------------------------------------------------- */
+
+/* Tablet: rodapé quebra em linhas; decoração do hero some */
 @media (max-width: 1079px) {
     .footer__links {
         gap: var(--space-10);
     }
+
+    .page-hero>:is(.burst, .stairs) {
+        display: none;
+    }
+
+    .feature>.burst {
+        inset-inline-end: var(--space-6);
+    }
+
+    .feature__seal {
+        inset-inline-end: calc(var(--space-6) + (250px - var(--seal-size)) / 2);
+    }
+
+    .feature .card__title,
+    .feature .card__desc {
+        max-width: 50%;
+    }
 }
 
-/* Mobile: nav vira menu; rodapé em coluna */
+/* Mobile: nav vira menu; filtros quebram; selo do destaque entra no fluxo */
 @media (max-width: 767px) {
     .nav {
         display: none;
@@ -741,5 +1367,29 @@ a:hover>.round-btn:not(.menu__close) :is(svg, .icon),
 
     .footer__top {
         flex-direction: column;
+    }
+
+    .filters {
+        border-radius: var(--radius-lg);
+    }
+
+    .card,
+    .feature {
+        padding: var(--card-pad);
+    }
+
+    .feature .card__title,
+    .feature .card__desc {
+        max-width: none;
+    }
+
+    .feature>.burst {
+        display: none;
+    }
+
+    .feature__seal {
+        position: static;
+        order: -1;
+        align-self: flex-end;
     }
 }
