@@ -6,27 +6,22 @@ Restrição do semestre: HTML, CSS e JavaScript puros. Sem framework, sem bundle
 
 ```
 /
-  index.html               home, os três pilares e a chamada da calculadora
-  moradia.html
-  comer.html
-  cena.html
-  calculadora.html
-  metodologia.html         de onde vem cada dado
-  acessibilidade.html      declaração de acessibilidade
-  sobre.html               o grupo e o projeto
+  index.html               home (fica na raiz: é o que o servidor abre primeiro)
+  index.css                CSS só da home
+  index.js                 carrossel da home
+  global.css               tokens do Figma (cor, tipografia, espaço, layout) e base
+  components.css           peças usadas por mais de uma página
+  menu.js                  menu mobile, comum a todas as páginas
+  /comer-bem               uma pasta por página
+    index.html             escrito pelo integrante responsável
+    index.css              só o que é desta página (cor da seção, decoração)
+    README.md              árvore de tags e classes a usar
+  /cena-e-role
+  /calculadora
+  /moradia, /metodologia, /acessibilidade, /sobre   mesmo padrão, quando existirem
   /assets
-    /css
-      tokens.css           variáveis geradas a partir do Figma
-      base.css             reset, tipografia, elementos nativos
-      layout.css           grid, container, seções
-      /componentes
-        cartao.css
-        filtro.css
-        comparador.css
-        calculadora.css
-        navegacao.css
-      utilitarios.css      helpers curtos, sem virar framework
-    /js
+    /icones                SVG do Figma, aplicados como máscara (.icon--*)
+    /js                    planejado: módulos abaixo, quando a página precisar
       main.js              ponto de entrada por página
       dados.js             carregamento e cache dos JSON
       estado.js            estado da tela e sincronia com a URL
@@ -353,8 +348,11 @@ Limites autoimpostos:
 
 ## 5.9 CSS
 
-- Nomenclatura **BEM** (`bloco__elemento--modificador`), previsível e fácil de revisar em grupo.
-- `tokens.css` só declara variáveis, e nenhum outro arquivo declara cor, espaçamento ou tamanho de fonte literal. Ver `06-design-system.md`.
+- Nomenclatura **BEM** (`bloco__elemento--modificador`), previsível e fácil de revisar em grupo. Classes e tokens em inglês, como a home começou (`.card__title`, `--surface`); textos, comentários e documentação em português.
+- `global.css` é o único arquivo com valor literal de cor. Os outros usam só tokens. Ver `06-design-system.md`.
+- Três camadas, nesta ordem de `<link>` em toda página: `global.css` (tokens e base), `components.css` (peças compartilhadas) e o `index.css` da página.
+- O `index.css` de uma página não redefine componente. Ele só ajusta tokens locais (`--accent`, posição de decoração). Se uma peça aparece em duas páginas, ela vai para `components.css`.
+- Cor da seção: cada página define `--accent` (`--section-food`, `--section-scene` ou `--section-calc`), e os componentes leem dele.
 - Layout com `grid` e `flex`, mobile primeiro, `min-width` nas media queries.
 - Unidades: `rem` para tipografia e espaçamento, `px` apenas para bordas e detalhes de 1 px.
 - `clamp()` para tipografia fluida, com limite mínimo confortável para leitura em 320 px.

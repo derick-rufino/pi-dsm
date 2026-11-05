@@ -11,13 +11,13 @@ O design system é um dos dois diferenciais declarados do projeto (o outro é ac
 ## 6.1 Fluxo Figma para CSS
 
 ```
-Figma (Variables)  ->  export  ->  tokens.json  ->  tokens.css  ->  componentes
+Figma (Variables)  ->  cópia manual  ->  global.css  ->  components.css  ->  index.css da página
 ```
 
-Neste semestre, com quatro pessoas e prazo curto, a conversão pode ser **manual e documentada**: as Variables do Figma são organizadas com os mesmos nomes dos custom properties do CSS, e a cópia é feita à mão em uma única sessão, com o arquivo `tokens.css` como destino exclusivo. Isso é aceitável desde que:
+Neste semestre, com quatro pessoas e prazo curto, a conversão pode ser **manual e documentada**: as Variables do Figma são organizadas com os mesmos nomes dos custom properties do CSS, e a cópia é feita à mão em uma única sessão, com o arquivo `global.css` como destino exclusivo. Isso é aceitável desde que:
 
-- o nome da variável no Figma seja idêntico ao nome no CSS (`cor/superficie/base` vira `--cor-superficie-base`);
-- ninguém edite cor fora de `tokens.css`;
+- o nome da variável no Figma corresponda ao nome no CSS;
+- ninguém edite cor fora de `global.css`;
 - o arquivo do Figma seja citado no `sobre.html` como origem.
 
 Automatizar (plugin de exportação ou Style Dictionary transformando `tokens.json` em CSS) é a evolução natural, e cabe no 2º ou 3º semestre. Automatizar agora custa mais tempo do que economiza numa base desse tamanho, e a decisão consciente vale mais na banca do que a ferramenta.
@@ -93,7 +93,9 @@ Componentes consomem **apenas semânticos**. Essa separação é o que permite t
 }
 ```
 
-Regra de nomenclatura: `--<categoria>-<papel>-<variação>`, sempre em português, sempre em minúsculas, separado por hífen. `--cor-acao-hover`, não `--primaryHover`.
+> **Como ficou no código:** o bloco acima foi o modelo inicial. Os tokens reais estão em `global.css`, com nomes curtos em inglês, e seguem as mesmas duas camadas. Primitivos: `--blue`, `--sky`, `--lime`, `--ramp-*`. Semânticos: `--bg`, `--surface`, `--surface-raised`, `--text`, `--text-muted`, `--ink` e `--section-food|scene|calc`. A escala de espaço é `--space-N` (N × 4px), e a de tipografia é `--text-*` e `--heading-*`. `components.css` acrescenta `--accent`, a cor da seção atual, que cada página troca no seu `index.css`.
+
+Regra de nomenclatura: `--<categoria>-<papel>-<variação>`, em minúsculas, separado por hífen, nunca em camelCase. `--surface-raised`, não `--surfaceRaised`.
 
 ## 6.3 Critérios para decidir a identidade
 
@@ -166,6 +168,6 @@ Atenção: contraste precisa ser verificado **nos dois temas**. Uma paleta que p
 ## 6.6 O que não fazer
 
 - Não criar um utilitário para cada propriedade CSS. O projeto não precisa de um Tailwind caseiro, e essa é a forma mais rápida de o CSS virar ilegível.
-- Não usar valor literal de cor ou espaçamento fora de `tokens.css`.
+- Não usar valor literal de cor fora de `global.css`, nem espaçamento fora da escala `--space-*`.
 - Não criar variante de componente para um uso único. Se aparece uma vez, é exceção local, e exceção documentada no próprio arquivo do componente.
 - Não redesenhar depois de a fase 4 começar. A identidade fecha na fase 3 e congela. Retrabalho de identidade em cima de código pronto é a forma mais cara de perder a semana final.
