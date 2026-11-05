@@ -178,7 +178,7 @@ html {
 
 .banner__slides--no-transition,
 .banner__slides--no-transition .slide {
-    transition: none !important;
+    transition: none;
 }
 
 /* <li.slide> */
