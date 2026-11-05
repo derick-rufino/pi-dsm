@@ -1,60 +1,15 @@
 /**
  * Kampi · index.js
- * Comportamentos e interações da página inicial (home).
+ * Comportamentos e interações da página inicial (home). Menu mobile: menu.js.
  * Sem dependências externas.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initMenuMobile();
     initBannerCarousel();
 });
 
 /* ==========================================================================
-   1. MENU MOBILE
-   ========================================================================== */
-function initMenuMobile() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.menu');
-    const menuClose = document.querySelector('.menu__close');
-
-    if (!menuToggle || !menu) return;
-
-    function toggleMenu(abrir) {
-        if (abrir) {
-            menu.setAttribute('data-open', '');
-            menuToggle.setAttribute('aria-expanded', 'true');
-        } else {
-            menu.removeAttribute('data-open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-        }
-    }
-
-    menuToggle.addEventListener('click', () => {
-        const estaAberto = menu.hasAttribute('data-open');
-        toggleMenu(!estaAberto);
-    });
-
-    menuClose?.addEventListener('click', () => {
-        toggleMenu(false);
-        menuToggle.focus();
-    });
-
-    // Fecha o menu ao pressionar a tecla Escape
-    document.addEventListener('keydown', (evento) => {
-        if (evento.key === 'Escape' && menu.hasAttribute('data-open')) {
-            toggleMenu(false);
-            menuToggle.focus();
-        }
-    });
-
-    // Fecha ao clicar em qualquer link interno do menu
-    menu.querySelectorAll('.menu__link').forEach((link) => {
-        link.addEventListener('click', () => toggleMenu(false));
-    });
-}
-
-/* ==========================================================================
-   2. BANNER CARROSSEL (LOOP INFINITO SEMPRE PARA FRENTE & PROGRESS BAR)
+   1. BANNER CARROSSEL (LOOP INFINITO SEMPRE PARA FRENTE & PROGRESS BAR)
    ========================================================================== */
 function initBannerCarousel() {
     const banner = document.querySelector('.banner');
