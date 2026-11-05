@@ -1,0 +1,29 @@
+/* ==========================================================================
+   Kampi · comer-bem/index.css
+   Depende de ../global.css e ../components.css (hero, filtros e cards estão
+   lá). Aqui só fica o que é desta página: cor da seção e decoração.
+   Estrutura HTML: comer-bem/README.md
+   ========================================================================== */
+
+:root {
+    --accent: var(--section-food);
+    --wordmark-color: var(--accent);
+}
+
+/* Burst claro no canto superior direito do hero */
+.page-hero>.burst {
+    --burst-color: var(--sky);
+    inset-inline-end: calc(var(--gutter) + var(--space-10));
+    inset-block-start: 0;
+}
+
+/* Degraus azuis à esquerda do burst */
+.page-hero>.stairs {
+    inset-inline-end: calc(var(--gutter) + var(--space-12) * 4);
+    inset-block-start: calc(var(--space-10) * 3);
+}
+
+/* Burst do card de destaque: azul claro sobre o card azul */
+.feature>.burst {
+    --burst-color: var(--sky);
+}
