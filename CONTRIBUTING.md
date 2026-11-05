@@ -26,7 +26,7 @@ Português, imperativo, curto: `adiciona filtro por bairro`, `corrige contraste 
 Roda `scripts/verificar-regras.sh`. Rode antes de abrir o PR.
 
 - `innerHTML` em JavaScript: use `textContent` e `<template>`.
-- Cor literal fora de `assets/css/tokens.css`.
+- Cor literal fora de `global.css`.
 - `!important` no CSS.
 - JSON inválido em `dados/`.
 

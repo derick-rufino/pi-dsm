@@ -23,7 +23,7 @@ Este arquivo é para o Claude Code e para qualquer assistente de IA que trabalhe
 5. **Não altere `/dados/*.json` com conteúdo novo.** Estrutura sim (quando o esquema mudar, e com atualização de `04-modelo-de-dados.md`), conteúdo não.
 6. **Não remova `outline` de foco** sem repor um indicador equivalente e com contraste adequado.
 7. **Não use `innerHTML` com dado.** Use `textContent` e `<template>`.
-8. **Não escreva cor, espaçamento ou tamanho de fonte literal** fora de `assets/css/tokens.css`.
+8. **Não escreva cor, espaçamento ou tamanho de fonte literal** fora de `global.css`.
 9. **Não decida nome, marca, paleta ou tipografia.** Essas decisões são do grupo, estão listadas em `11-decisoes-em-aberto.md` e não devem ser resolvidas por conveniência de implementação. Use os tokens neutros existentes.
 10. **Não commite** planilha de respostas, contato pessoal ou foto com pessoa identificável.
 
@@ -32,8 +32,9 @@ Este arquivo é para o Claude Code e para qualquer assistente de IA que trabalhe
 **Nomenclatura**
 - Domínio em português: `moradia`, `bairro`, `precoMin`, `verificadoEm`.
 - APIs do navegador em inglês, como são: `addEventListener`, `querySelector`.
-- CSS em BEM: `.cartao__titulo`, `.filtro--ativo`.
-- Custom properties: `--cor-acao`, `--esp-4`, `--txt-lg`.
+- CSS em BEM, com classes em inglês: `.card__title`, `.option--active`.
+- Custom properties: `--surface`, `--space-4`, `--text-lg` (tokens em `global.css`).
+- Estrutura: uma pasta por página com `index.html` e `index.css`. Peça usada em mais de uma página vai para `components.css`. Ver 5.1 e 5.9 em `05-arquitetura-front-end.md`.
 - Arquivos em minúsculas com hífen: `filtro-moradia.js`.
 
 **JavaScript**
