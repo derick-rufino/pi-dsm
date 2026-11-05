@@ -1,0 +1,341 @@
+/* ==========================================================================
+   Kampi · calculadora/index.css
+   Depende de ../global.css e ../components.css (header, hero, footer).
+   Estrutura HTML: calculadora/README.md
+
+   1. Cor da seção e decoração do hero
+   2. Layout (perguntas + estimativa)
+   3. Pergunta e opções
+   4. Estimativa
+   5. Responsivo
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. COR DA SEÇÃO E DECORAÇÃO DO HERO
+   -------------------------------------------------------------------------- */
+
+:root {
+    --accent: var(--section-calc);
+    --wordmark-color: var(--accent);
+}
+
+.page-hero>.burst {
+    --burst-color: var(--blue);
+    inset-inline-end: calc(var(--gutter) + var(--space-10));
+    inset-block-start: 0;
+}
+
+.page-hero>.stairs {
+    inset-inline-end: calc(var(--gutter) + var(--space-12) * 4);
+    inset-block-start: calc(var(--space-10) * 3);
+}
+
+/* --------------------------------------------------------------------------
+   2. LAYOUT
+   <form.calc> > <div.calc__questions> + <aside.estimate>
+   -------------------------------------------------------------------------- */
+
+.calc {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: 0 var(--gutter) var(--section-gap);
+}
+
+.calc__questions {
+    display: flex;
+    flex: 1 1 340px;
+    flex-direction: column;
+    gap: var(--space-4);
+    min-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   3. PERGUNTA E OPÇÕES
+   <fieldset.question> > <legend.question__head> + <div.options> > <label.option>
+   -------------------------------------------------------------------------- */
+
+.question {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    min-width: 0;
+    margin: 0;
+    padding: var(--card-pad);
+    border: 0;
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+}
+
+/* float + width tira o <legend> da borda do fieldset e deixa ele virar flex */
+.question__head {
+    float: left;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+    padding: 0;
+}
+
+.question__head+* {
+    clear: both;
+}
+
+.question__number {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: var(--space-12);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
+}
+
+.question__title {
+    display: block;
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: var(--heading-sub);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+}
+
+.question__hint {
+    display: block;
+    margin-top: var(--space-1);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-auto);
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+/* <label.option> > <input.sr-only type="radio"> + <span.option__radio> + <span.option__text> */
+.option {
+    display: flex;
+    flex: 1 1 150px;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    border-radius: var(--radius-md);
+    background: var(--surface-raised);
+    color: var(--text);
+    cursor: pointer;
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+.option:hover {
+    background: color-mix(in srgb, var(--surface-raised), var(--text) var(--state-hover));
+}
+
+/* Bolinha do radio: vazia; marcada vira tinta com check na cor da seção */
+.option__radio {
+    display: grid;
+    place-items: center;
+    width: var(--space-7);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--accent);
+}
+
+.option__radio::after {
+    content: "";
+    width: 14px;
+    aspect-ratio: 1;
+    background: currentColor;
+    -webkit-mask: url("../assets/icones/check.svg") center / contain no-repeat;
+    mask: url("../assets/icones/check.svg") center / contain no-repeat;
+    opacity: 0;
+}
+
+.option__title {
+    display: block;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-auto);
+}
+
+.option__desc {
+    display: block;
+    margin-top: var(--space-1);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-auto);
+}
+
+/* Opção marcada: fundo na cor da seção, texto escuro */
+.option:has(:checked) {
+    background: var(--accent);
+    color: var(--ink);
+}
+
+.option:has(:checked) .option__desc {
+    color: var(--ink);
+    font-weight: var(--weight-medium);
+}
+
+.option:has(:checked) .option__radio {
+    background: var(--ink);
+}
+
+.option:has(:checked) .option__radio::after {
+    opacity: 1;
+}
+
+.option:has(:focus-visible) {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   4. ESTIMATIVA
+   <aside.estimate> card verde com total, detalhamento e botão copiar
+   -------------------------------------------------------------------------- */
+
+.estimate {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex: 1 1 300px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    max-width: 388px;
+    padding: var(--card-pad);
+    overflow: hidden;
+    border-radius: var(--radius-2xl);
+    background: var(--accent);
+    color: var(--ink);
+}
+
+/* Burst azul saindo pelo canto superior direito */
+.estimate>.burst {
+    --burst-size: 132px;
+    --burst-color: var(--blue);
+    z-index: -1;
+    inset-inline-end: calc(var(--space-6) * -1);
+    inset-block-start: calc(var(--space-12) * -1);
+}
+
+.estimate:hover>.burst {
+    rotate: calc(var(--burst-rotate) + 90deg);
+}
+
+/* <output.estimate__total> R$ 420 (anunciado ao leitor de tela quando muda) */
+.estimate__total {
+    font-family: var(--font-display);
+    font-size: var(--heading-display);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-hero);
+    white-space: nowrap;
+}
+
+.estimate__note {
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-text);
+}
+
+/* <ul.breakdown> > <li.breakdown__item> alimentação / transporte / lazer */
+.breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    align-self: stretch;
+}
+
+.breakdown__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-5) var(--space-2) var(--space-2);
+    border-radius: var(--radius-pill);
+    background: var(--ink);
+    color: var(--text);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-auto);
+}
+
+/* <span.breakdown__icon> > <span.icon.icon--food|bus|star> */
+.breakdown__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: var(--space-9);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--ink);
+}
+
+.breakdown__name {
+    flex: 1;
+}
+
+.breakdown__value {
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+/* + ou = entre as linhas (decorativo) */
+.breakdown__op {
+    color: var(--text-muted);
+}
+
+/* <div.estimate__method> > <span.icon.icon--info> + <div> > strong + p */
+.estimate__method {
+    --icon-size: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    max-width: 330px;
+    font-size: var(--text-sm);
+    line-height: var(--leading-text);
+}
+
+.estimate__method strong {
+    display: block;
+    font-weight: var(--weight-semibold);
+}
+
+/* <button.pill.pill--ink.estimate__copy> > texto + <span.round-btn> > <span.icon.icon--arrow> */
+.estimate__copy {
+    justify-content: space-between;
+    align-self: stretch;
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-6);
+    font-size: var(--text-md);
+}
+
+.estimate__copy .round-btn {
+    --control: var(--control-sm);
+    --btn-bg: var(--accent);
+    --btn-fg: var(--ink);
+}
+
+.estimate__disclaimer {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+}
+
+/* --------------------------------------------------------------------------
+   5. RESPONSIVO
+   -------------------------------------------------------------------------- */
+
+/* Mobile: estimativa ocupa a largura toda, abaixo das perguntas */
+@media (max-width: 767px) {
+    .estimate {
+        max-width: none;
+    }
+}

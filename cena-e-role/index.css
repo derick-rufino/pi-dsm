@@ -1,0 +1,23 @@
+/* ==========================================================================
+   Kampi · cena-e-role/index.css
+   Depende de ../global.css e ../components.css (hero, filtros e cards estão
+   lá). Aqui só fica o que é desta página: cor da seção e decoração.
+   Estrutura HTML: cena-e-role/README.md
+   ========================================================================== */
+
+:root {
+    --accent: var(--section-scene);
+    --wordmark-color: var(--accent);
+}
+
+/* Burst azul à direita da segunda linha do título (sem degraus nesta página) */
+.page-hero>.burst {
+    --burst-color: var(--blue);
+    inset-inline-end: calc(var(--gutter) + var(--space-14));
+    inset-block-start: calc(var(--space-14) * 2);
+}
+
+/* Burst do card de destaque: azul sobre o card azul claro */
+.feature>.burst {
+    --burst-color: var(--blue);
+}
