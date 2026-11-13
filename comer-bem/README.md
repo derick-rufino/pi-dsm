@@ -53,13 +53,14 @@ main
 │       │   └── span.icon.icon--chevron (aria-hidden)
 │       └── button.pill.pill--md.filters__clear  type="reset"   "limpar filtros"
 │
-└── section.results
+└── section.results  aria-labelledby="titulo-resultados"
+    ├── h2.sr-only#titulo-resultados                    "resultados" (só leitor de tela)
     ├── p.sr-only  aria-live="polite"                     "3 resultados" (o JS atualiza)
     ├── article.feature                                   ← card grande de destaque
     │   ├── div.card__top
     │   │   ├── span.category                             "Restaurante universitário"
     │   │   └── span.verified                             "verificado"
-    │   ├── h2.card__title#titulo-…                       "Bandejão Universitário"
+    │   ├── h3.card__title#titulo-…                       "Bandejão Universitário"
     │   ├── p.seal.feature__seal                          "R$ 4–9"  (logo após o título: ordem de leitura)
     │   ├── p.card__desc
     │   ├── ul.meta
