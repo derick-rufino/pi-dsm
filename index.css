@@ -566,9 +566,20 @@ html {
         display: none;
     }
 
-    .banner__title .tag,
     .banner__controls .round-btn--prev {
         display: none;
+    }
+
+    /* Sem espaço para a etiqueta no mobile, mas o aviso de dado de exemplo
+       continua para o leitor de tela (mesmas regras do .sr-only) */
+    .banner__title .tag {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
     }
 
     .slide {
