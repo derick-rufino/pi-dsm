@@ -1318,6 +1318,8 @@ svg {
 .feature__seal {
     --seal-fg: var(--accent);
     position: absolute;
+    /* vem antes do burst no DOM (ordem de leitura), então precisa subir */
+    z-index: 1;
     inset-inline-end: calc(var(--space-12) + (250px - var(--seal-size)) / 2);
     inset-block-start: calc(var(--space-9) + (250px - var(--seal-size)) / 2);
     padding: var(--space-3);
