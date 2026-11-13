@@ -1,38 +1,105 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comer Bem</title>
+    <title>comer bem · kampi</title>
+
     <link rel="stylesheet" href="../global.css">
     <link rel="stylesheet" href="../components.css">
     <link rel="stylesheet" href="index.css">
     <script src="../menu.js" defer></script>
 </head>
-<body>
 
-    <main>
+<body>
+    <!-- ================================================================
+         HEADER
+         ================================================================ -->
+    <header class="header">
+        <a href="../" class="brand" aria-label="kampi — página inicial">
+            <span class="brand__dot" aria-hidden="true"></span>
+            <span class="brand__name">kampi</span>
+        </a>
+
+        <nav class="nav" aria-label="Navegação principal">
+            <a href="./" class="pill pill--md nav__link link--food" aria-current="page">comer bem</a>
+            <a href="../cena-e-role/" class="pill pill--md nav__link link--scene">cena &amp; rolê</a>
+            <a href="../calculadora/" class="pill pill--md nav__link link--calc">calculadora</a>
+        </nav>
+
+        <button type="button" class="pill pill--md menu-toggle"
+            aria-expanded="false" aria-controls="menu"
+            aria-label="Abrir menu de navegação">
+            <span>menu</span>
+            <span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+    </header>
+
+    <!-- ================================================================
+         MENU MOBILE
+         ================================================================ -->
+    <nav id="menu" class="menu" aria-label="Menu móvel">
+        <div class="menu__top">
+            <p class="menu__title">menu</p>
+            <button type="button" class="round-btn menu__close" aria-label="Fechar menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M18 6 6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <ul>
+            <li>
+                <a href="./" class="pill menu__link link--food" aria-current="page">
+                    <span>comer bem</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="../cena-e-role/" class="pill menu__link link--scene">
+                    <span>cena &amp; rolê</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="../calculadora/" class="pill menu__link link--calc">
+                    <span>calculadora</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="conteudo">
+        <!-- ============================================================
+             HERO
+             ============================================================ -->
         <section class="page-hero">
             <h1 class="page-hero__title">
                 <span class="page-hero__row">
                     <span class="pill pill--lg title-pill--light">comida boa entre</span>
                 </span>
                 <span class="page-hero__row">
+                    <!-- Strip azul: 7 círculos -->
                     <span class="strip strip--blue" aria-hidden="true">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
                     </span>
                     <span class="pill pill--lg title-pill--accent">uma aula e outra.</span>
                 </span>
             </h1>
 
             <div class="page-hero__info">
-                <p class="page-hero__lead">subtitulo</p>
+                <p class="page-hero__lead">
+                    Bandejão, marmita, feira e mercado perto do seu campus, com preço e data de verificação.
+                </p>
                 <div class="stat">
                     <span class="stat__value">24+</span>
                     <span>
@@ -40,23 +107,20 @@
                         <span class="stat__desc">verificadas nos últimos 60 dias</span>
                     </span>
                 </div>
+                <span class="pill tag">dados de exemplo</span>
             </div>
 
             <span class="burst" aria-hidden="true"></span>
+            <!-- Degraus decorativos: 10 quadrados -->
             <span class="stairs" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
             </span>
         </section>
 
+        <!-- ============================================================
+             FILTROS
+             ============================================================ -->
         <section class="filters-section">
             <form class="filters" role="search">
                 <label class="filters__search">
@@ -65,17 +129,24 @@
                     <input class="filters__input" type="search" placeholder="buscar em comer bem...">
                 </label>
 
+                <!-- As opções de bairro vêm de /dados (filtros.js, issue #22) -->
                 <label class="select">
                     <span class="select__label">bairro</span>
                     <select class="select__input">
-                        <option>todos</option>
+                        <option value="">todos</option>
                     </select>
                     <span class="icon icon--chevron" aria-hidden="true"></span>
                 </label>
 
+                <!-- Chaves de ordenação definidas em docs/05-arquitetura-front-end.md -->
                 <label class="select">
                     <span class="select__label">ordenar por</span>
-                    <select class="select__input"></select>
+                    <select class="select__input">
+                        <option value="preco-asc">menor preço</option>
+                        <option value="preco-desc">maior preço</option>
+                        <option value="distancia">mais perto</option>
+                        <option value="recentes">verificados recentemente</option>
+                    </select>
                     <span class="icon icon--chevron" aria-hidden="true"></span>
                 </label>
 
@@ -83,16 +154,20 @@
             </form>
         </section>
 
+        <!-- ============================================================
+             RESULTADOS (dados de exemplo; os reais vêm de /dados)
+             ============================================================ -->
         <section class="results">
             <p class="sr-only" aria-live="polite">3 resultados</p>
 
+            <!-- Destaque -->
             <article class="feature">
                 <div class="card__top">
                     <span class="category">Restaurante universitário</span>
                     <span class="verified">verificado</span>
                 </div>
                 <h2 class="card__title">Bandejão Universitário</h2>
-                <p class="card__desc"></p>
+                <p class="card__desc">Almoço e jantar completos para quem tem vínculo estudantil.</p>
                 <ul class="meta">
                     <li><span class="icon icon--pin" aria-hidden="true"></span>Montana · No campus Unesp</li>
                     <li><span class="icon icon--clock" aria-hidden="true"></span>2 min a pé</li>
@@ -103,7 +178,7 @@
                 </ul>
                 <div class="card__footer">
                     <p class="card__date">verificado em 11 jun. 2026</p>
-                    <button class="compare" aria-pressed="false">comparar</button>
+                    <button type="button" class="compare" aria-pressed="false">comparar</button>
                 </div>
                 <span class="burst" aria-hidden="true"></span>
                 <p class="seal feature__seal">R$ 4–9</p>
@@ -113,25 +188,50 @@
                 <li>
                     <article class="card">
                         <div class="card__top">
-                            <span class="category"></span>
+                            <span class="category">Mercado</span>
                             <span class="verified">verificado</span>
                         </div>
-                        <h3 class="card__title"></h3>
-                        <p class="card__desc"></p>
+                        <h3 class="card__title">Mercado de bairro</h3>
+                        <p class="card__desc">Compra da semana com hortifrúti e marca própria.</p>
                         <p class="price">
                             <span class="price__value">R$ 12–28</span>
                             <span class="price__unit">/ compra</span>
                         </p>
                         <ul class="meta">
-                            <li><span class="icon icon--pin" aria-hidden="true"></span></li>
-                            <li><span class="icon icon--clock" aria-hidden="true"></span></li>
+                            <li><span class="icon icon--pin" aria-hidden="true"></span>Centro</li>
+                            <li><span class="icon icon--clock" aria-hidden="true"></span>10 min a pé</li>
                         </ul>
                         <ul class="chips">
-                            <li class="chip"></li>
+                            <li class="chip">Aberto à noite</li>
                         </ul>
                         <div class="card__footer">
-                            <p class="card__date"></p>
-                            <button class="compare" aria-pressed="false">comparar</button>
+                            <p class="card__date">verificado em 3 jun. 2026</p>
+                            <button type="button" class="compare" aria-pressed="false">comparar</button>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="card">
+                        <div class="card__top">
+                            <span class="category">Marmita</span>
+                            <span class="verified">verificado</span>
+                        </div>
+                        <h3 class="card__title">Marmitaria do centro</h3>
+                        <p class="card__desc">Marmita do dia com opção sem carne.</p>
+                        <p class="price">
+                            <span class="price__value">R$ 15–22</span>
+                            <span class="price__unit">/ refeição</span>
+                        </p>
+                        <ul class="meta">
+                            <li><span class="icon icon--pin" aria-hidden="true"></span>Centro</li>
+                            <li><span class="icon icon--clock" aria-hidden="true"></span>8 min a pé</li>
+                        </ul>
+                        <ul class="chips">
+                            <li class="chip">Vegetariano</li>
+                        </ul>
+                        <div class="card__footer">
+                            <p class="card__date">verificado em 28 mai. 2026</p>
+                            <button type="button" class="compare" aria-pressed="false">comparar</button>
                         </div>
                     </article>
                 </li>
@@ -139,5 +239,60 @@
         </section>
     </main>
 
+    <!-- ================================================================
+         FOOTER
+         ================================================================ -->
+    <footer class="footer">
+        <div class="footer__block">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <p class="footer__tagline">Informação honesta para quem está chegando.</p>
+                    <p class="footer__credit">
+                        feito em Marília · projeto integrador DSM, Fatec
+                    </p>
+                </div>
+
+                <nav class="footer__links" aria-label="Links do rodapé">
+                    <div class="footer__col">
+                        <h3 class="footer__heading">explorar</h3>
+                        <ul>
+                            <li><a href="./" class="footer__link" aria-current="page">comer bem</a></li>
+                            <li><a href="../cena-e-role/" class="footer__link">cena &amp; rolê</a></li>
+                            <li><a href="../calculadora/" class="footer__link">calculadora</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h3 class="footer__heading">projeto</h3>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/derick-rufino/pi-dsm"
+                                    class="footer__link" target="_blank" rel="noopener noreferrer">
+                                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                                        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15
+                                        -.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87
+                                        .51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12
+                                        0 0 .67-.21 2.2.82a7.64 7.64 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82
+                                        2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95
+                                        .29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0
+                                        16 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </li>
+                            <li><a href="#" class="footer__link">reportar dado errado</a></li>
+                            <li><a href="#" class="footer__link">sugerir um lugar</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Wordmark gigante cortada -->
+            <div class="footer__wordmark" aria-hidden="true">
+                <span>kampi</span>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
