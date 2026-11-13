@@ -768,9 +768,11 @@ svg {
     inset-inline-start: var(--space-4);
 }
 
-/* Nav nas páginas internas: o link com aria-current="page" fica na cor da
-   seção; os outros ficam neutros. Na home (sem aria-current) nada muda. */
-.nav:has([aria-current="page"]) .nav__link:not([aria-current="page"]) {
+/* Nav e menu mobile nas páginas internas: o link com aria-current="page"
+   fica na cor da seção; os outros ficam neutros. Na home (sem aria-current)
+   nada muda. */
+.nav:has([aria-current="page"]) .nav__link:not([aria-current="page"]),
+.menu:has([aria-current="page"]) .menu__link:not([aria-current="page"]) {
     --link-bg: var(--surface-raised);
     --pill-fg: var(--text);
     --state-tint: var(--text);
