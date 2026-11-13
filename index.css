@@ -407,6 +407,13 @@ html {
     --control: var(--control-lg);
 }
 
+/* Botão e texto acima do burst: no mobile o burst ocupa quase toda a
+   largura do bloco e cobria a seta */
+.block--main> :not(.burst) {
+    position: relative;
+    z-index: 1;
+}
+
 .block--main>.burst {
     inset-block-start: calc(var(--space-8) * -1);
     inset-inline-end: var(--space-9);
@@ -453,9 +460,9 @@ html {
     border-radius: var(--radius-xl);
 }
 
-.block--side .block__title {
+.block--side .block__text {
     padding-inline-end: calc(var(--control-md) + var(--space-2));
-    /* não encosta no botão */
+    /* título e descrição não passam por baixo do botão */
 }
 
 .block--side .round-btn {
