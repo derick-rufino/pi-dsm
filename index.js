@@ -221,7 +221,7 @@ function initBannerCarousel() {
     }
 
     function despausar() {
-        if (!estaPausado) return;
+        if (!estaPausado || pausadoPeloUsuario) return;
         estaPausado = false;
         iniciarCiclo(tempoRestante);
     }
@@ -230,7 +230,7 @@ function initBannerCarousel() {
         // Clique em seta ou dot acontece com o mouse em cima ou o foco dentro
         // do banner: nesse caso o tempo zera, mas o ciclo continua pausado
         // até o mouse ou o foco saírem.
-        if (banner.matches(':hover, :focus-within')) {
+        if (pausadoPeloUsuario || banner.matches(':hover, :focus-within')) {
             pararCiclo();
             estaPausado = true;
             tempoInicio = null;
@@ -260,6 +260,36 @@ function initBannerCarousel() {
             despausar();
         }
     });
+
+    // Botão pausar/retomar (WCAG 2.2.2): pausa que só o próprio usuário desfaz.
+    // Hover, foco e aba oculta continuam pausando por cima disso.
+    const botaoPausa = banner.querySelector('[data-banner="pause"]');
+    let pausadoPeloUsuario = false;
+
+    function alternarPausa() {
+        pausadoPeloUsuario = !pausadoPeloUsuario;
+        botaoPausa.setAttribute('aria-label', pausadoPeloUsuario ? 'Retomar carrossel' : 'Pausar carrossel');
+        // SVG não tem a propriedade .hidden do HTML: precisa ser o atributo
+        botaoPausa.querySelector('[data-icon="pause"]').toggleAttribute('hidden', pausadoPeloUsuario);
+        botaoPausa.querySelector('[data-icon="play"]').toggleAttribute('hidden', !pausadoPeloUsuario);
+        banner.toggleAttribute('data-paused', pausadoPeloUsuario);
+
+        if (pausadoPeloUsuario) {
+            pausar();
+        } else if (!banner.matches(':hover, :focus-within')) {
+            despausar();
+        }
+        // Com mouse em cima ou foco dentro, retoma ao sair (mouseleave/focusout).
+    }
+
+    if (botaoPausa) {
+        // Com movimento reduzido não há autoplay, então não há o que pausar.
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            botaoPausa.hidden = true;
+        } else {
+            botaoPausa.addEventListener('click', alternarPausa);
+        }
+    }
 
     // Inicialização
     irParaSlide(1, false, true);

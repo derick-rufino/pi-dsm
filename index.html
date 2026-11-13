@@ -133,6 +133,17 @@
                 </div>
 
                 <div class="banner__controls">
+                    <!-- Pausar/retomar a troca automática (WCAG 2.2.2). O JS
+                         troca o aria-label e o ícone; some com movimento reduzido. -->
+                    <button type="button" class="round-btn round-btn--pause"
+                        aria-label="Pausar carrossel" data-banner="pause">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" data-icon="pause">
+                            <path d="M9 6v12M15 6v12"></path>
+                        </svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true" data-icon="play" hidden>
+                            <path d="M8 5.5v13l10-6.5z"></path>
+                        </svg>
+                    </button>
                     <button type="button" class="round-btn round-btn--prev"
                         aria-label="Slide anterior" data-banner="prev">
                         <svg viewBox="0 0 24 24" aria-hidden="true">

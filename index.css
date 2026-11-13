@@ -157,10 +157,22 @@ html {
     --btn-fg: var(--ink);
 }
 
-.banner__controls .round-btn--prev {
+.banner__controls :is(.round-btn--prev, .round-btn--pause) {
     --btn-bg: var(--surface-raised);
     --btn-fg: var(--text);
     --state-tint: var(--text);
+}
+
+/* Pausar não é seta: o ícone não anda no hover */
+.round-btn--pause {
+    --dir: 0;
+}
+
+/* .round-btn e svg definem display, o que venceria o atributo hidden que o
+   JS usa para trocar o ícone e esconder o botão com movimento reduzido */
+.round-btn--pause[hidden],
+.round-btn--pause [hidden] {
+    display: none;
 }
 
 /* <div.banner__viewport> recorta os slides */
@@ -327,7 +339,7 @@ html {
     animation: dot-progress var(--slide-duration, 5000ms) linear forwards;
 }
 
-.banner:is(:hover, :focus-within) .banner__dot[aria-current="true"]::after {
+.banner:is(:hover, :focus-within, [data-paused]) .banner__dot[aria-current="true"]::after {
     animation-play-state: paused;
 }
 
