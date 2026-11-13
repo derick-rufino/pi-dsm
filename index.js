@@ -41,6 +41,12 @@ function initBannerCarousel() {
     cloneSegundo.setAttribute('aria-hidden', 'true');
     cloneSegundo.removeAttribute('data-active');
 
+    // aria-hidden só esconde do leitor de tela; o link "ver no..." do clone
+    // continuaria recebendo Tab. inert tira o clone da ordem de foco também.
+    [cloneUltimo, clonePrimeiro, cloneSegundo].forEach((clone) => {
+        clone.inert = true;
+    });
+
     slidesContainer.insertBefore(cloneUltimo, slidesContainer.firstChild);
     slidesContainer.appendChild(clonePrimeiro);
     slidesContainer.appendChild(cloneSegundo);
@@ -215,12 +221,22 @@ function initBannerCarousel() {
     }
 
     function despausar() {
-        if (!estaPausado) return;
+        if (!estaPausado || pausadoPeloUsuario) return;
         estaPausado = false;
         iniciarCiclo(tempoRestante);
     }
 
     function reiniciarAutoplay() {
+        // Clique em seta ou dot acontece com o mouse em cima ou o foco dentro
+        // do banner: nesse caso o tempo zera, mas o ciclo continua pausado
+        // até o mouse ou o foco saírem.
+        if (pausadoPeloUsuario || banner.matches(':hover, :focus-within')) {
+            pararCiclo();
+            estaPausado = true;
+            tempoInicio = null;
+            tempoRestante = duracaoSlide;
+            return;
+        }
         estaPausado = false;
         iniciarCiclo(duracaoSlide);
     }
@@ -228,6 +244,13 @@ function initBannerCarousel() {
     // Pausa no hover do banner
     banner.addEventListener('mouseenter', pausar);
     banner.addEventListener('mouseleave', despausar);
+
+    // Pausa enquanto o foco do teclado estiver dentro do banner (WCAG 2.2.2):
+    // sem isso o slide troca embaixo de quem está navegando por Tab.
+    banner.addEventListener('focusin', pausar);
+    banner.addEventListener('focusout', (evento) => {
+        if (!banner.contains(evento.relatedTarget)) despausar();
+    });
 
     // Pausa quando a aba perde o foco e retoma quando visível
     document.addEventListener('visibilitychange', () => {
@@ -237,6 +260,36 @@ function initBannerCarousel() {
             despausar();
         }
     });
+
+    // Botão pausar/retomar (WCAG 2.2.2): pausa que só o próprio usuário desfaz.
+    // Hover, foco e aba oculta continuam pausando por cima disso.
+    const botaoPausa = banner.querySelector('[data-banner="pause"]');
+    let pausadoPeloUsuario = false;
+
+    function alternarPausa() {
+        pausadoPeloUsuario = !pausadoPeloUsuario;
+        botaoPausa.setAttribute('aria-label', pausadoPeloUsuario ? 'Retomar carrossel' : 'Pausar carrossel');
+        // SVG não tem a propriedade .hidden do HTML: precisa ser o atributo
+        botaoPausa.querySelector('[data-icon="pause"]').toggleAttribute('hidden', pausadoPeloUsuario);
+        botaoPausa.querySelector('[data-icon="play"]').toggleAttribute('hidden', !pausadoPeloUsuario);
+        banner.toggleAttribute('data-paused', pausadoPeloUsuario);
+
+        if (pausadoPeloUsuario) {
+            pausar();
+        } else if (!banner.matches(':hover, :focus-within')) {
+            despausar();
+        }
+        // Com mouse em cima ou foco dentro, retoma ao sair (mouseleave/focusout).
+    }
+
+    if (botaoPausa) {
+        // Com movimento reduzido não há autoplay, então não há o que pausar.
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            botaoPausa.hidden = true;
+        } else {
+            botaoPausa.addEventListener('click', alternarPausa);
+        }
+    }
 
     // Inicialização
     irParaSlide(1, false, true);

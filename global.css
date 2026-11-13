@@ -288,6 +288,11 @@
 
 html {
     -webkit-text-size-adjust: 100%;
+    /* O header é sticky: sem isto, âncoras (#comer, #conteudo) e o foco do
+       Tab param embaixo dele (WCAG 2.4.11, docs/07). Altura do header =
+       padding (space-5 + space-3, ver .header) + controle mais alto
+       (control-sm, o botão de menu no mobile); space-4 é a folga. */
+    scroll-padding-top: calc(var(--space-5) + var(--space-3) + var(--control-sm) + var(--space-4));
 }
 
 body {
@@ -317,6 +322,12 @@ h6 {
 :focus-visible {
     outline: var(--focus-ring);
     outline-offset: 4px;
+}
+
+/* <main tabindex="-1"> recebe foco do link de pular só para mover o ponto de
+   partida do Tab; não é controle, então não ganha anel de foco. */
+[tabindex="-1"]:focus {
+    outline: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

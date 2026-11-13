@@ -53,13 +53,15 @@ main
 │       │   └── span.icon.icon--chevron (aria-hidden)
 │       └── button.pill.pill--md.filters__clear  type="reset"   "limpar filtros"
 │
-└── section.results
+└── section.results  aria-labelledby="titulo-resultados"
+    ├── h2.sr-only#titulo-resultados                    "resultados" (só leitor de tela)
     ├── p.sr-only  aria-live="polite"                     "3 resultados" (o JS atualiza)
     ├── article.feature                                   ← card grande de destaque
     │   ├── div.card__top
     │   │   ├── span.category                             "Restaurante universitário"
     │   │   └── span.verified                             "verificado"
-    │   ├── h2.card__title                                "Bandejão Universitário"
+    │   ├── h3.card__title#titulo-…                       "Bandejão Universitário"
+    │   ├── p.seal.feature__seal                          "R$ 4–9"  (logo após o título: ordem de leitura)
     │   ├── p.card__desc
     │   ├── ul.meta
     │   │   ├── li > span.icon.icon--pin   + texto        "Montana · No campus Unesp"
@@ -67,13 +69,12 @@ main
     │   ├── ul.chips > li.chip                            "Mais barato", "Vegetariano"
     │   ├── div.card__footer
     │   │   ├── p.card__date                              "verificado em 11 jun. 2026"
-    │   │   └── button.compare  aria-pressed="false"      "comparar"
-    │   ├── span.burst (aria-hidden)
-    │   └── p.seal.feature__seal                          "R$ 4–9"
+    │   │   └── button.compare#comparar-…  (ver regras)   "comparar"
+    │   └── span.burst (aria-hidden)
     └── ul.results__grid
         └── li > article.card                             ← um por lugar
             ├── div.card__top     (igual ao destaque)
-            ├── h3.card__title
+            ├── h3.card__title#titulo-…
             ├── p.card__desc
             ├── p.price
             │   ├── span.price__value                     "R$ 12–28"
@@ -86,6 +87,6 @@ main
 ## Regras rápidas
 
 - **Ícones:** `<span class="icon icon--pin" aria-hidden="true"></span>`. Eles herdam a cor do texto. Disponíveis: `arrow bus check chevron clock food info pin plus search star`.
-- **Botão comparar:** o JS troca `aria-pressed` para `"true"` e o texto para "adicionado". O visual muda sozinho.
+- **Botão comparar:** o nome acessível junta o botão e o título do card, senão o leitor de tela anuncia três "comparar" iguais: `<button type="button" class="compare" id="comparar-X" aria-labelledby="comparar-X titulo-X" aria-pressed="false">comparar</button>`, com `id="titulo-X"` no título. O JS troca `aria-pressed` para `"true"` e o texto para "adicionado"; o nome acompanha sozinho. O visual muda sozinho.
 - **Lista vazia ou erro:** `div.empty` com um `p` e um `button.pill.pill--md.filters__clear`.
 - **Dados:** os textos acima são do Figma, só exemplo. Os reais vêm de `/dados`.

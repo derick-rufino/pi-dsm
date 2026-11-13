@@ -157,10 +157,22 @@ html {
     --btn-fg: var(--ink);
 }
 
-.banner__controls .round-btn--prev {
+.banner__controls :is(.round-btn--prev, .round-btn--pause) {
     --btn-bg: var(--surface-raised);
     --btn-fg: var(--text);
     --state-tint: var(--text);
+}
+
+/* Pausar não é seta: o ícone não anda no hover */
+.round-btn--pause {
+    --dir: 0;
+}
+
+/* .round-btn e svg definem display, o que venceria o atributo hidden que o
+   JS usa para trocar o ícone e esconder o botão com movimento reduzido */
+.round-btn--pause[hidden],
+.round-btn--pause [hidden] {
+    display: none;
 }
 
 /* <div.banner__viewport> recorta os slides */
@@ -327,7 +339,7 @@ html {
     animation: dot-progress var(--slide-duration, 5000ms) linear forwards;
 }
 
-.banner:hover .banner__dot[aria-current="true"]::after {
+.banner:is(:hover, :focus-within, [data-paused]) .banner__dot[aria-current="true"]::after {
     animation-play-state: paused;
 }
 
@@ -407,6 +419,13 @@ html {
     --control: var(--control-lg);
 }
 
+/* Botão e texto acima do burst: no mobile o burst ocupa quase toda a
+   largura do bloco e cobria a seta */
+.block--main> :not(.burst) {
+    position: relative;
+    z-index: 1;
+}
+
 .block--main>.burst {
     inset-block-start: calc(var(--space-8) * -1);
     inset-inline-end: var(--space-9);
@@ -453,9 +472,9 @@ html {
     border-radius: var(--radius-xl);
 }
 
-.block--side .block__title {
+.block--side .block__text {
     padding-inline-end: calc(var(--control-md) + var(--space-2));
-    /* não encosta no botão */
+    /* título e descrição não passam por baixo do botão */
 }
 
 .block--side .round-btn {
@@ -547,9 +566,20 @@ html {
         display: none;
     }
 
-    .banner__title .tag,
     .banner__controls .round-btn--prev {
         display: none;
+    }
+
+    /* Sem espaço para a etiqueta no mobile, mas o aviso de dado de exemplo
+       continua para o leitor de tela (mesmas regras do .sr-only) */
+    .banner__title .tag {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
     }
 
     .slide {

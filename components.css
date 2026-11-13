@@ -754,9 +754,25 @@ svg {
     white-space: nowrap;
 }
 
-/* Nav nas páginas internas: o link com aria-current="page" fica na cor da
-   seção; os outros ficam neutros. Na home (sem aria-current) nada muda. */
-.nav:has([aria-current="page"]) .nav__link:not([aria-current="page"]) {
+/* <a.pill.pill--md.pular> "pular para o conteúdo" (docs/07, seção 7.2).
+   Fora da tela até receber foco; aparece acima do header sticky (z 10) e do
+   menu mobile (z 20). */
+.pular {
+    position: absolute;
+    inset-inline-start: -9999px;
+    inset-block-start: var(--space-4);
+    z-index: 30;
+}
+
+.pular:focus {
+    inset-inline-start: var(--space-4);
+}
+
+/* Nav e menu mobile nas páginas internas: o link com aria-current="page"
+   fica na cor da seção; os outros ficam neutros. Na home (sem aria-current)
+   nada muda. */
+.nav:has([aria-current="page"]) .nav__link:not([aria-current="page"]),
+.menu:has([aria-current="page"]) .menu__link:not([aria-current="page"]) {
     --link-bg: var(--surface-raised);
     --pill-fg: var(--text);
     --state-tint: var(--text);
@@ -1302,6 +1318,8 @@ svg {
 .feature__seal {
     --seal-fg: var(--accent);
     position: absolute;
+    /* vem antes do burst no DOM (ordem de leitura), então precisa subir */
+    z-index: 1;
     inset-inline-end: calc(var(--space-12) + (250px - var(--seal-size)) / 2);
     inset-block-start: calc(var(--space-9) + (250px - var(--seal-size)) / 2);
     padding: var(--space-3);
