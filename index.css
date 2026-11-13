@@ -327,7 +327,7 @@ html {
     animation: dot-progress var(--slide-duration, 5000ms) linear forwards;
 }
 
-.banner:hover .banner__dot[aria-current="true"]::after {
+.banner:is(:hover, :focus-within) .banner__dot[aria-current="true"]::after {
     animation-play-state: paused;
 }
 
