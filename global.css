@@ -319,6 +319,12 @@ h6 {
     outline-offset: 4px;
 }
 
+/* <main tabindex="-1"> recebe foco do link de pular só para mover o ponto de
+   partida do Tab; não é controle, então não ganha anel de foco. */
+[tabindex="-1"]:focus {
+    outline: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
     :root {
         --duration-step: 0s;

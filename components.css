@@ -754,6 +754,20 @@ svg {
     white-space: nowrap;
 }
 
+/* <a.pill.pill--md.pular> "pular para o conteúdo" (docs/07, seção 7.2).
+   Fora da tela até receber foco; aparece acima do header sticky (z 10) e do
+   menu mobile (z 20). */
+.pular {
+    position: absolute;
+    inset-inline-start: -9999px;
+    inset-block-start: var(--space-4);
+    z-index: 30;
+}
+
+.pular:focus {
+    inset-inline-start: var(--space-4);
+}
+
 /* Nav nas páginas internas: o link com aria-current="page" fica na cor da
    seção; os outros ficam neutros. Na home (sem aria-current) nada muda. */
 .nav:has([aria-current="page"]) .nav__link:not([aria-current="page"]) {
