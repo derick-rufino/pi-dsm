@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculadora · kampi</title>
+
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="../menu.js" defer></script>
+</head>
+
+<body>
+    <a href="#conteudo" class="pill pill--md">Pular para o conteúdo</a>
+
+    <!-- ================================================================
+         HEADER
+         ================================================================ -->
+    <header class="header">
+        <a href="../index.html" class="brand" aria-label="kampi — página inicial">
+            <span class="brand__dot" aria-hidden="true"></span>
+            <span class="brand__name">kampi</span>
+        </a>
+
+        <nav class="nav" aria-label="Navegação principal">
+            <a href="../comer-bem/" class="pill pill--md nav__link link--food">comer bem</a>
+            <a href="../cena-e-role/" class="pill pill--md nav__link link--scene">cena &amp; rolê</a>
+            <a href="../calculadora/" aria-current="page" class="pill pill--md nav__link link--calc">calculadora</a>
+        </nav>
+
+        <button type="button" class="pill pill--md menu-toggle"
+            aria-expanded="false" aria-controls="menu"
+            aria-label="Abrir menu de navegação">
+            <span>menu</span>
+            <span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+    </header>
+
+    <!-- ================================================================
+         MENU MOBILE
+         ================================================================ -->
+    <nav id="menu" class="menu" aria-label="Menu móvel">
+        <div class="menu__top">
+            <p class="menu__title">menu</p>
+            <button type="button" class="round-btn menu__close" aria-label="Fechar menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M18 6 6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <ul>
+            <li>
+                <a href="../comer-bem/" class="pill menu__link link--food">
+                    <span>comer bem</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="../cena-e-role/" class="pill menu__link link--scene">
+                    <span>cena &amp; rolê</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="../calculadora/" aria-current="page" class="pill menu__link link--calc">
+                    <span>calculadora</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="conteudo" tabindex="-1">
+        <section class="page-hero" aria-labelledby="titulo-calculadora">
+            <h1 class="page-hero__title" id="titulo-calculadora">
+                <span class="page-hero__row">
+                    <span class="pill pill--lg title-pill--light">planeje o mês</span>
+                    <span class="strip strip--mint" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </span>
+                </span>
+                <span class="page-hero__row">
+                    <span class="pill pill--lg title-pill--accent">antes de chegar.</span>
+                </span>
+            </h1>
+            <div class="page-hero__info">
+                <p class="page-hero__lead">Comida, transporte e lazer: planeje os gastos do mês de acordo com a sua rotina em Marília.</p>
+                <span class="pill tag">valores de exemplo</span>
+            </div>
+            <span class="burst" aria-hidden="true"></span>
+            <span class="stairs" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+            </span>
+        </section>
+
+        <form class="calc" aria-label="Calculadora de gastos mensais" aria-describedby="aviso-exemplo">
+            <div class="calc__questions">
+                <fieldset class="question">
+                    <legend class="question__head">
+                        <span class="question__number" aria-hidden="true">1</span>
+                        <span>
+                            <span class="question__title">Quantas refeições fora por semana?</span>
+                            <span class="question__hint">O restante considera mercado e refeições preparadas em casa.</span>
+                        </span>
+                    </legend>
+                    <div class="options">
+                        <label class="option">
+                            <input class="sr-only" type="radio" name="refeicoes" value="ate-3" checked>
+                            <span class="option__radio" aria-hidden="true"></span>
+                            <span>
+                                <span class="option__title">Até 3</span>
+                                <span class="option__desc">Alguns dias da semana</span>
+                            </span>
+                        </label>
+                        <label class="option">
+                            <input class="sr-only" type="radio" name="refeicoes" value="de-4-a-7">
+                            <span class="option__radio" aria-hidden="true"></span>
+                            <span>
+                                <span class="option__title">De 4 a 7</span>
+                                <span class="option__desc">Quase todos os dias</span>
+                            </span>
+                        </label>
+                        <label class="option">
+                            <input class="sr-only" type="radio" name="refeicoes" value="mais-de-7">
+                            <span class="option__radio" aria-hidden="true"></span>
+                            <span>
+                                <span class="option__title">Mais de 7</span>
+                                <span class="option__desc">Mais de uma por dia</span>
+                            </span>
+                        </label>
+                    </div>
+                </fieldset>
+                <fieldset class="question">
+                    <legend class="question__head">
+                        <span class="question__number" aria-hidden="true">2</span>
+                        <span>
+                            <span class="question__title">Como você costuma se deslocar?</span>
+                            <span class="question__hint">Pense nos trajetos para a faculdade e nas atividades do dia a dia.</span>
+                        </span>
+                    </legend>
+                    <div class="options">
+                        <label class="option">
+                            <input class="sr-only" type="radio" name="transporte" value="a-pe-ou-bicicleta" checked>
+                            <span class="option__radio" aria-hidden="true"></span>
+                            <span>
+                                <span class="option__title">A pé ou de bicicleta</span>
+                                <span class="option__desc">Trajetos sem passagem</span>
+                            </span>
+                        </label>
+                        <label class="option">
+                            <input class="sr-only" type="radio" name="transporte" value="onibus">
+                            <span class="option__radio" aria-hidden="true"></span>
+                            <span>
+                                <span class="option__title">Ônibus</span>
+                                <span class="option__desc">Transporte coletivo na rotina</span>
+                            </span>
+                        </label>
+                        <label class="option">
+                            <input class="sr-only" type="radio" name="transporte" value="aplicativo">
+                            <span class="option__radio" aria-hidden="true"></span>
+                            <span>
+                                <span class="option__title">Aplicativo</span>
+                                <span class="option__desc">Corridas no dia a dia</span>
+                            </span>
+                        </label>
+                    </div>
+                </fieldset>
+                <fieldset class="question">
+                    <legend class="question__head">
+                        <span class="question__number" aria-hidden="true">3</span>
+                        <span>
+                            <span class="question__title">Com que frequência você sai para um rolê?</span>
+                            <span class="question__hint">Considere passeios, cinema e encontros com os amigos.</span>
+                        </span>
+                    </legend>
+                    <div class="options">
+                        <label class="option">
+                            <input class="sr-only" type="radio" name="lazer" value="pouco" checked>
+                            <span class="option__radio" aria-hidden="true"></span>
+                            <span>
+                                <span class="option__title">De vez em quando</span>
+                                <span class="option__desc">Prefiro programas gratuitos</span>
+                            </span>
+                        </label>
+                        <label class="option">
+                            <input class="sr-only" type="radio" name="lazer" value="semanal">
+                            <span class="option__radio" aria-hidden="true"></span>
+                            <span>
+                                <span class="option__title">Toda semana</span>
+                                <span class="option__desc">Um rolê por semana</span>
+                            </span>
+                        </label>
+                        <label class="option">
+                            <input class="sr-only" type="radio" name="lazer" value="frequente">
+                            <span class="option__radio" aria-hidden="true"></span>
+                            <span>
+                                <span class="option__title">Várias vezes</span>
+                                <span class="option__desc">Mais de um rolê por semana</span>
+                            </span>
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+
+            <aside class="estimate" aria-labelledby="titulo-estimativa">
+                <span class="pill pill--ink" id="titulo-estimativa">estimativa mensal</span>
+                <output class="estimate__total" aria-live="polite" aria-atomic="true" aria-labelledby="titulo-estimativa">R$ 420</output>
+                <p class="estimate__note" id="aviso-exemplo">Esta estimativa considera alimentação, transporte e lazer. Os valores são exemplos fixos: alterar as respostas ainda não recalcula o total. A função de copiar também estará disponível na versão funcional.</p>
+                <ul class="breakdown">
+                    <li class="breakdown__item">
+                        <span class="breakdown__icon" aria-hidden="true">
+                            <span class="icon icon--food"></span>
+                        </span>
+                        <span class="breakdown__name">alimentação</span>
+                        <span class="breakdown__value">R$ 300</span>
+                        <span class="breakdown__op" aria-hidden="true">+</span>
+                    </li>
+                    <li class="breakdown__item">
+                        <span class="breakdown__icon" aria-hidden="true">
+                            <span class="icon icon--bus"></span>
+                        </span>
+                        <span class="breakdown__name">transporte</span>
+                        <span class="breakdown__value">R$ 0</span>
+                        <span class="breakdown__op" aria-hidden="true">+</span>
+                    </li>
+                    <li class="breakdown__item">
+                        <span class="breakdown__icon" aria-hidden="true">
+                            <span class="icon icon--star"></span>
+                        </span>
+                        <span class="breakdown__name">lazer</span>
+                        <span class="breakdown__value">R$ 120</span>
+                        <span class="breakdown__op" aria-hidden="true">=</span>
+                    </li>
+                </ul>
+                <div class="estimate__method">
+                    <span class="icon icon--info" aria-hidden="true"></span>
+                    <div>
+                        <strong>Como calculamos?</strong>
+                        <p>Valores baseados em exemplos para demonstrar a composição do total mensal. Os dados coletados pelo grupo serão usados na versão funcional.</p>
+                    </div>
+                </div>
+                <button class="pill pill--ink estimate__copy" type="button" disabled aria-describedby="aviso-exemplo">
+                    copiar minha estimativa
+                    <span class="round-btn" aria-hidden="true">
+                        <span class="icon icon--arrow"></span>
+                    </span>
+                </button>
+                <p class="estimate__disclaimer">Esta é uma estimativa, não um orçamento definitivo. Moradia e outras despesas não estão incluídas.</p>
+                <span class="burst" aria-hidden="true"></span>
+            </aside>
+        </form>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__block">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <p class="footer__tagline">Informação honesta para quem está chegando.</p>
+                    <p class="footer__credit">
+                        feito em Marília · projeto integrador DSM, Fatec
+                    </p>
+                </div>
+
+                <nav class="footer__links" aria-label="Links do rodapé">
+                    <div class="footer__col">
+                        <h2 class="footer__heading">explorar</h2>
+                        <ul>
+                            <li><a href="../comer-bem/" class="footer__link">comer bem</a></li>
+                            <li><a href="../cena-e-role/" class="footer__link">cena &amp; rolê</a></li>
+                            <li><a href="../calculadora/" class="footer__link">calculadora</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h2 class="footer__heading">projeto</h2>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/derick-rufino/pi-dsm"
+                                    class="footer__link" target="_blank" rel="noopener noreferrer">
+                                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                                        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15
+                                        -.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87
+                                        .51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12
+                                        0 0 .67-.21 2.2.82a7.64 7.64 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82
+                                        2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95
+                                        .29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0
+                                        16 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </li>
+                            <li><a href="../index.html#" class="footer__link">reportar dado errado</a></li>
+                            <li><a href="../index.html#" class="footer__link">sugerir um lugar</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Wordmark gigante cortada -->
+            <div class="footer__wordmark" aria-hidden="true">
+                <span>kampi</span>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
