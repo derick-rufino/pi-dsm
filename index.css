@@ -203,8 +203,11 @@ html {
     flex: none;
     flex-direction: column;
     justify-content: space-between;
+    gap: var(--space-5);
     width: var(--slide-width);
-    height: var(--slide-height);
+    /* mínima, não fixa: título longo cresce o slide em vez de jogar o
+       botão por cima do texto (os slides da fila esticam juntos) */
+    min-height: var(--slide-height);
     padding: var(--slide-pad-y) var(--slide-pad-x);
     overflow: hidden;
     border-radius: var(--radius-2xl);
