@@ -1081,9 +1081,11 @@ svg {
     padding: 0 var(--gutter) var(--section-gap);
 }
 
+/* Duas colunas fixas (Figma desktop e tablet): um card sozinho fica com
+   meia largura em vez de esticar; uma coluna no celular (seção 9) */
 .results__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
 }
 
@@ -1389,6 +1391,10 @@ svg {
 
     .filters {
         border-radius: var(--radius-lg);
+    }
+
+    .results__grid {
+        grid-template-columns: 1fr;
     }
 
     .card,
