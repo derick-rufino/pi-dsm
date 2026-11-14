@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="../global.css">
     <link rel="stylesheet" href="../components.css">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../dados.css">
     <script src="../menu.js" defer></script>
+    <script src="../dados.js" defer></script>
 </head>
 
 <body>
@@ -157,7 +159,8 @@
         </section>
 
         <!-- ============================================================
-             RESULTADOS (dados de exemplo; os reais vêm de /dados)
+             RESULTADOS (dados.js troca pelos de dados/comer.json;
+             o HTML abaixo só aparece se o JSON não carregar)
              ============================================================ -->
         <section class="results" aria-labelledby="titulo-resultados">
             <!-- Título só para leitor de tela: destaque e cards ficam todos em h3,
@@ -189,7 +192,7 @@
                 <span class="burst" aria-hidden="true"></span>
             </article>
 
-            <ul class="results__grid">
+            <ul class="results__grid" data-dados="comer">
                 <li>
                     <article class="card">
                         <div class="card__top">

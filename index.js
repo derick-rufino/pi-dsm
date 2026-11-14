@@ -4,7 +4,9 @@
  * Sem dependências externas.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // dados.js troca os slides de exemplo pelos de dados/banner.json antes do carrossel ligar
+    if (window.kampiDados) await window.kampiDados.banner;
     initBannerCarousel();
 });
 

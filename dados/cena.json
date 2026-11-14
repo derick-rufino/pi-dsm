@@ -1,0 +1,257 @@
+{
+  "versao": "2026-11-14",
+  "itens": [
+    {
+      "id": "cen-cao-perere",
+      "nome": "Cão Pererê",
+      "categoria": "Bar alternativo",
+      "subtipo": "bar",
+      "descricao": "Shows de bandas locais e festas de coletivos: pop, rock, reggae, MPB, hip hop, forró e jazz.",
+      "bairro": "Alto Cafezal",
+      "endereco": "R. Cel. José Brás, 1627",
+      "horario": "Festas com data, a partir das 22h",
+      "dia_recorrente": null,
+      "preco_min": 15,
+      "preco_max": 35,
+      "unidade": "entrada",
+      "preco_texto": "R$ 15 a 20 antecipado, R$ 30 a 35 na portaria",
+      "etiquetas": [
+        "música ao vivo",
+        "festas",
+        "drink em dobro"
+      ],
+      "instagram": "https://www.instagram.com/caoperere/",
+      "instagram_post": null,
+      "imagem": null,
+      "imagem_local": "assets/img-local/cen-cao-perere.webp",
+      "observacoes": null,
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Instagram do Cão Pererê",
+        "url": "https://www.instagram.com/caoperere/"
+      },
+      "verificado_em": "2026-11-14",
+      "ativo": true,
+      "destaque": true
+    },
+    {
+      "id": "cen-insty",
+      "nome": "Insty",
+      "categoria": "Festa pop",
+      "subtipo": "bar",
+      "descricao": "Festa pop do coletivo O Instituto, com DJs das 23h às 5h no Cão Pererê. Entrada livre para quem mora em Assis, Bauru, Garça e Tupã, com comprovante.",
+      "bairro": "Alto Cafezal",
+      "endereco": "R. Cel. José Brás, 1627 (Cão Pererê)",
+      "horario": "Edições periódicas, 23h às 5h",
+      "dia_recorrente": null,
+      "preco_min": 20,
+      "preco_max": 35,
+      "unidade": "entrada",
+      "preco_texto": "Lote R$ 20; portaria R$ 30 até 0h30, R$ 35 depois",
+      "etiquetas": [
+        "18+",
+        "drink em dobro até 1h",
+        "lista T/NB"
+      ],
+      "instagram": "https://www.instagram.com/o.institut.o/",
+      "instagram_post": "https://www.instagram.com/o.institut.o/reel/DfqJg3rhVbF/",
+      "imagem": null,
+      "imagem_local": "assets/img-local/cen-insty.webp",
+      "observacoes": "Última edição em 14/11/2026; próxima data ainda não divulgada.",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Instagram do coletivo",
+        "url": "https://www.instagram.com/o.institut.o/"
+      },
+      "verificado_em": "2026-11-14",
+      "ativo": true
+    },
+    {
+      "id": "cen-xeque-mate",
+      "nome": "Xeque Mate Retrô Bar",
+      "categoria": "Bar e música ao vivo",
+      "subtipo": "bar",
+      "descricao": "Bar da diversidade há 11 anos, com shows e DJs de quinta a sábado: MPB, reggae, dub, drum n bass e rock.",
+      "bairro": "Mirante",
+      "endereco": "Av. Saudade, 1374",
+      "horario": "Ter a qui 19h às 0h; sex e sáb 19h às 2h",
+      "dia_recorrente": "quinta a sábado",
+      "preco_min": null,
+      "preco_max": null,
+      "unidade": "entrada",
+      "preco_texto": "A confirmar",
+      "etiquetas": [
+        "diversidade",
+        "música ao vivo"
+      ],
+      "instagram": "https://www.instagram.com/xeque_mate_retro_bar/",
+      "instagram_post": null,
+      "imagem": null,
+      "imagem_local": "assets/img-local/cen-xeque-mate.webp",
+      "observacoes": "Endereço vem de guia comercial (Lista Mais); a bio do bar não traz endereço.",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Instagram do bar",
+        "url": "https://www.instagram.com/xeque_mate_retro_bar/"
+      },
+      "verificado_em": "2026-11-14",
+      "ativo": true
+    },
+    {
+      "id": "cen-vixe",
+      "nome": "Vixe Bar e Restaurante",
+      "categoria": "Bar e restaurante",
+      "subtipo": "bar",
+      "descricao": "Boteco com drinks autorais e porções. Em novembro, todos os drinks em dobro no happy hour.",
+      "bairro": "Parque das Indústrias",
+      "endereco": "Av. Carlos Pavarini, 500",
+      "horario": "Seg a qui 17h às 0h; fim de semana 12h às 1h",
+      "dia_recorrente": null,
+      "preco_min": null,
+      "preco_max": null,
+      "unidade": "consumo",
+      "preco_texto": "Drinks em dobro: seg a sex 17h às 20h; sáb, dom e feriado 12h às 18h",
+      "etiquetas": [
+        "happy hour",
+        "pet friendly",
+        "reserva pelo direct"
+      ],
+      "instagram": "https://www.instagram.com/vixebar.marilia/",
+      "instagram_post": "https://www.instagram.com/vixebar.marilia/p/DfTBfyjo4_G/",
+      "imagem": null,
+      "imagem_local": "assets/img-local/cen-vixe.webp",
+      "observacoes": "Endereço confirmado em Facebook do bar, Restaurant Guru, Espaces e Cylex.",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Instagram do Vixe",
+        "url": "https://www.instagram.com/vixebar.marilia/p/DfTBfyjo4_G/"
+      },
+      "verificado_em": "2026-11-14",
+      "ativo": true
+    },
+    {
+      "id": "cen-doctor-beer",
+      "nome": "Doctor Beer",
+      "categoria": "Choperia",
+      "subtipo": "bar",
+      "descricao": "Chopps variados e petiscos, com promoções de chopp em dobro em alguns dias da semana.",
+      "bairro": "Alto Cafezal",
+      "endereco": "Av. Rio Branco, 1331",
+      "horario": "Qua a sáb 18h às 1h",
+      "dia_recorrente": null,
+      "preco_min": null,
+      "preco_max": null,
+      "unidade": "consumo",
+      "preco_texto": "Chopp em dobro em dias de promoção",
+      "etiquetas": [
+        "chopp",
+        "happy hour"
+      ],
+      "instagram": "https://www.instagram.com/doctorbeermarilia/",
+      "instagram_post": "https://www.instagram.com/doctorbeermarilia/reel/Db9BWIaPhUE/",
+      "imagem": null,
+      "imagem_local": "assets/img-local/cen-doctor-beer.webp",
+      "observacoes": null,
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Instagram do bar",
+        "url": "https://www.instagram.com/doctorbeermarilia/"
+      },
+      "verificado_em": "2026-11-14",
+      "ativo": true
+    },
+    {
+      "id": "cen-sesc",
+      "nome": "Sesc Marília",
+      "categoria": "Cultura e esporte",
+      "subtipo": "cultura",
+      "descricao": "Unidade nova, inaugurada em 14/11/2026: biblioteca, piscinas, quadra de areia, teatro de 217 lugares, mirante e wi-fi grátis.",
+      "bairro": "Jd. Portal do Sol",
+      "endereco": "R. Antônio Gallina, 75",
+      "horario": "Ter a sex 9h às 21h30; sáb, dom e feriados 10h às 18h30",
+      "dia_recorrente": null,
+      "preco_min": 0,
+      "preco_max": 12,
+      "unidade": "atividade",
+      "preco_texto": "Muitas atividades gratuitas; piscina exige Credencial Plena e exame (R$ 12)",
+      "etiquetas": [
+        "gratuito",
+        "piscina",
+        "biblioteca"
+      ],
+      "instagram": null,
+      "instagram_post": null,
+      "imagem": null,
+      "imagem_local": "assets/img-local/cen-sesc.webp",
+      "observacoes": null,
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Sesc SP",
+        "url": "https://www.sescsp.org.br/editorial/saiba-tudo-o-que-voce-vai-encontrar-no-sesc-marilia"
+      },
+      "verificado_em": "2026-11-14",
+      "ativo": true
+    },
+    {
+      "id": "cen-teatro-municipal",
+      "nome": "Teatro Municipal Waldir Silveira Mello",
+      "categoria": "Teatro",
+      "subtipo": "cultura",
+      "descricao": "Principal palco da cidade, com espetáculos, stand-up e dança. Estudante paga meia.",
+      "bairro": "Centro",
+      "endereco": "Av. Rio Branco, s/n",
+      "horario": "Programação com data",
+      "dia_recorrente": null,
+      "preco_min": null,
+      "preco_max": null,
+      "unidade": "entrada",
+      "preco_texto": "Valores por espetáculo; meia para estudante",
+      "etiquetas": [
+        "meia-entrada"
+      ],
+      "instagram": null,
+      "instagram_post": null,
+      "imagem": null,
+      "imagem_local": "assets/img-local/cen-teatro-municipal.webp",
+      "observacoes": "Fontes divergem no número (s/n ou 51).",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "MegaBilheteria",
+        "url": "https://megabilheteria.com/evento?id=20261104172410"
+      },
+      "verificado_em": "2026-11-14",
+      "ativo": true
+    },
+    {
+      "id": "cen-esportes",
+      "nome": "Aulas gratuitas da Secretaria de Esportes",
+      "categoria": "Esporte",
+      "subtipo": "esporte",
+      "descricao": "22 modalidades gratuitas, de natação a skate, com inscrição no Ginásio Neusa Galetti ou no Cemesc Zona Sul.",
+      "bairro": "Vários",
+      "endereco": "Ginásio Neusa Galetti: R. Francisco Xavier Ambrósio, 228",
+      "horario": "Inscrições seg a sex, 8h às 11h30 e 13h às 16h30",
+      "dia_recorrente": null,
+      "preco_min": 0,
+      "preco_max": 0,
+      "unidade": "aula",
+      "preco_texto": "Gratuito",
+      "etiquetas": [
+        "gratuito",
+        "esporte"
+      ],
+      "instagram": null,
+      "instagram_post": null,
+      "imagem": null,
+      "imagem_local": "assets/img-local/cen-esportes.webp",
+      "observacoes": "Grade completa em esporte.marilia.sp.gov.br, aba Projeto Social Esportivo.",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Prefeitura de Marília",
+        "url": "https://www.marilia.sp.gov.br/portal/noticias/0/3/17752/secretaria-de-esportes-abre-vagas-gratuitas-em-22-modalidades-para-transformar-a-rotina-dos-marilienses/"
+      },
+      "verificado_em": "2026-11-14",
+      "ativo": true
+    }
+  ]
+}

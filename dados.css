@@ -1,0 +1,130 @@
+/**
+ * Kampi · dados.css
+ * Estilos só do que o dados.js acrescenta: foto no burst do slide, pill de
+ * data, créditos das fotos no rodapé, foto do card e post do Instagram.
+ * Só tokens de global.css (regra do CI).
+ */
+
+/* ---------- banner da home ---------- */
+
+/* Rótulo + data lado a lado */
+.slide__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+/* Foto recortada no formato do burst (Figma: slide "promoção de comida"),
+   preenchendo a forma inteira, sem borda */
+.slide--photo>.burst {
+    --burst-size: var(--burst-lg);
+    --burst-rotate: 0deg;
+    inset-inline-start: 68%;
+    inset-block-start: 14%;
+}
+
+/* Foto não gira no hover: o burst com foto fica parado */
+.slide--photo:hover>.burst {
+    rotate: var(--burst-rotate);
+}
+
+.slide__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: var(--star-14);
+}
+
+/* Texto não passa por baixo da foto (o burst começa em 68%) */
+.slide--photo .slide__body {
+    max-width: 60%;
+}
+
+/* Tablet e celular: slide estreito, a foto atrapalharia a leitura.
+   O burst volta a ser liso (e a foto sai dos créditos do rodapé). */
+@media (max-width: 1079px) {
+    .slide__media {
+        display: none;
+    }
+
+    .slide--photo .slide__body {
+        max-width: calc(100% * 2 / 3);
+    }
+}
+
+@media (max-width: 767px) {
+    .slide--photo .slide__body {
+        max-width: none;
+    }
+}
+
+/* ---------- cards das listagens ---------- */
+
+/* O burst (250px) é absoluto: o conteúdo do destaque precisa deixar a
+   coluna dele livre, senão endereço e etiquetas entram por baixo do selo.
+   Categoria/verificado (topo) e rodapé seguem na largura toda, como no Figma. */
+.feature {
+    --burst-reserve: calc(250px + var(--space-12) + var(--space-6));
+    min-height: calc(var(--space-9) + 250px + var(--space-12) * 2);
+}
+
+.feature> :is(.card__title, .card__desc, .meta, .chips, .card__social) {
+    max-width: min(var(--card-text-max), 100% - var(--burst-reserve));
+}
+
+@media (max-width: 1079px) {
+    .feature {
+        --burst-reserve: calc(250px + var(--space-6) + var(--space-4));
+    }
+}
+
+/* Celular: burst some, conteúdo volta à largura toda */
+@media (max-width: 767px) {
+    .feature {
+        min-height: 0;
+    }
+
+    .feature> :is(.card__title, .card__desc, .meta, .chips, .card__social) {
+        max-width: none;
+    }
+}
+
+/* Foto do card comum (opcional; o destaque não tem) */
+.card__media {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+
+/* Botão ou link do Instagram dentro do card */
+.card__social {
+    display: flex;
+}
+
+.social-btn {
+    text-decoration: none;
+}
+
+/* Post incorporado ocupa a largura do card */
+.embed-ig {
+    width: 100%;
+    border-radius: var(--radius-sm);
+}
+
+.embed-ig .instagram-media {
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+}
+
+/* ---------- créditos das fotos (rodapé) ---------- */
+
+/* Linha extra em .footer__brand, mesmo estilo de .footer__credit
+   ("feito em Marília"): fica na coluna da marca, discreta */
+.footer__photos a {
+    color: inherit;
+}

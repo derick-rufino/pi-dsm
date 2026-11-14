@@ -1,0 +1,134 @@
+{
+  "versao": "2026-11-14",
+  "nota": "Valores inteiros: reais quando a unidade não termina em _centavos; centavos quando termina.",
+  "itens": [
+    {
+      "id": "cst-onibus-estudante",
+      "categoria": "transporte",
+      "rotulo": "Passagem de ônibus, tarifa estudante",
+      "valor_min": 287,
+      "valor_tipico": 287,
+      "valor_max": 287,
+      "unidade": "viagem_centavos",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "AMTU",
+        "url": "https://www.amtumarilia.com.br/tarifas"
+      },
+      "observacoes": "Exige Marília Card Estudante.",
+      "verificado_em": "2026-11-14"
+    },
+    {
+      "id": "cst-onibus-comum",
+      "categoria": "transporte",
+      "rotulo": "Passagem de ônibus, tarifa comum",
+      "valor_min": 575,
+      "valor_tipico": 575,
+      "valor_max": 575,
+      "unidade": "viagem_centavos",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "AMTU",
+        "url": "https://www.amtumarilia.com.br/tarifas"
+      },
+      "observacoes": null,
+      "verificado_em": "2026-11-14"
+    },
+    {
+      "id": "cst-ru-unesp",
+      "categoria": "alimentacao",
+      "rotulo": "Refeição no RU da Unesp (estudante)",
+      "valor_min": 294,
+      "valor_tipico": 294,
+      "valor_max": 294,
+      "unidade": "refeicao_centavos",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Blog do Rodrigo, jun/2026",
+        "url": "https://www.blogdorodrigo.com.br/post/campus-de-espera"
+      },
+      "observacoes": "Atende menos de 20% da graduação; vaga disputada.",
+      "verificado_em": "2026-11-14"
+    },
+    {
+      "id": "cst-almoco-buffet",
+      "categoria": "alimentacao",
+      "rotulo": "Almoço em buffet livre no Centro",
+      "valor_min": 1890,
+      "valor_tipico": 1890,
+      "valor_max": 1890,
+      "unidade": "refeicao_centavos",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Marília ON (Instagram)",
+        "url": "https://www.instagram.com/marilia.on/reel/DfpI4O-zWbF/"
+      },
+      "observacoes": "Proteína à parte.",
+      "verificado_em": "2026-11-14"
+    },
+    {
+      "id": "cst-cerveja-happy",
+      "categoria": "lazer",
+      "rotulo": "Cerveja no happy hour",
+      "valor_min": 990,
+      "valor_tipico": 990,
+      "valor_max": 990,
+      "unidade": "unidade_centavos",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Instagram do Toca Raul",
+        "url": "https://www.instagram.com/tocaraulbar.marilia/p/Dd38TCum3Xz/"
+      },
+      "observacoes": null,
+      "verificado_em": "2026-11-14"
+    },
+    {
+      "id": "cst-entrada-role",
+      "categoria": "lazer",
+      "rotulo": "Entrada de festa ou show em bar",
+      "valor_min": 15,
+      "valor_tipico": 20,
+      "valor_max": 35,
+      "unidade": "entrada",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Instagram do Cão Pererê e Sympla",
+        "url": "https://www.instagram.com/caoperere/"
+      },
+      "observacoes": "R$ 15 a 20 antecipado; R$ 30 a 35 na portaria.",
+      "verificado_em": "2026-11-14"
+    },
+    {
+      "id": "cst-festa-atletica",
+      "categoria": "lazer",
+      "rotulo": "Ingresso de festa de atlética",
+      "valor_min": 12,
+      "valor_tipico": 15,
+      "valor_max": 15,
+      "unidade": "entrada",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Instagram da atlética da Unesp",
+        "url": "https://www.instagram.com/atleticaunespmarilia/"
+      },
+      "observacoes": "Combos: 2 por R$ 30, 3 por R$ 39.",
+      "verificado_em": "2026-11-14"
+    },
+    {
+      "id": "cst-exame-sesc",
+      "categoria": "lazer",
+      "rotulo": "Exame para usar a piscina do Sesc",
+      "valor_min": 12,
+      "valor_tipico": 12,
+      "valor_max": 12,
+      "unidade": "semestre",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Sesc SP",
+        "url": "https://www.sescsp.org.br/editorial/saiba-tudo-o-que-voce-vai-encontrar-no-sesc-marilia"
+      },
+      "observacoes": "Isento até 16 anos.",
+      "verificado_em": "2026-11-14"
+    }
+  ]
+}

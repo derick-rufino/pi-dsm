@@ -1,0 +1,122 @@
+{
+  "versao": "2026-11-14",
+  "itens": [
+    {
+      "id": "evt-sintonize",
+      "variante": "scene",
+      "rotulo": "show",
+      "titulo": "reggae de Bob Marley no Cão Pererê",
+      "texto": "Sintonize, de Porto Alegre, toca os clássicos do rei do reggae. Antecipado de R$ 15 a R$ 25.",
+      "selo": [
+        "4 dez",
+        "22h"
+      ],
+      "data": "2026-12-04",
+      "horario": "22h às 3h30",
+      "local": "Cão Pererê",
+      "endereco": "R. Cel. José Brás, 1627, Alto Cafezal",
+      "preco_min": 15,
+      "preco_max": 25,
+      "unidade": "entrada",
+      "link": {
+        "href": "cena-e-role/",
+        "texto": "ver em cena & rolê"
+      },
+      "imagem": "img-noite",
+      "instagram_post": "https://www.instagram.com/sintonizeoriginal/p/Dfk0nD_kvF8/",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Sympla",
+        "url": "https://www.sympla.com.br/evento/sintonize-tributo-bob-marley-original-brasileiro/3649594"
+      },
+      "verificado_em": "2026-11-14"
+    },
+    {
+      "id": "evt-fabio-rabin",
+      "variante": "scene",
+      "rotulo": "stand-up",
+      "titulo": "Fábio Rabin em Séloko no Teatro Municipal",
+      "texto": "Sábado, 5 de dezembro, às 21h. Classificação 16 anos, ingressos de R$ 45 a R$ 90.",
+      "selo": [
+        "5 dez",
+        "21h"
+      ],
+      "data": "2026-12-05",
+      "horario": "21h",
+      "local": "Teatro Municipal de Marília",
+      "endereco": "Av. Rio Branco, 51, Centro",
+      "preco_min": 45,
+      "preco_max": 90,
+      "unidade": "entrada",
+      "link": {
+        "href": "cena-e-role/",
+        "texto": "ver em cena & rolê"
+      },
+      "imagem": "img-sampaio-vidal",
+      "instagram_post": null,
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Sympla",
+        "url": "https://bileto.sympla.com.br/event/129107"
+      },
+      "verificado_em": "2026-11-14"
+    },
+    {
+      "id": "evt-tres-porquinhos",
+      "variante": "scene",
+      "rotulo": "teatro",
+      "titulo": "O Natal dos Três Porquinhos",
+      "texto": "Espetáculo natalino no Teatro Municipal. Meia para estudante a R$ 35.",
+      "selo": [
+        "19 dez",
+        "16h"
+      ],
+      "data": "2026-12-19",
+      "horario": "16h",
+      "local": "Teatro Municipal Waldir Silveira Mello",
+      "endereco": "Av. Rio Branco, s/n, Centro",
+      "preco_min": 35,
+      "preco_max": 70,
+      "unidade": "entrada",
+      "link": {
+        "href": "cena-e-role/",
+        "texto": "ver em cena & rolê"
+      },
+      "imagem": "img-por-do-sol",
+      "instagram_post": null,
+      "fonte": {
+        "tipo": "publica",
+        "nome": "MegaBilheteria",
+        "url": "https://megabilheteria.com/evento?id=20261104172410"
+      },
+      "verificado_em": "2026-11-14"
+    },
+    {
+      "id": "com-estacao-sabor",
+      "variante": "food",
+      "rotulo": "promoção de comida",
+      "titulo": "almoço à vontade a R$ 18,90 no Centro",
+      "texto": "Buffet livre com sobremesa, de segunda a sábado, na Rua São Luís.",
+      "selo": null,
+      "data": null,
+      "horario": "almoço",
+      "local": "Estação Sabor Premium",
+      "endereco": "R. São Luís, 1224, Centro",
+      "preco_min": 19,
+      "preco_max": 19,
+      "unidade": "refeicao",
+      "link": {
+        "href": "comer-bem/",
+        "texto": "ver no comer bem"
+      },
+      "imagem": "img-cidade-1",
+      "instagram_post": "https://www.instagram.com/marilia.on/reel/DfpI4O-zWbF/",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Marília ON (Instagram)",
+        "url": "https://www.instagram.com/marilia.on/reel/DfpI4O-zWbF/"
+      },
+      "verificado_em": "2026-11-14"
+    }
+  ]
+}

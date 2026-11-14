@@ -1,0 +1,86 @@
+{
+  "versao": "2026-11-14",
+  "nota": "Fotos do Wikimedia Commons. CC BY e CC BY-SA exigem crédito visível ao autor com a licença.",
+  "itens": [
+    {
+      "id": "img-bosque",
+      "arquivo": "assets/img/img-bosque.webp",
+      "titulo": "Bosque Municipal de Marília",
+      "alt": "Trilha calçada sob árvores no Bosque Municipal, com cerca de madeira e mata ao fundo",
+      "autor": "V.Agostinelli",
+      "licenca": "CC BY-SA 4.0",
+      "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "fonte_url": "https://commons.wikimedia.org/wiki/File:Bosque_Municipal_de_Mar%C3%ADlia-SP,_BRASIL.jpg"
+    },
+    {
+      "id": "img-noite",
+      "arquivo": "assets/img/img-noite.webp",
+      "titulo": "Marília à noite",
+      "alt": "Luzes da cidade vistas de longe, à noite",
+      "autor": "Alexandre Possi",
+      "licenca": "CC BY 3.0",
+      "licenca_url": "https://creativecommons.org/licenses/by/3.0/",
+      "fonte_url": "https://commons.wikimedia.org/wiki/File:Mar%C3%ADlia_%C3%A0_noite_-_panoramio_-_Alexandre_Possi.jpg"
+    },
+    {
+      "id": "img-sampaio-vidal",
+      "arquivo": "assets/img/img-sampaio-vidal.webp",
+      "titulo": "Avenida Sampaio Vidal",
+      "alt": "Avenida Sampaio Vidal de dia, com prédios, carros estacionados e um ônibus",
+      "autor": "Alexandre Possi",
+      "licenca": "CC BY 3.0",
+      "licenca_url": "https://creativecommons.org/licenses/by/3.0/",
+      "fonte_url": "https://commons.wikimedia.org/wiki/File:Mar%C3%ADlia,_Av._Sampaio_Vidal_-_panoramio_-_Alexandre_Possi.jpg"
+    },
+    {
+      "id": "img-cidade-1",
+      "arquivo": "assets/img/img-cidade-1.webp",
+      "titulo": "Varal de lâmpadas acesas",
+      "alt": "Varal de lâmpadas amarelas acesas, com luzes desfocadas ao fundo",
+      "autor": "Luis Tosta",
+      "licenca": "CC0",
+      "licenca_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "fonte_url": "https://commons.wikimedia.org/wiki/File:Mar%C3%ADlia,_Brazil_(Unsplash_XpEIpQ6JDKY).jpg"
+    },
+    {
+      "id": "img-cidade-2",
+      "arquivo": "assets/img/img-cidade-2.webp",
+      "titulo": "Textura de casca de árvore",
+      "alt": "Close de casca de árvore com manchas de líquen",
+      "autor": "Luis Tosta",
+      "licenca": "CC0",
+      "licenca_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "fonte_url": "https://commons.wikimedia.org/wiki/File:Mar%C3%ADlia,_Brazil_(Unsplash_Cf9V7tS2OeE).jpg"
+    },
+    {
+      "id": "img-panorama",
+      "arquivo": "assets/img/img-panorama.webp",
+      "titulo": "Panorama de Marília",
+      "alt": "Prédios do centro de Marília no horizonte, vistos além de um vale com mata",
+      "autor": "Filipe Mesquita de Oliveira",
+      "licenca": "CC BY-SA 3.0",
+      "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "fonte_url": "https://commons.wikimedia.org/wiki/File:Mar%C3%ADlia_panorama.JPG"
+    },
+    {
+      "id": "img-por-do-sol",
+      "arquivo": "assets/img/img-por-do-sol.webp",
+      "titulo": "Pôr do sol em Marília",
+      "alt": "Céu alaranjado no pôr do sol com a silhueta de uma torre de antena",
+      "autor": "Brenno Brandalise Demarchi",
+      "licenca": "CC BY 3.0",
+      "licenca_url": "https://creativecommons.org/licenses/by/3.0/",
+      "fonte_url": "https://commons.wikimedia.org/wiki/File:Sunset_In_Mar%C3%ADlia_(224495819).jpeg"
+    },
+    {
+      "id": "img-unesp",
+      "arquivo": "assets/img/img-unesp.webp",
+      "titulo": "Campus da Unesp Marília",
+      "alt": "Caminho entre gramado e árvores no campus da Unesp, com postes de luz",
+      "autor": "AdriDaqui",
+      "licenca": "CC BY-SA 4.0",
+      "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "fonte_url": "https://commons.wikimedia.org/wiki/File:Unesp_Campus_Mar%C3%ADlia.jpg"
+    }
+  ]
+}

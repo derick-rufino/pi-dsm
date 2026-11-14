@@ -1,0 +1,69 @@
+{
+  "versao": "2026-11-14",
+  "itens": [
+    {
+      "id": "com-ru-unesp",
+      "nome": "Restaurante Universitário da Unesp",
+      "categoria": "Restaurante universitário",
+      "subtipo": "ru",
+      "descricao": "Refeição completa a preço subsidiado para estudantes da Unesp Marília. É o prato mais barato da cidade, mas a vaga é disputada.",
+      "bairro": "Mirante",
+      "endereco": "Campus da Unesp, Av. Hygino Muzzi Filho, 737",
+      "horario": null,
+      "dia_recorrente": null,
+      "preco_min": 2.94,
+      "preco_max": 2.94,
+      "unidade": "refeicao",
+      "preco_texto": "Atende menos de 20% da graduação",
+      "etiquetas": [
+        "mais barato",
+        "só estudantes Unesp"
+      ],
+      "instagram": null,
+      "instagram_post": null,
+      "imagem": "img-unesp",
+      "imagem_local": null,
+      "observacoes": "Mesmo valor de cst-ru-unesp em custos.json.",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Blog do Rodrigo, jun/2026",
+        "url": "https://www.blogdorodrigo.com.br/post/campus-de-espera"
+      },
+      "verificado_em": "2026-11-14",
+      "ativo": true,
+      "destaque": true
+    },
+    {
+      "id": "com-estacao-sabor",
+      "nome": "Estação Sabor Premium",
+      "categoria": "Buffet livre",
+      "subtipo": "self_service",
+      "descricao": "Almoço à vontade com cardápio diferente todo dia e sobremesa inclusa. Também vende marmitex.",
+      "bairro": "Centro",
+      "endereco": "R. São Luís, 1224",
+      "horario": "Almoço, seg a sáb",
+      "dia_recorrente": null,
+      "preco_min": 18.9,
+      "preco_max": 18.9,
+      "unidade": "refeicao",
+      "preco_texto": "proteína à parte, R$ 6,99 a cada 100 g",
+      "etiquetas": [
+        "mais barato",
+        "marmitex",
+        "climatizado"
+      ],
+      "instagram": null,
+      "instagram_post": "https://www.instagram.com/marilia.on/reel/DfpI4O-zWbF/",
+      "imagem": null,
+      "imagem_local": "assets/img-local/com-estacao-sabor.webp",
+      "observacoes": "Estacionamento conveniado na R. Araraquara, 82 (1 hora).",
+      "fonte": {
+        "tipo": "publica",
+        "nome": "Marília ON (Instagram)",
+        "url": "https://www.instagram.com/marilia.on/reel/DfpI4O-zWbF/"
+      },
+      "verificado_em": "2026-11-14",
+      "ativo": true
+    }
+  ]
+}
