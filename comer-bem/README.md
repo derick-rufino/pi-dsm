@@ -68,8 +68,7 @@ main
     │   │   └── li > span.icon.icon--clock + texto        "2 min a pé"
     │   ├── ul.chips > li.chip                            "Mais barato", "Vegetariano"
     │   ├── div.card__footer
-    │   │   ├── p.card__date                              "verificado em 11 jun. 2026"
-    │   │   └── button.compare#comparar-…  (ver regras)   "comparar"
+    │   │   └── p.card__date                              "verificado em 11 jun. 2026"
     │   └── span.burst (aria-hidden)
     └── ul.results__grid
         └── li > article.card                             ← um por lugar
@@ -87,6 +86,5 @@ main
 ## Regras rápidas
 
 - **Ícones:** `<span class="icon icon--pin" aria-hidden="true"></span>`. Eles herdam a cor do texto. Disponíveis: `arrow bus check chevron clock food info pin plus search star`.
-- **Botão comparar:** o nome acessível junta o botão e o título do card, senão o leitor de tela anuncia três "comparar" iguais: `<button type="button" class="compare" id="comparar-X" aria-labelledby="comparar-X titulo-X" aria-pressed="false">comparar</button>`, com `id="titulo-X"` no título. O JS troca `aria-pressed` para `"true"` e o texto para "adicionado"; o nome acompanha sozinho. O visual muda sozinho.
 - **Lista vazia ou erro:** `div.empty` com um `p` e um `button.pill.pill--md.filters__clear`.
 - **Dados:** os textos acima são do Figma, só exemplo. Os reais vêm de `/dados`.
