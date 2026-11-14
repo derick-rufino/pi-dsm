@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cena &amp; rolê · kampi</title>
+
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../dados.css">
+    <script src="../menu.js" defer></script>
+    <script src="../dados.js" defer></script>
+</head>
+
+<body>
+    <a href="#conteudo" class="pill pill--md pular">Pular para o conteúdo</a>
+
+    <header class="header">
+        <a href="../" class="brand" aria-label="kampi — página inicial">
+            <span class="brand__dot" aria-hidden="true"></span>
+            <span class="brand__name">kampi</span>
+        </a>
+
+        <nav class="nav" aria-label="Navegação principal">
+            <a href="../comer-bem/" class="pill pill--md nav__link link--food">comer bem</a>
+            <a href="./" class="pill pill--md nav__link link--scene" aria-current="page">cena &amp; rolê</a>
+            <a href="../calculadora/" class="pill pill--md nav__link link--calc">calculadora</a>
+        </nav>
+
+        <button type="button" class="pill pill--md menu-toggle"
+            aria-expanded="false" aria-controls="menu"
+            aria-label="Abrir menu de navegação">
+            <span>menu</span>
+            <span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+    </header>
+
+
+    <nav id="menu" class="menu" aria-label="Menu móvel">
+        <div class="menu__top">
+            <p class="menu__title">menu</p>
+            <button type="button" class="round-btn menu__close" aria-label="Fechar menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M18 6 6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <ul>
+            <li>
+                <a href="../comer-bem/" class="pill menu__link link--food">
+                    <span>comer bem</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="./" class="pill menu__link link--scene" aria-current="page">
+                    <span>cena &amp; rolê</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="../calculadora/" class="pill menu__link link--calc">
+                    <span>calculadora</span>
+                    <span class="round-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="conteudo" tabindex="-1">
+
+        <section class="page-hero">
+            <h1 class="page-hero__title">
+                <span class="page-hero__row">
+                    <span class="pill pill--lg title-pill--light">a cidade também</span>
+                    <span class="strip strip--sky" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </span>
+                </span>
+                <span class="page-hero__row">
+                    <span class="pill pill--lg title-pill--accent">acontece depois da aula.</span>
+                </span>
+            </h1>
+
+            <div class="page-hero__info">
+                <p class="page-hero__lead">
+                    Cultura, esporte, parques e lugares para conhecer a cena de Marília.
+                </p>
+                <div class="stat">
+                    <span class="stat__value">0</span>
+                    <span>
+                        <span class="stat__label">opções</span>
+                        <span class="stat__desc">consulte a fonte e a data de cada informação</span>
+                    </span>
+                </div>
+                <span class="pill tag">dados carregados do catálogo</span>
+            </div>
+
+            <span class="burst" aria-hidden="true"></span>
+        </section>
+
+        <section class="filters-section">
+            <form class="filters" role="search">
+                <label class="filters__search">
+                    <span class="icon icon--search" aria-hidden="true"></span>
+                    <span class="sr-only">buscar</span>
+                    <input class="filters__input" type="search" placeholder="buscar em cena &amp; rolê...">
+                </label>
+
+                <label class="select">
+                    <span class="select__label">bairro</span>
+                    <select class="select__input">
+                        <option value="">todos</option>
+                    </select>
+                    <span class="icon icon--chevron" aria-hidden="true"></span>
+                </label>
+
+                <label class="select">
+                    <span class="select__label">ordenar por</span>
+                    <select class="select__input">
+                        <option value="preco-asc">menor preço</option>
+                        <option value="preco-desc">maior preço</option>
+                        <option value="distancia">mais perto</option>
+                        <option value="recentes">verificados recentemente</option>
+                    </select>
+                    <span class="icon icon--chevron" aria-hidden="true"></span>
+                </label>
+
+                <button class="pill pill--md filters__clear" type="reset">limpar filtros</button>
+            </form>
+        </section>
+
+        <section class="results" aria-labelledby="titulo-resultados">
+            <h2 class="sr-only" id="titulo-resultados">resultados</h2>
+            <p class="sr-only" aria-live="polite">8 resultados</p>
+
+            <article class="feature">
+                <div class="card__top">
+                    <span class="category">Bar alternativo</span>
+                    <span class="verified">verificado</span>
+                </div>
+                <h3 class="card__title" id="titulo-cao-perere">Cão Pererê</h3>
+                <p class="seal feature__seal">R$ 15–35</p>
+                <p class="card__desc">
+                    Shows de bandas locais e festas de coletivos: pop, rock, reggae, MPB, hip hop, forró e jazz.
+                </p>
+                <ul class="meta">
+                    <li><span class="icon icon--pin" aria-hidden="true"></span>Alto Cafezal · R. Cel. José Brás, 1627</li>
+                    <li><span class="icon icon--clock" aria-hidden="true"></span>Festas com data, a partir das 22h</li>
+                    <li><span class="icon icon--info" aria-hidden="true"></span>R$ 15 a 20 antecipado; R$ 30 a 35 na portaria</li>
+                </ul>
+                <ul class="chips">
+                    <li class="chip">música ao vivo</li>
+                    <li class="chip">festas</li>
+                </ul>
+                <div class="card__footer">
+                    <p class="card__date">
+                        verificado em 14 nov. 2026 ·
+                        <a href="https://www.instagram.com/caoperere/" target="_blank" rel="noopener noreferrer">
+                            Instagram do Cão Pererê<span class="sr-only"> (abre em nova aba)</span>
+                        </a>
+                    </p>
+                </div>
+                <span class="burst" aria-hidden="true"></span>
+            </article>
+
+            <ul class="results__grid" data-dados="cena">
+                <li>
+                    <article class="card">
+                        <div class="card__top">
+                            <span class="category">Cultura e esporte</span>
+                            <span class="verified">verificado</span>
+                        </div>
+                        <h3 class="card__title" id="titulo-sesc">Sesc Marília</h3>
+                        <p class="card__desc">
+                            Biblioteca, piscinas, quadra de areia, teatro, mirante e wi-fi grátis.
+                        </p>
+                        <p class="price">
+                            <span class="price__value">até R$ 12</span>
+                        </p>
+                        <ul class="meta">
+                            <li><span class="icon icon--pin" aria-hidden="true"></span>Jd. Portal do Sol · R. Antônio Gallina, 75</li>
+                            <li><span class="icon icon--clock" aria-hidden="true"></span>Ter a sex, 9h às 21h30; sáb, dom e feriados, 10h às 18h30</li>
+                            <li><span class="icon icon--info" aria-hidden="true"></span>Muitas atividades gratuitas; piscina exige Credencial Plena e exame (R$ 12)</li>
+                        </ul>
+                        <ul class="chips">
+                            <li class="chip">gratuito</li>
+                            <li class="chip">biblioteca</li>
+                        </ul>
+                        <div class="card__footer">
+                            <p class="card__date">
+                                verificado em 14 nov. 2026 ·
+                                <a href="https://www.sescsp.org.br/editorial/saiba-tudo-o-que-voce-vai-encontrar-no-sesc-marilia" target="_blank" rel="noopener noreferrer">
+                                    Sesc SP<span class="sr-only"> (abre em nova aba)</span>
+                                </a>
+                            </p>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="card">
+                        <div class="card__top">
+                            <span class="category">Esporte</span>
+                            <span class="verified">verificado</span>
+                        </div>
+                        <h3 class="card__title" id="titulo-esportes">Aulas gratuitas da Secretaria de Esportes</h3>
+                        <p class="card__desc">
+                            22 modalidades gratuitas, de natação a skate, com inscrição no Ginásio Neusa Galetti ou no Cemesc Zona Sul.
+                        </p>
+                        <p class="price"><span class="price__value">Gratuito</span></p>
+                        <ul class="meta">
+                            <li><span class="icon icon--pin" aria-hidden="true"></span>Vários · Ginásio Neusa Galetti: R. Francisco Xavier Ambrósio, 228</li>
+                            <li><span class="icon icon--clock" aria-hidden="true"></span>Inscrições de seg a sex, 8h às 11h30 e 13h às 16h30</li>
+                        </ul>
+                        <ul class="chips">
+                            <li class="chip">gratuito</li>
+                            <li class="chip">esporte</li>
+                        </ul>
+                        <div class="card__footer">
+                            <p class="card__date">
+                                verificado em 14 nov. 2026 ·
+                                <a href="https://www.marilia.sp.gov.br/portal/noticias/0/3/17752/secretaria-de-esportes-abre-vagas-gratuitas-em-22-modalidades-para-transformar-a-rotina-dos-marilienses/" target="_blank" rel="noopener noreferrer">
+                                    Prefeitura de Marília<span class="sr-only"> (abre em nova aba)</span>
+                                </a>
+                            </p>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__block">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <p class="footer__tagline">Informação honesta para quem está chegando.</p>
+                    <p class="footer__credit">feito em Marília · projeto integrador DSM, Fatec</p>
+                </div>
+
+                <nav class="footer__links" aria-label="Links do rodapé">
+                    <div class="footer__col">
+                        <h2 class="footer__heading">explorar</h2>
+                        <ul>
+                            <li><a href="../comer-bem/" class="footer__link">comer bem</a></li>
+                            <li><a href="./" class="footer__link" aria-current="page">cena &amp; rolê</a></li>
+                            <li><a href="../calculadora/" class="footer__link">calculadora</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h2 class="footer__heading">projeto</h2>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/derick-rufino/pi-dsm"
+                                    class="footer__link" target="_blank" rel="noopener noreferrer">
+                                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.64 7.64 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </li>
+                            <li><a href="#" class="footer__link">reportar dado errado</a></li>
+                            <li><a href="#" class="footer__link">sugerir um lugar</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="footer__wordmark" aria-hidden="true">
+                <span>kampi</span>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
