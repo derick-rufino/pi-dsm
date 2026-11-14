@@ -18,3 +18,7 @@ node_modules/
 *.log
 pi-shadow-auditor/
 shadow-report/*
+
+# Imagens de terceiros só para a apresentação (nunca no repositório)
+assets/img-local/
+assets/img/originais/
