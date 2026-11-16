@@ -292,13 +292,15 @@
             el('span', { classe: 'price__value', texto: faixaPreco(item.preco_min, item.preco_max) }),
             UNIDADE[item.unidade] ? el('span', { classe: 'price__unit', texto: UNIDADE[item.unidade] }) : null
         ]) : null;
+        // No destaque o selo também mora no head: no desktop ele é absoluto
+        // (sobre o burst); no celular fica ao lado do título, como nos outros
+        const selo = destaque && temPreco
+            ? el('p', { classe: 'seal feature__seal', texto: faixaPreco(item.preco_min, item.preco_max) })
+            : null;
         nos.push(el('div', { classe: 'card__head' }, [
             el('h3', { classe: 'card__title', texto: item.nome, attrs: { id: idTitulo } }),
-            preco
+            preco || selo
         ]));
-        if (destaque && temPreco) {
-            nos.push(el('p', { classe: 'seal feature__seal', texto: faixaPreco(item.preco_min, item.preco_max) }));
-        }
 
         nos.push(el('p', { classe: 'card__desc', texto: item.descricao }));
 
@@ -330,8 +332,10 @@
         nos.push(el('div', { classe: 'card__footer' }, [
             el('p', { classe: 'card__date' }, [
                 icone('check'),
-                'verificado em ' + dataCurta(item.verificado_em) + ' · ',
-                linkExterno(item.fonte.nome, item.fonte.url)
+                'verificado em ' + dataCurta(item.verificado_em),
+                // A fonte vai na linha de baixo (CSS): quebrar no meio do nome ficava feio
+                el('span', { classe: 'sr-only', texto: ', fonte: ' }),
+                linkExterno(item.fonte.nome, item.fonte.url, { classe: 'card__source' })
             ]),
             blocoInstagram(item)
         ]));

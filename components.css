@@ -1084,21 +1084,28 @@ svg {
 }
 
 /* <div.card__head> título à esquerda, preço à direita */
+/* Se o preço não cabe ao lado sem espremer o título, desce para baixo dele */
 .card__head {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--space-3);
     align-self: stretch;
 }
 
+.card__head .card__title {
+    flex: 1 1 60%;
+    min-width: 0;
+}
+
+/* Pill numa linha só: valor + unidade lado a lado, na base do texto */
 .card__head .price {
     flex: none;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0;
+    align-items: baseline;
+    gap: var(--space-1);
     padding: var(--space-1) var(--space-3);
-    border-radius: var(--radius-md);
+    white-space: nowrap;
 }
 
 .card__head .price__value {
@@ -1300,6 +1307,12 @@ svg {
     font-size: var(--text-sm);
 }
 
+/* Fonte da informação na linha de baixo, nunca quebrada no meio */
+.card__source {
+    display: block;
+    color: inherit;
+}
+
 .card__date .icon {
     --icon-size: 14px;
     margin-inline-end: var(--space-1);
@@ -1376,6 +1389,19 @@ svg {
 .feature> :not(.burst, .feature__seal) {
     position: relative;
     z-index: 1;
+}
+
+/* O selo mora dentro do head: o head não pode ser a referência do
+   absoluto, senão o selo sai do burst e cai em cima do título.
+   O título continua acima do burst (z-index próprio). */
+.feature>.card__head {
+    position: static;
+}
+
+.feature .card__title {
+    position: relative;
+    z-index: 1;
+    flex-basis: auto;
 }
 
 /* <div.empty> lista vazia ou erro de carregamento.
@@ -1455,16 +1481,23 @@ svg {
         display: none;
     }
 
-    /* Selo do destaque vira pill de preço logo abaixo do título,
-       no lugar do .price dos cards comuns (o círculo quebrava "R$ 15–35") */
+    /* Selo do destaque vira pill de preço ao lado do título, no mesmo
+       tamanho do preço dos cards comuns (o círculo quebrava "R$ 15–35") */
     .feature__seal {
         position: static;
+        flex: none;
         width: auto;
         aspect-ratio: auto;
-        padding: var(--space-2) var(--space-5);
+        padding: var(--space-1) var(--space-3);
         border-radius: var(--radius-pill);
-        font-size: var(--heading-sub);
+        font-size: var(--text-lg);
+        line-height: var(--leading-display);
         white-space: nowrap;
+    }
+
+    /* Cantos menores: o raio grande quase encostava na badge e no ✓ */
+    .feature {
+        border-radius: var(--radius-xl);
     }
 
     /* Badges do card: não são clicáveis, então podem ficar abaixo de 44px.
