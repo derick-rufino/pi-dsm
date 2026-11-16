@@ -77,13 +77,13 @@
 
 /* O burst (250px) é absoluto: o conteúdo do destaque precisa deixar a
    coluna dele livre, senão endereço e etiquetas entram por baixo do selo.
-   Categoria/verificado (topo) e rodapé seguem na largura toda, como no Figma. */
+   Topo (categoria/bairro) e rodapé seguem na largura toda, como no Figma. */
 .feature {
     --burst-reserve: calc(250px + var(--space-12) + var(--space-6));
     min-height: calc(var(--space-9) + 250px + var(--space-12) * 2);
 }
 
-.feature> :is(.card__title, .card__desc, .meta, .chips, .card__social) {
+.feature> :is(.card__head, .card__desc, .meta, .card__more) {
     max-width: min(var(--card-text-max), 100% - var(--burst-reserve));
 }
 
@@ -99,7 +99,7 @@
         min-height: 0;
     }
 
-    .feature> :is(.card__title, .card__desc, .meta, .chips, .card__social) {
+    .feature> :is(.card__head, .card__desc, .meta, .card__more) {
         max-width: none;
     }
 }
@@ -113,11 +113,7 @@
     border-radius: var(--radius-sm);
 }
 
-/* Botão ou link do Instagram dentro do card */
-.card__social {
-    display: flex;
-}
-
+/* Link do Instagram (ícone) no rodapé do card */
 .social-btn {
     text-decoration: none;
 }
