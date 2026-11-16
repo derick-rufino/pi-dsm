@@ -42,21 +42,34 @@
     max-width: 60%;
 }
 
-/* Tablet e celular: slide estreito, a foto atrapalharia a leitura.
-   O burst volta a ser liso (e a foto sai dos créditos do rodapé). */
+/* Tablet: a foto continua no burst grande; o texto fica nos 2/3 da esquerda */
 @media (max-width: 1079px) {
-    .slide__media {
-        display: none;
-    }
-
     .slide--photo .slide__body {
         max-width: calc(100% * 2 / 3);
     }
 }
 
+/* Celular: a foto volta, pequena, num burst no canto superior direito,
+   sangrando pela borda do slide. As pills de tag não entram por baixo dela. */
 @media (max-width: 767px) {
     .slide--photo .slide__body {
         max-width: none;
+    }
+
+    .slide--photo>.burst {
+        --burst-size: var(--burst-xs);
+        display: block;
+        inset-inline-start: auto;
+        inset-inline-end: calc(var(--space-3) * -1);
+        inset-block-start: calc(var(--space-3) * -1);
+    }
+
+    .slide--photo .slide__media {
+        display: block;
+    }
+
+    .slide--photo .slide__tags {
+        padding-inline-end: calc(var(--burst-xs) - var(--space-3) - var(--slide-pad-x) + var(--space-2));
     }
 }
 

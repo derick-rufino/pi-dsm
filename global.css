@@ -209,6 +209,8 @@
     /* strip do título 1 do hero */
     --strip-lg: 248px;
     /* strip do título 2 do hero */
+    --burst-xs: 104px;
+    /* foto do slide no celular, no canto */
     --burst-sm: 208px;
     --burst-md: 252px;
     --burst-lg: 324px;
