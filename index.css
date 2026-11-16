@@ -115,6 +115,8 @@ html {
 .banner {
     --slide-index: 0;
     /* atualizado por JS; autoplay a cada 5s */
+    --drag-offset: 0px;
+    /* deslocamento do dedo durante o arrasto (JS) */
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
@@ -179,12 +181,15 @@ html {
 .banner__viewport {
     overflow: hidden;
     border-radius: var(--radius-2xl);
+    /* gesto vertical fica com o navegador (rolar a página);
+       o horizontal fica com o JS (arrastar o slide) */
+    touch-action: pan-y;
 }
 
 .banner__slides {
     display: flex;
     gap: var(--space-4);
-    translate: calc(var(--slide-index) * -1 * (var(--slide-width) + var(--space-4))) 0;
+    translate: calc(var(--slide-index) * -1 * (var(--slide-width) + var(--space-4)) + var(--drag-offset)) 0;
     transition: translate var(--duration-base) var(--ease-in-out);
 }
 

@@ -172,6 +172,72 @@ function initBannerCarousel() {
         }
     });
 
+    // Arrastar com o dedo (touch e caneta). O mouse segue com setas e dots,
+    // para não brigar com clique em link e seleção de texto.
+    // Com touch-action: pan-y no viewport, gesto vertical rola a página: o
+    // navegador dispara pointercancel e o slide volta para o lugar.
+    const viewport = banner.querySelector('.banner__viewport');
+    const limiarArrasto = 10; // px até o toque virar arrasto (abaixo disso é toque)
+    const limiarTroca = 50;   // px de arrasto para trocar de slide
+    let arrasto = null;       // { id, x0, dx, ativo }
+    let ignorarClique = false;
+
+    function soltarArrasto(trocar) {
+        if (!arrasto) return;
+        const { dx, ativo } = arrasto;
+        arrasto = null;
+        if (!ativo) {
+            despausar();
+            return;
+        }
+        // Tira o deslocamento e devolve a transição no mesmo quadro: o slide
+        // anima da posição do dedo até o destino (ou de volta ao lugar).
+        banner.style.removeProperty('--drag-offset');
+        slidesContainer.classList.remove('banner__slides--no-transition');
+        if (trocar && dx <= -limiarTroca) avancar();
+        else if (trocar && dx >= limiarTroca) retroceder();
+        else despausar();
+    }
+
+    viewport?.addEventListener('pointerdown', (e) => {
+        ignorarClique = false;
+        if (e.pointerType === 'mouse' || emTransicao || arrasto) return;
+        arrasto = { id: e.pointerId, x0: e.clientX, dx: 0, ativo: false };
+        pausar();
+    });
+
+    viewport?.addEventListener('pointermove', (e) => {
+        if (!arrasto || e.pointerId !== arrasto.id) return;
+        arrasto.dx = e.clientX - arrasto.x0;
+        if (!arrasto.ativo && Math.abs(arrasto.dx) > limiarArrasto) {
+            // Captura só depois do limiar: capturar no pointerdown desviaria
+            // o clique de um toque simples no link do slide.
+            arrasto.ativo = true;
+            viewport.setPointerCapture(e.pointerId);
+            slidesContainer.classList.add('banner__slides--no-transition');
+        }
+        if (arrasto.ativo) banner.style.setProperty('--drag-offset', `${arrasto.dx}px`);
+    });
+
+    viewport?.addEventListener('pointerup', (e) => {
+        if (!arrasto || e.pointerId !== arrasto.id) return;
+        ignorarClique = arrasto.ativo;
+        soltarArrasto(true);
+    });
+
+    viewport?.addEventListener('pointercancel', (e) => {
+        if (arrasto && e.pointerId === arrasto.id) soltarArrasto(false);
+    });
+
+    // Fim de arrasto não é clique: não abre link nem dispara o "clique no
+    // card posterior" lá embaixo. Fase de captura para chegar antes deles.
+    viewport?.addEventListener('click', (e) => {
+        if (!ignorarClique) return;
+        ignorarClique = false;
+        e.preventDefault();
+        e.stopPropagation();
+    }, true);
+
     // Controles Próximo e Anterior
     banner.querySelector('[data-banner="next"]')?.addEventListener('click', () => {
         avancar();
