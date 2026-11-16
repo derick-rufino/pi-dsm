@@ -738,6 +738,7 @@ svg {
 .icon--chevron { -webkit-mask-image: url("assets/icones/chevron.svg"); mask-image: url("assets/icones/chevron.svg"); }
 .icon--clock   { -webkit-mask-image: url("assets/icones/clock.svg");   mask-image: url("assets/icones/clock.svg"); }
 .icon--food    { -webkit-mask-image: url("assets/icones/food.svg");    mask-image: url("assets/icones/food.svg"); }
+.icon--instagram { -webkit-mask-image: url("assets/icones/instagram.svg"); mask-image: url("assets/icones/instagram.svg"); }
 .icon--info    { -webkit-mask-image: url("assets/icones/info.svg");    mask-image: url("assets/icones/info.svg"); }
 .icon--pin     { -webkit-mask-image: url("assets/icones/pin.svg");     mask-image: url("assets/icones/pin.svg"); }
 .icon--plus    { -webkit-mask-image: url("assets/icones/plus.svg");    mask-image: url("assets/icones/plus.svg"); }
@@ -868,46 +869,6 @@ svg {
     color: var(--text-muted);
     font-size: var(--text-lg);
     line-height: var(--leading-text);
-}
-
-/* <div.stat> destaque "24+ opções" */
-.stat {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-2) var(--space-6) var(--space-2) var(--space-2);
-    border-radius: var(--radius-pill);
-    background: var(--surface);
-}
-
-.stat__value {
-    display: grid;
-    flex: none;
-    place-items: center;
-    width: var(--control-lg);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--accent);
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-size: var(--text-xl);
-    font-weight: var(--weight-display);
-    line-height: var(--leading-display);
-}
-
-.stat__label {
-    display: block;
-    color: var(--text);
-    font-size: var(--text-md);
-    font-weight: var(--weight-semibold);
-    line-height: var(--leading-auto);
-}
-
-.stat__desc {
-    display: block;
-    color: var(--text-muted);
-    font-size: var(--text-sm);
-    line-height: var(--leading-auto);
 }
 
 /* Decoração do hero: burst e degraus (posição definida no index.css da página) */
@@ -1111,9 +1072,97 @@ svg {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--space-2);
+    gap: var(--space-2) var(--space-3);
     align-self: stretch;
+}
+
+/* <span.card__place> bairro ao lado da categoria */
+.card__place {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+}
+
+/* <div.card__head> título à esquerda, preço à direita */
+/* Se o preço não cabe ao lado sem espremer o título, desce para baixo dele */
+.card__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+    align-self: stretch;
+}
+
+.card__head .card__title {
+    flex: 1 1 60%;
+    min-width: 0;
+}
+
+/* Pill numa linha só: valor + unidade lado a lado, na base do texto */
+.card__head .price {
+    flex: none;
+    align-items: baseline;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-3);
+    white-space: nowrap;
+}
+
+.card__head .price__value {
+    font-size: var(--text-lg);
+}
+
+.card__head .price__unit {
+    font-size: var(--text-xs);
+}
+
+/* <details.card__more> endereço, regras de preço e etiquetas */
+.card__more {
+    align-self: stretch;
+}
+
+.card__more-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--control-sm);
+    color: var(--text);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    list-style: none;
+    cursor: pointer;
+}
+
+.card__more-toggle::-webkit-details-marker {
+    display: none;
+}
+
+/* Chevron que vira para cima quando aberto */
+.card__more-toggle::after {
+    content: "";
+    width: 16px;
+    aspect-ratio: 1;
+    background: currentColor;
+    -webkit-mask: url("assets/icones/chevron.svg") center / contain no-repeat;
+    mask: url("assets/icones/chevron.svg") center / contain no-repeat;
+    transition: rotate var(--duration-fast) var(--ease-out);
+}
+
+.card__more[open]>.card__more-toggle::after {
+    rotate: 180deg;
+}
+
+.card__more-toggle:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+.card__more-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-block: var(--space-1) var(--space-2);
 }
 
 /* <span.category> pill com bolinha */
@@ -1165,10 +1214,20 @@ svg {
     font-size: var(--card-title);
 }
 
+/* Descrição em até 3 linhas; inteira quando "ver detalhes" está aberto */
 .card__desc {
+    display: -webkit-box;
     max-width: 440px;
+    overflow: hidden;
     color: var(--text-muted);
     line-height: var(--leading-text);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+}
+
+:is(.card, .feature):has(.card__more[open]) .card__desc {
+    display: block;
 }
 
 /* <p.price> > <span.price__value> + <span.price__unit> */
@@ -1242,8 +1301,32 @@ svg {
 }
 
 .card__date {
+    flex: 1 1 0;
+    min-width: 0;
     color: var(--text-muted);
     font-size: var(--text-sm);
+}
+
+/* Fonte da informação na linha de baixo, nunca quebrada no meio */
+.card__source {
+    display: block;
+    color: inherit;
+}
+
+.card__date .icon {
+    --icon-size: 14px;
+    margin-inline-end: var(--space-1);
+    color: var(--lime);
+    vertical-align: -2px;
+}
+
+/* Instagram: botão redondo com ícone, 44px de toque */
+.social-btn {
+    --control: var(--control-sm);
+    --btn-bg: var(--surface-raised);
+    --btn-fg: var(--text);
+    --state-tint: var(--text);
+    --dir: 0;
 }
 
 /* <article.feature> card de destaque, na cor da seção.
@@ -1271,8 +1354,13 @@ svg {
     color: var(--text);
 }
 
-.feature :is(.meta .icon, .card__date) {
+.feature :is(.meta .icon, .card__date, .card__date .icon, .card__place, .card__more-toggle) {
     color: var(--ink);
+}
+
+.feature .social-btn {
+    --btn-bg: var(--ink);
+    --btn-fg: var(--text);
 }
 
 .feature>.burst {
@@ -1301,6 +1389,19 @@ svg {
 .feature> :not(.burst, .feature__seal) {
     position: relative;
     z-index: 1;
+}
+
+/* O selo mora dentro do head: o head não pode ser a referência do
+   absoluto, senão o selo sai do burst e cai em cima do título.
+   O título continua acima do burst (z-index próprio). */
+.feature>.card__head {
+    position: static;
+}
+
+.feature .card__title {
+    position: relative;
+    z-index: 1;
+    flex-basis: auto;
 }
 
 /* <div.empty> lista vazia ou erro de carregamento.
@@ -1338,7 +1439,8 @@ svg {
         inset-inline-end: calc(var(--space-6) + (250px - var(--seal-size)) / 2);
     }
 
-    .feature .card__title,
+    /* O título já vive no .card__head, que reserva a coluna do burst
+       (dados.css); limitar a 50% dele deixava "da" sozinho na linha */
     .feature .card__desc {
         max-width: 50%;
     }
@@ -1380,9 +1482,110 @@ svg {
         display: none;
     }
 
+    /* Selo do destaque vira pill de preço ao lado do título, no mesmo
+       tamanho do preço dos cards comuns (o círculo quebrava "R$ 15–35") */
     .feature__seal {
         position: static;
-        order: -1;
-        align-self: flex-end;
+        flex: none;
+        width: auto;
+        aspect-ratio: auto;
+        padding: var(--space-1) var(--space-3);
+        border-radius: var(--radius-pill);
+        font-size: var(--text-lg);
+        line-height: var(--leading-display);
+        white-space: nowrap;
+    }
+
+    /* Cantos menores: o raio grande quase encostava na badge e no ✓ */
+    .feature {
+        border-radius: var(--radius-xl);
+    }
+
+    /* Badges do card: não são clicáveis, então podem ficar abaixo de 44px.
+       Menores, categoria e "verificado" cabem na mesma linha e as chips
+       quebram menos. */
+    .category,
+    .chip {
+        padding: var(--space-1) var(--space-3);
+        font-size: var(--text-xs);
+    }
+
+    .category {
+        padding-inline-start: var(--space-2);
+    }
+
+    .verified {
+        gap: var(--space-1);
+        padding: var(--space-1) var(--space-2) var(--space-1) var(--space-1);
+        font-size: var(--text-xs);
+    }
+
+    .verified::before {
+        width: var(--space-4);
+        background-size: 10px;
+    }
+
+    .card,
+    .feature {
+        --card-title: var(--heading-card);
+    }
+
+    .feature .card__title {
+        font-size: var(--heading-card);
+    }
+
+    .card__date {
+        font-size: var(--text-xs);
+    }
+
+    .card__desc {
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+
+    /* Hero das páginas internas: título menor e strip mais baixa, que
+       passa a caber ao lado da primeira pill */
+    .page-hero {
+        --page-title: var(--heading-card);
+    }
+
+    .page-hero .pill--lg {
+        padding-inline: var(--space-4);
+    }
+
+    .page-hero__row {
+        column-gap: var(--space-3);
+    }
+
+    .page-hero .strip {
+        --circle: var(--space-7);
+        --strip-width: 64px;
+    }
+
+    /* Filtros: busca + "limpar" na 1ª linha, bairro e ordenar lado a lado
+       na 2ª (eram 4 linhas). Tudo segue com 44px+ de toque. */
+    .filters__search {
+        flex: 1 1 calc(100% - 130px);
+    }
+
+    .filters__clear {
+        order: 1;
+        flex: none;
+        padding-inline: var(--space-4);
+    }
+
+    .filters .select {
+        order: 2;
+        flex: 1 1 calc(50% - var(--space-3));
+        min-width: 0;
+        padding-inline-end: var(--space-9);
+    }
+
+    .filters .select>.icon {
+        inset-inline-end: var(--space-3);
+    }
+
+    .footer__tagline {
+        font-size: var(--text-md);
     }
 }

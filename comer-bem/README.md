@@ -33,11 +33,7 @@ main
 │   │       └── span.pill.pill--lg.title-pill--accent     "uma aula e outra."
 │   ├── div.page-hero__info
 │   │   ├── p.page-hero__lead                             subtítulo
-│   │   └── div.stat
-│   │       ├── span.stat__value                          "24+"
-│   │       └── span
-│   │           ├── span.stat__label                      "opções"
-│   │           └── span.stat__desc                       "verificadas nos últimos 60 dias"
+│   │   └── span.pill.tag                                 "verificado em ..." (dados.js)
 │   ├── span.burst  (aria-hidden)
 │   └── span.stairs (aria-hidden)                         10× <span></span> vazios
 │

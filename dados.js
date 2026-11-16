@@ -165,13 +165,17 @@
         }
     }
 
+    // Botão redondo só com ícone (44px de toque); o nome vai no aria-label
+    function iconeInstagram() {
+        return el('span', { classe: 'icon icon--instagram', attrs: { 'aria-hidden': 'true' } });
+    }
+
     function blocoInstagram(item) {
         if (item.instagram_post) {
             const botao = el('button', {
-                classe: 'pill pill--md social-btn',
-                texto: 'ver post no Instagram',
-                attrs: { type: 'button' }
-            });
+                classe: 'round-btn social-btn',
+                attrs: { type: 'button', 'aria-label': 'ver post de ' + item.nome + ' no Instagram' }
+            }, [iconeInstagram()]);
             botao.addEventListener('click', () => {
                 const quadro = el('div', {
                     classe: 'embed-ig',
@@ -190,7 +194,13 @@
             return botao;
         }
         if (item.instagram) {
-            return linkExterno('perfil no Instagram', item.instagram, { classe: 'pill pill--md social-btn' });
+            return el('a', {
+                classe: 'round-btn social-btn',
+                attrs: {
+                    href: item.instagram, target: '_blank', rel: 'noopener',
+                    'aria-label': 'perfil de ' + item.nome + ' no Instagram (abre em nova aba)'
+                }
+            }, [iconeInstagram()]);
         }
         return null;
     }
@@ -267,43 +277,67 @@
         const media = destaque ? null : imagem(item, catalogo, 'card__media');
         if (media) nos.push(media);
 
+        const icone = (nome) => el('span', { classe: 'icon icon--' + nome, attrs: { 'aria-hidden': 'true' } });
+
+        // Topo: categoria + bairro (o "verificado" mora só no rodapé)
         nos.push(el('div', { classe: 'card__top' }, [
             el('span', { classe: 'category', texto: item.categoria }),
-            el('span', { classe: 'verified', texto: 'verificado' })
+            item.bairro ? el('span', { classe: 'card__place', texto: item.bairro }) : null
         ]));
-        nos.push(el('h3', { classe: 'card__title', texto: item.nome, attrs: { id: idTitulo } }));
 
-        // Sem preço conhecido, o selo de preço some; o texto fica na linha de informação
+        // Título com o preço ao lado. Sem preço conhecido, o preço some;
+        // o texto fica nos detalhes. No destaque o preço é o selo do burst.
         const temPreco = item.preco_min != null;
-        if (destaque && temPreco) {
-            nos.push(el('p', { classe: 'seal feature__seal', texto: faixaPreco(item.preco_min, item.preco_max) }));
-        }
-        nos.push(el('p', { classe: 'card__desc', texto: item.descricao }));
-        if (!destaque && temPreco) {
-            nos.push(el('p', { classe: 'price' }, [
-                el('span', { classe: 'price__value', texto: faixaPreco(item.preco_min, item.preco_max) }),
-                UNIDADE[item.unidade] ? el('span', { classe: 'price__unit', texto: UNIDADE[item.unidade] }) : null
-            ]));
-        }
-
-        nos.push(el('ul', { classe: 'meta' }, [
-            el('li', {}, [el('span', { classe: 'icon icon--pin', attrs: { 'aria-hidden': 'true' } }), [item.bairro, item.endereco].filter(Boolean).join(' · ')]),
-            item.horario ? el('li', {}, [el('span', { classe: 'icon icon--clock', attrs: { 'aria-hidden': 'true' } }), item.horario]) : null,
-            item.preco_texto ? el('li', {}, [el('span', { classe: 'icon icon--info', attrs: { 'aria-hidden': 'true' } }), item.preco_texto]) : null
+        const preco = !destaque && temPreco ? el('p', { classe: 'price' }, [
+            el('span', { classe: 'price__value', texto: faixaPreco(item.preco_min, item.preco_max) }),
+            UNIDADE[item.unidade] ? el('span', { classe: 'price__unit', texto: UNIDADE[item.unidade] }) : null
+        ]) : null;
+        // No destaque o selo também mora no head: no desktop ele é absoluto
+        // (sobre o burst); no celular fica ao lado do título, como nos outros
+        const selo = destaque && temPreco
+            ? el('p', { classe: 'seal feature__seal', texto: faixaPreco(item.preco_min, item.preco_max) })
+            : null;
+        nos.push(el('div', { classe: 'card__head' }, [
+            el('h3', { classe: 'card__title', texto: item.nome, attrs: { id: idTitulo } }),
+            preco || selo
         ]));
 
-        if (item.etiquetas && item.etiquetas.length) {
-            nos.push(el('ul', { classe: 'chips' }, item.etiquetas.map((t) => el('li', { classe: 'chip', texto: t }))));
+        nos.push(el('p', { classe: 'card__desc', texto: item.descricao }));
+
+        // Horário fica à vista: é o que decide "dá pra ir hoje?"
+        if (item.horario) {
+            nos.push(el('ul', { classe: 'meta' }, [el('li', {}, [icone('clock'), item.horario])]));
         }
 
-        const social = blocoInstagram(item);
-        if (social) nos.push(el('div', { classe: 'card__social' }, [social]));
+        // O resto vai para "ver detalhes" (<details> nativo: teclado e leitor de tela de graça)
+        const endereco = [item.bairro, item.endereco].filter(Boolean).join(' · ');
+        const detalhes = [
+            el('ul', { classe: 'meta' }, [
+                endereco ? el('li', {}, [icone('pin'), endereco]) : null,
+                item.preco_texto ? el('li', {}, [icone('info'), item.preco_texto]) : null
+            ]),
+            item.etiquetas && item.etiquetas.length
+                ? el('ul', { classe: 'chips' }, item.etiquetas.map((t) => el('li', { classe: 'chip', texto: t })))
+                : null
+        ];
+        nos.push(el('details', { classe: 'card__more' }, [
+            el('summary', { classe: 'card__more-toggle' }, [
+                'ver detalhes',
+                el('span', { classe: 'sr-only', texto: ' de ' + item.nome })
+            ]),
+            el('div', { classe: 'card__more-body' }, detalhes)
+        ]));
 
+        // Rodapé: verificado + fonte à esquerda, Instagram (ícone) à direita
         nos.push(el('div', { classe: 'card__footer' }, [
             el('p', { classe: 'card__date' }, [
-                'verificado em ' + dataCurta(item.verificado_em) + ' · ',
-                linkExterno(item.fonte.nome, item.fonte.url)
-            ])
+                icone('check'),
+                'verificado em ' + dataCurta(item.verificado_em),
+                // A fonte vai na linha de baixo (CSS): quebrar no meio do nome ficava feio
+                el('span', { classe: 'sr-only', texto: ', fonte: ' }),
+                linkExterno(item.fonte.nome, item.fonte.url, { classe: 'card__source' })
+            ]),
+            blocoInstagram(item)
         ]));
 
         if (destaque) {
@@ -316,10 +350,8 @@
         return el('li', {}, [el('article', { classe: 'card' }, conteudoCard(item, catalogo, false))]);
     }
 
-    // Hero: número de opções e data de verificação no lugar do "dados de exemplo"
-    function atualizarHero(total, versao) {
-        const valor = document.querySelector('.page-hero .stat__value');
-        if (valor) valor.textContent = String(total);
+    // Hero: data de verificação no lugar do "dados de exemplo"
+    function atualizarHero(versao) {
         const aviso = document.querySelector('.page-hero .tag');
         if (aviso && versao) aviso.textContent = 'verificado em ' + dataCurta(versao);
     }
@@ -346,7 +378,7 @@
             alvo.replaceChildren(...itens.filter((i) => i !== destaque).map((i) => card(i, catalogo)));
             const vivo = secao && secao.querySelector('[aria-live]');
             if (vivo) vivo.textContent = itens.length + (itens.length === 1 ? ' resultado' : ' resultados');
-            atualizarHero(itens.length, dados.versao);
+            atualizarHero(dados.versao);
         }));
     }
 

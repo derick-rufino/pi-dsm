@@ -29,7 +29,7 @@ O `dados.js` então:
 
 - troca os cards de exemplo pelos do JSON (só os com `"ativo": true`);
 - coloca o item com `"destaque": true` no `<article class="feature">` da seção, com burst e selo de preço (sem foto: o selo cobriria). Sem nenhum destaque, o card grande some;
-- atualiza o contador do leitor de tela, o número do hero (`.stat__value`) e troca a etiqueta "dados de exemplo" por "verificado em ...".
+- atualiza o contador do leitor de tela e troca a etiqueta "dados de exemplo" por "verificado em ...".
 
 Destaques atuais: `com-ru-unesp` (comer bem) e `cen-cao-perere` (cena & rolê). Preço pode ter centavos (`18.9` vira R$ 18,90).
 
