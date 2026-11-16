@@ -604,6 +604,23 @@ html {
         display: none;
     }
 
+    /* Pills de confiança menores: duas cabem por linha (eram uma por linha).
+       Não são clicáveis, então podem ficar abaixo de 44px. */
+    .trust {
+        gap: var(--space-2);
+    }
+
+    .trust .pill {
+        min-height: 0;
+        gap: var(--space-2);
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--text-xs);
+    }
+
+    .trust__dot {
+        width: var(--space-2);
+    }
+
     .bento {
         grid-template-columns: 1fr;
     }
