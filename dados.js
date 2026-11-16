@@ -346,10 +346,8 @@
         return el('li', {}, [el('article', { classe: 'card' }, conteudoCard(item, catalogo, false))]);
     }
 
-    // Hero: número de opções e data de verificação no lugar do "dados de exemplo"
-    function atualizarHero(total, versao) {
-        const valor = document.querySelector('.page-hero .stat__value');
-        if (valor) valor.textContent = String(total);
+    // Hero: data de verificação no lugar do "dados de exemplo"
+    function atualizarHero(versao) {
         const aviso = document.querySelector('.page-hero .tag');
         if (aviso && versao) aviso.textContent = 'verificado em ' + dataCurta(versao);
     }
@@ -376,7 +374,7 @@
             alvo.replaceChildren(...itens.filter((i) => i !== destaque).map((i) => card(i, catalogo)));
             const vivo = secao && secao.querySelector('[aria-live]');
             if (vivo) vivo.textContent = itens.length + (itens.length === 1 ? ' resultado' : ' resultados');
-            atualizarHero(itens.length, dados.versao);
+            atualizarHero(dados.versao);
         }));
     }
 

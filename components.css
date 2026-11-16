@@ -871,46 +871,6 @@ svg {
     line-height: var(--leading-text);
 }
 
-/* <div.stat> destaque "24+ opções" */
-.stat {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-2) var(--space-6) var(--space-2) var(--space-2);
-    border-radius: var(--radius-pill);
-    background: var(--surface);
-}
-
-.stat__value {
-    display: grid;
-    flex: none;
-    place-items: center;
-    width: var(--control-lg);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--accent);
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-size: var(--text-xl);
-    font-weight: var(--weight-display);
-    line-height: var(--leading-display);
-}
-
-.stat__label {
-    display: block;
-    color: var(--text);
-    font-size: var(--text-md);
-    font-weight: var(--weight-semibold);
-    line-height: var(--leading-auto);
-}
-
-.stat__desc {
-    display: block;
-    color: var(--text-muted);
-    font-size: var(--text-sm);
-    line-height: var(--leading-auto);
-}
-
 /* Decoração do hero: burst e degraus (posição definida no index.css da página) */
 .page-hero>.burst {
     --burst-size: 120px;
@@ -1566,29 +1526,6 @@ svg {
     .page-hero .strip {
         --circle: var(--space-7);
         --strip-width: 64px;
-    }
-
-    /* Stat compacto, sem a descrição (fonte e data já estão em cada card),
-       com a tag "verificado em" na mesma linha */
-    .page-hero__info {
-        column-gap: var(--space-3);
-    }
-
-    .stat {
-        padding-inline-end: var(--space-3);
-    }
-
-    .page-hero__info .tag {
-        padding-inline: var(--space-3);
-    }
-
-    .stat__value {
-        width: var(--space-12);
-        font-size: var(--text-lg);
-    }
-
-    .stat__desc {
-        display: none;
     }
 
     /* Filtros: busca + "limpar" na 1ª linha, bairro e ordenar lado a lado
