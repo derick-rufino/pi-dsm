@@ -1439,7 +1439,8 @@ svg {
         inset-inline-end: calc(var(--space-6) + (250px - var(--seal-size)) / 2);
     }
 
-    .feature .card__title,
+    /* O título já vive no .card__head, que reserva a coluna do burst
+       (dados.css); limitar a 50% dele deixava "da" sozinho na linha */
     .feature .card__desc {
         max-width: 50%;
     }
