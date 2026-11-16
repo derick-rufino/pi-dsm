@@ -338,4 +338,29 @@
     .estimate {
         max-width: none;
     }
+
+    /* Número menor e título 20px: a pergunta cabe em 2 linhas, não 3 */
+    .question__number {
+        width: var(--space-9);
+        font-size: var(--text-lg);
+    }
+
+    .question__title {
+        font-size: var(--text-xl);
+    }
+
+    /* Opção em linha: bolinha à esquerda do texto (~64px em vez de ~120px) */
+    .option {
+        flex-direction: row;
+        align-items: center;
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .option__radio {
+        flex: none;
+    }
+
+    .option__title {
+        font-size: var(--text-md);
+    }
 }
