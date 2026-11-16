@@ -1331,8 +1331,6 @@ svg {
     gap: var(--space-3);
     align-self: stretch;
     margin-top: auto;
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--surface-raised);
 }
 
 .card__date {
@@ -1385,10 +1383,6 @@ svg {
 
 .feature :is(.meta .icon, .card__date, .card__date .icon, .card__place, .card__more-toggle) {
     color: var(--ink);
-}
-
-.feature .card__footer {
-    border-top-color: color-mix(in srgb, var(--ink) 20%, transparent);
 }
 
 .feature .social-btn {
